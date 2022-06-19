@@ -1,0 +1,43 @@
+<app-header
+  [haveBeforeHeader]="false"
+  [hasMarketCart]="false"
+  [title]="'charity-market-requests'"
+  [isHome]="false"
+></app-header>
+
+<ion-content class="ion-padding-horizontal">
+  <div
+    class="request-container ion-margin-bottom"
+    *ngFor="let request of requests"
+    (click)="showOrder('charity-market',request.id)"
+  >
+    <div class="request-status-date">
+      <div class="title primary-color fn-16 qesaa-Janna-Bold">
+        {{"orderNumber"|translate}}
+      </div>
+      <div class="requestNumber fn-16 qesaa-Janna-Bold">#{{request?.id}}</div>
+      <div class="requestDate fn-12 qesaa-Janna-Regular ion-text-end">
+        {{request?.order_date}}
+      </div>
+    </div>
+    <!-- // 1 waiting 2 canceled 3  confirmed -->
+    <div class="request-status">
+      <div class="title primary-color fn-16 qesaa-Janna-Bold">
+        {{"orderStatus"|translate}}
+      </div>
+      <div class="requestStatus fn-16 qesaa-Janna-Bold">
+        <!-- <span class="secondary-color" *ngIf="request.status==3">
+          {{request.requestStatus|translate}}
+        </span>
+        <span class="red-color" *ngIf="request.status==2">
+          {{request.requestStatus|translate}}
+        </span>
+        <span class="black-text-color" *ngIf="request.status==1">
+          {{request.requestStatus|translate}}
+        </span> -->
+
+        <span> {{request?.status_f}} </span>
+      </div>
+    </div>
+  </div>
+</ion-content>

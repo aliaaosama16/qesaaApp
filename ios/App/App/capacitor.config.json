@@ -1,0 +1,20 @@
+{
+	"appId": "com.efada.qesaa.app",
+	"appName": "qesaa",
+	"webDir": "www",
+	"bundledWebRuntime": false,
+	"plugins": {
+		"SplashScreen": {
+			"launchShowDuration": 5000,
+			"launchAutoHide": true
+		},
+		"Keyboard": {
+			"resize": "body",
+			"style": "dark",
+			"resizeOnFullScreen": true
+		}
+	},
+	"android": {
+		"allowMixedContent": true
+	}
+}

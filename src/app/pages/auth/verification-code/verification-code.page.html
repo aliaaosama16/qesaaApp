@@ -1,0 +1,48 @@
+<ion-content class="form-container">
+  <div class="auth-image">
+    <img src="./../../../../assets/images/auth-left.svg" />
+  </div>
+
+  <div class="title ion-padding-horizontal ion-margin-horizontal ">
+    <p class="ion-no-margin fn-24 qesaa-Janna-Bold">{{"code-verification"|translate}}</p>
+  </div>
+
+  <div class="notice ion-padding-horizontal ion-margin-horizontal ">
+    <p class="ion-no-margin fn-15 qesaa-Janna-Regular gray-color">{{"enter code sent to mobile"|translate}}</p>
+  </div>
+
+
+  <form (ngSubmit)="confirmVerificationCode()" class="ion-margin-bottom ion-margin-horizontal  ion-padding-horizontal">
+    <div class="code-conatiner">
+      <div>
+        <ion-item lines="none" [ngClass]="inputFocusNumber1 ? 'code-focused' : 'code-unfocused' ">
+          <ion-input class="otp ion-padding-top ion-text-center" #n1 min="0" max="9" maxlength="1" (keyup)="next($event,n2,'n1')" type="tel">
+          </ion-input>
+        </ion-item>
+      </div>
+      <div>
+        <ion-item lines="none" [ngClass]="inputFocusNumber2 ? 'code-focused' : 'code-unfocused' ">
+          <ion-input class="otp ion-padding-top ion-text-center" #n2 min="0" max="9" maxlength="1" (keyup)="next($event,n3,'n2')" type="tel">
+          </ion-input>
+        </ion-item>
+      </div>
+      <div>
+        <ion-item lines="none" [ngClass]="inputFocusNumber3 ? 'code-focused' : 'code-unfocused' ">
+          <ion-input class="otp ion-padding-top ion-text-center" #n3 min="0" max="9" maxlength="1" (keyup)="next($event,n4,'n3')" type="tel">
+          </ion-input>
+        </ion-item>
+      </div>
+      <div>
+        <ion-item lines="none" [ngClass]="inputFocusNumber4 ? 'code-focused' : 'code-unfocused' ">
+          <ion-input class="otp ion-padding-top ion-text-center" #n4 min="0" max="9" maxlength="1" (keyup)="next($event,'','n4')" type="tel">
+          </ion-input>
+        </ion-item>
+      </div>
+    </div>
+
+    <ion-button class="form-btn margin-8-top" expand="block" type="submit" color="primary">
+      <span class="fn-20 qesaa-Janna-Bold"> {{ "confirm"|translate}} </span>
+    </ion-button>
+  </form>
+
+</ion-content>

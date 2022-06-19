@@ -1,0 +1,104 @@
+<app-header
+  [hasMarketCart]="false"
+  [haveBeforeHeader]="false"
+  [title]="'details'"
+  [isHome]="false"
+></app-header>
+
+<ion-content class="ion-padding-horizontal">
+  <div class="ion-padding-horizontal" *ngIf="familyDetails">
+    <div class="family-image">
+      <img [src]="familyDetails?.avatar" />
+    </div>
+
+    <div class="family-details">
+      <div class="nameandphone">
+        <div class="title">
+          <div [ngClass]=" langauge=='ar' ?'icon-ar':'icon-en'">
+            <ion-icon src="./../../../assets/icon/family/person.svg"></ion-icon>
+          </div>
+          <div class="fn-16 qesaa-Janna-Bold primary-color">
+            :{{"person name"|translate}}
+          </div>
+        </div>
+        <div class="fn-16 qesaa-Janna-Regular secondary-color">
+          {{familyDetails?.first_name}}
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="nameandphone">
+        <div class="title">
+          <div [ngClass]=" langauge=='ar' ?'icon-ar':'icon-en'">
+            <ion-icon src="./../../../assets/icon/family/phone.svg"></ion-icon>
+          </div>
+          <div class="fn-16 qesaa-Janna-Bold primary-color">
+            :{{"phone number"|translate}}
+          </div>
+        </div>
+        <div class="fn-16 qesaa-Janna-Regular secondary-color">
+          {{familyDetails?.phone}}
+        </div>
+      </div>
+    </div>
+
+    <div class="family-details">
+      <div class="nameandphone">
+        <div class="title">
+          <div [ngClass]=" langauge=='ar' ?'icon-ar':'icon-en'">
+            <ion-icon
+              src="./../../../assets/icon/family/instagram.svg"
+            ></ion-icon>
+          </div>
+          <div class="fn-16 qesaa-Janna-Bold primary-color">
+            :{{"instgram"|translate}}
+          </div>
+        </div>
+        <div class="fn-16 qesaa-Janna-Regular secondary-color" (click)="showProviderSocail('twitter',familyDetails?.instagram)">
+          {{familyDetails?.instagram}}
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="nameandphone">
+        <div class="title">
+          <div [ngClass]=" langauge=='ar' ?'icon-ar':'icon-en'">
+            <ion-icon
+              src="./../../../assets/icon/family/twitter.svg"
+            ></ion-icon>
+          </div>
+          <div class="fn-16 qesaa-Janna-Bold primary-color">
+            :{{"twitter"|translate}}
+          </div>
+        </div>
+        <div class="fn-16 qesaa-Janna-Regular secondary-color" (click)="showProviderSocail('twitter',familyDetails?.twitter)">
+          {{familyDetails?.twitter}}
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="nameandphone">
+        <div class="title">
+          <div [ngClass]=" langauge=='ar' ?'icon-ar':'icon-en'">
+            <!-- <ion-icon
+              src="./../../../assets/icon/family/twitter.svg"
+            ></ion-icon> -->
+            <ion-icon style="font-size:21px ;" color="primary" name="logo-whatsapp"></ion-icon>
+          </div>
+          <div class="fn-16 qesaa-Janna-Bold primary-color">
+            :{{"whatsapp"|translate}}
+          </div>
+        </div>
+        <div
+          class="fn-16 qesaa-Janna-Regular secondary-color"
+          (click)="showProviderSocail('whats',familyDetails?.full_phone)"
+        >
+          {{familyDetails?.full_phone}}
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

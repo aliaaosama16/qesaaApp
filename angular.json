@@ -30,7 +30,12 @@
                 "output": "./svg"
               }
             ],
-            "styles": ["src/theme/variables.scss", "src/global.scss"],
+           "styles": [
+              "src/theme/variables.scss",
+              "src/global.scss",
+              "node_modules/animate.css/animate.css",
+               "node_modules/flag-icon-css/sass/flag-icon.scss" 
+            ],
             "scripts": [],
             "aot": false,
             "vendorChunk": true,

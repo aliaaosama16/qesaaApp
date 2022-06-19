@@ -1,0 +1,62 @@
+<app-header
+  [haveBeforeHeader]="false"
+  [hasMarketCart]="false"
+  [title]="'products'"
+  [isHome]="false"
+></app-header>
+
+<ion-content class="ion-padding-horizontal">
+  <div *ngIf="products?.length==0" class="no-data">
+    <p>{{"no products"|translate}}</p>
+  </div>
+  <div *ngIf="products?.length!=0">
+    <div
+      class="product-container ion-margin-bottom"
+      *ngFor="let product of products"
+    >
+      <div class="product-image">
+        <img [src]="product?.image" />
+      </div>
+
+      <div class="names">
+        <h6 class="ion-no-margin fn-22 qesaa-Janna-Bold">
+          {{product?.service_title}}
+        </h6>
+        <p class="ion-no-margin fn-14 qesaa-Janna-Regular light-grayed-color">
+          {{product?.section_title}}
+        </p>
+        <div class="updateCount">
+          <div
+            class="increase"
+            (click)="increaseCount(product.count,product.id)"
+          >
+            <ion-icon name="add-circle-sharp" color="primary"></ion-icon>
+          </div>
+          <div class="count fn-18">{{product.count}}</div>
+          <div
+            class="decrease"
+            (click)="decreaseCount(product.count,product.id)"
+          >
+            <ion-icon name="remove-circle-sharp" color="primary"></ion-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="delete-icon" (click)="deleteProduct(product?.id)">
+        <ion-icon src="./../../../assets/icon/Delete.svg"></ion-icon>
+      </div>
+    </div>
+
+    <div class="checkout-btn">
+      <ion-button
+        *ngIf="products"
+        (click)="checkout()"
+        color="primary"
+        expand="block"
+        class="fn-20 qesaa-Janna-Bold"
+      >
+        {{ "complete-request"|translate}}
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

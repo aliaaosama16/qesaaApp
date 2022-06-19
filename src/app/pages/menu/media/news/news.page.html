@@ -1,0 +1,31 @@
+<app-header
+  [haveBeforeHeader]="false"
+  [title]="'news'"
+  [hasMarketCart]="false"
+  [isHome]="false"
+></app-header>
+
+<ion-content class="ion-padding-horizontal">
+  
+  <div
+   *ngFor="let news of newsList"
+    class="ion-margin-bottom news-container"
+    routerLink="/tabs/news/details/{{news.id}}"
+  >
+    <div class="icon" [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'">
+      <ion-avatar slot="start">
+
+      <img [src]="news.image" />
+      </ion-avatar>
+    </div>
+    <div class="details">
+      <p class="title ion-no-margin secondary-color fn-18 qesaa-Janna-Bold">
+        {{news.title}}
+      </p>
+      <p class="description ion-no-margin fn-12 qesaa-Janna-Regular">{{news.desc}}</p>
+      <p class="date ion-no-margin primary-color fn-12 qesaa-Janna-Regular">
+        {{news.date}}
+      </p>
+    </div>
+  </div>
+</ion-content>

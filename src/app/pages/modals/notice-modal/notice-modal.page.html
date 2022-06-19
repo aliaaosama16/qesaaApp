@@ -1,0 +1,19 @@
+<ion-content>
+  <div class=" content">
+    <div class="ion-text-center image">
+      <img src="./../../../../assets/icon/success.svg">
+    </div>
+
+    <div class="ion-text-center title ">
+      <p class="ion-no-margin fn-21 qesaa-Janna-Bold"> {{noticeText|translate}} </p>
+    </div>
+
+    <div class="ion-text-center modal-btn" >
+      <ion-button *ngIf="haveButton" (click)="showOrders()" shape="round" expand="block" color="primary">
+        <p class="ion-no-margin fn-20 qesaa-Janna-Bold white-color">
+          {{buttonText|translate}}
+        </p>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

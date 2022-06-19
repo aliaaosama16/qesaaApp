@@ -1,0 +1,42 @@
+<app-header
+  [haveBeforeHeader]="false"
+  [hasMarketCart]="true"
+  [title]="'charity-market'"
+  [isHome]="false"
+></app-header>
+
+<ion-content class="ion-padding-horizontal">
+  <div class="category-section">
+    <ion-segment scrollable="true" (ionChange)="segmentChanged($event)">
+      <ion-segment-button
+      (click)="catSelect(section.id)"
+      [class.cat-selected]="selectedIndex == section.id"
+        [value]="section.id"
+        *ngFor="let section of sections;let i=index"
+      >
+        <span class="fn-14 qesaa-Janna-Regular white-color">
+          {{section?.title}}
+        </span>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+  <div *ngIf="sectionProducts">
+    <ion-row>
+      <ion-col
+        size="4"
+        *ngFor="let product of sectionProducts"
+        (click)="showService(product?.id)"
+      >
+        <div class="product ion-text-center">
+          <div class="icon">
+            <img [src]="product?.image" />
+          </div>
+        </div>
+        <div class="ion-text-center title">
+          <p class="ion-no-margin fn-18 qesaa-Janna-Bold">{{product?.title}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

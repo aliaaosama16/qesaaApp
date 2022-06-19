@@ -1,0 +1,24 @@
+import {  TranslateModule } from '@ngx-translate/core';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { IonicModule } from '@ionic/angular';
+
+import { NewsPageRoutingModule } from './news-routing.module';
+
+import { NewsPage } from './news.page';
+import { SharedComponentModule } from 'src/app/components/shared-component.module';
+
+@NgModule({
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    NewsPageRoutingModule,
+    SharedComponentModule,
+    TranslateModule
+  ],
+  declarations: [NewsPage]
+})
+export class NewsPageModule {}

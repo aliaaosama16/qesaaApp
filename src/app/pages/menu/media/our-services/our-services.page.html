@@ -1,0 +1,26 @@
+<app-header
+  [haveBeforeHeader]="false"
+  [title]="'our-services'"
+  [isHome]="false"
+  [hasMarketCart]="false"
+></app-header>
+
+<ion-content class="ion-padding-horizontal">
+  <div class="services-container">
+    <div
+      class="service-wrapper ion-margin-bottom"
+      *ngFor="let service of services"
+      routerLink="/tabs/our-services/details/{{service.id}}"
+    >
+      <div class="service ion-padding ion-text-center">
+        <div class="icon">
+          <img [src]="service?.image" />
+        </div>
+
+        <div class="ion-text-center">
+          <p class="ion-no-margin fn-14 qesaa-Janna-Bold">{{service?.title}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,26 @@
+.families-container {
+  // display: flex;
+  // justify-content: space-around;
+  // flex-wrap: wrap;
+  .family {
+    margin-bottom: 18px;
+
+    .family-image {
+     img{
+      // border-radius: 10px;
+      // width: 100%;
+      // //height: 110px;
+
+      border-radius: 10px;
+      width: 100%;
+      height: 110px;
+      object-fit: cover;
+      object-position: top;
+     }
+    }
+
+    .family-name {
+      margin-top: 10px;
+    }
+  }
+}

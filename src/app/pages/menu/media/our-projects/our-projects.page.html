@@ -1,0 +1,21 @@
+<app-header
+  [haveBeforeHeader]="false"
+  [title]="'our-projects'"
+  [isHome]="false"
+  [hasMarketCart]="false"
+></app-header>
+
+<ion-content class="ion-padding-horizontal">
+  <ion-row>
+    <ion-col
+      routerLink="/tabs/our-projects/details/{{project.id}}"
+      size="6"
+      *ngFor="let project of projects"
+    >
+      <div class="project-container ion-text-center">
+        <img class="project-image" [src]="project.image" />
+        <p class="ion-no-margin fn-20 qesaa-Janna-Bold">{{project.title}}</p>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

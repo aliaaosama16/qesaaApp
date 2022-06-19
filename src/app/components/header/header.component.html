@@ -1,0 +1,58 @@
+<ion-header
+  class="ion-no-border"
+  [ngClass]="currentPlatform == 'ios' ? 'ios-header' : ''"
+>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button
+        fill="solid"
+        shape="round"
+        color="primary"
+        (click)="openMenu()"
+      >
+        <ion-icon
+          src="./../../../assets/icon/menu.svg"
+          [ngClass]="currentLangauge == 'ar' ? '' : 'menu-en'"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-title class="ion-text-center fn-24 qesaa-Janna-Bold black-color">{{
+      title | translate
+    }}</ion-title>
+
+    <ion-buttons
+      class="cart-icon"
+      slot="end"
+      *ngIf="hasMarketCart && cartCount != 0"
+      (click)="showUserCart()"
+    >
+      <span >{{
+        cartCount
+      }}</span>
+      <!-- <span class="animate__animated animate__slideInDown">{{
+        cartCount
+      }}</span> -->
+      <ion-icon name="cart-outline" color="primary"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="end" *ngIf="!isHome" (click)="goBack()">
+      <ion-button fill="solid" shape="round" color="primary">
+        <!-- <ion-icon
+          [name]="
+            currentLangauge == 'ar' ? 'arrow-forward-sharp' : 'arrow-back-sharp'
+          "
+        ></ion-icon> -->
+        <ion-icon
+          src="./../../../assets/icon/back-icon.svg"
+          [ngClass]="currentLangauge == 'ar' ? '' : 'menu-en'"
+        ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <div
+    [ngClass]="{
+      'header-extenstion': !haveBeforeHeader,
+      'custom-top-margin': currentPlatform != 'ios'
+    }"
+  ></div>
+</ion-header>

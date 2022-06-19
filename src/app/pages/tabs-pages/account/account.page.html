@@ -1,0 +1,162 @@
+<app-header
+  [hasMarketCart]="false"
+  [haveBeforeHeader]="false"
+  [title]="'account'"
+  [isHome]="false"
+></app-header>
+<!-- alt="./../../../../assets/icon/profile_alt.svg"  -->
+<ion-content class="ion-padding-horizontal">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="info">
+    <div class="user-image">
+      <ion-avatar *ngIf="userData?.avatar">
+        <ion-img [src]="userData?.avatar" ></ion-img>
+      </ion-avatar>
+    </div>
+
+    <div class="name-phone">
+      <p class="name primary-color fn-22 qesaa-Janna-Bold">
+        {{userData?.first_name}}
+      </p>
+
+      <p class="fn-20 secondary-color qesaa-Janna-Regular">
+        {{userData?.phone}}
+      </p>
+    </div>
+  </div>
+
+  <div class="wrapper" routerLink="/tabs/account/edit">
+    <div class="container">
+      <div class="icon">
+        <img src="./../../../../assets/icon/account/account_circle.svg" />
+      </div>
+      <div class="title fn-18 qesaa-Janna-Regular">
+        <span>{{"account-settings"|translate}}</span>
+      </div>
+      <div class="tailing-icon">
+        <ion-icon src="./../../../../assets/icon/account/edit.svg"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="container">
+      <div class="icon">
+        <ion-icon
+          src="./../../../../assets/icon/account/notifications.svg"
+        ></ion-icon>
+      </div>
+      <div class="title fn-18 qesaa-Janna-Regular">
+        <span>{{"notifications-settings"|translate}}</span>
+      </div>
+      <div class="tailing-icon">
+        <ion-toggle
+          mode="ios"
+          [checked]="notifcationsStatus"
+          (ionChange)="changeNotifcationsStatus()"
+        ></ion-toggle>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="container" (click)="helpPage()">
+      <div class="icon">
+        <ion-icon src="./../../../../assets/icon/account/help.svg"></ion-icon>
+      </div>
+      <div class="title fn-18 qesaa-Janna-Regular">
+        <span>{{"help-center"|translate}}</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="container" routerLink="/tabs/account/contact-with-admin">
+      <div class="icon">
+        <ion-icon
+          src="./../../../../assets/icon/account/contact.svg"
+        ></ion-icon>
+      </div>
+      <div class="title fn-18 qesaa-Janna-Regular">
+        <span>{{ "Communicate with management"|translate}}</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="container" (click)="policyPage()">
+      <div class="icon">
+        <ion-icon src="./../../../../assets/icon/account/policy.svg"></ion-icon>
+      </div>
+      <div class="title fn-18 qesaa-Janna-Regular">
+        <span>{{"use policy"|translate}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrapper">
+    <div class="container" (click)="aboutPage()">
+      <div class="icon">
+        <ion-icon src="./../../../../assets/icon/account/about.svg"></ion-icon>
+      </div>
+      <div class="title fn-18 qesaa-Janna-Regular">
+        <span>{{"about app"|translate}}</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="container" (click)="changeLanguage()">
+      <div class="icon">
+        <!-- <ion-icon
+          src="./../../../../assets/icon/account/version.svg"
+        ></ion-icon> -->
+
+        <ion-icon
+          style="font-size: 21px"
+          color="primary"
+          name="globe-outline"
+        ></ion-icon>
+      </div>
+      <div class="title fn-18 qesaa-Janna-Regular">
+        <span
+          >{{otherLanguage}}
+          <!-- {{"app version"|translate}} -->
+        </span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="container" (click)="logout()">
+      <div class="icon">
+        <ion-icon src="./../../../../assets/icon/account/logout.svg"></ion-icon>
+      </div>
+      <div class="title fn-18 qesaa-Janna-Regular">
+        <span>{{ "logout"|translate}}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="social-media">
+    <div (click)="openUrl('whatsapp')">
+      <ion-icon src="./../../../../assets/icon/account/whatsapp.svg">
+      </ion-icon>
+    </div>
+    <div (click)="openUrl('twitter')">
+      <ion-icon src="./../../../../assets/icon/account/twitter.svg"> </ion-icon>
+    </div>
+    <div (click)="openUrl('instgram')">
+      <ion-icon src="./../../../../assets/icon/account/instgram.svg">
+      </ion-icon>
+    </div>
+  </div>
+
+  <div class="copyright ion-text-center ion-margin-bottom">
+    <p class="primary-color ion-no-margin fn-20 qesaa-Janna-Regular">
+      {{ "app-copyright"|translate }}
+    </p>
+  </div>
+</ion-content>

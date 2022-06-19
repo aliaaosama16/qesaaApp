@@ -1,0 +1,45 @@
+.productImage {
+  border-radius: 10px;
+  background: var(--ion-color-white);
+ // height: 163px;
+  padding: 29px;
+  box-shadow: var(--custom-box-shadow);
+  margin-bottom: 20px;
+  .icon {
+    margin: 0 auto;
+  }
+}
+
+.names {
+  .product-name {
+    margin-bottom: 8px;
+  }
+
+  .category-name {
+    margin-bottom: 20px;
+  }
+}
+
+
+.description{
+    .description-text{
+        margin-top: 8px;
+    }
+
+    margin-bottom: 80px;
+}
+
+.add-btn{
+  margin-bottom: 30px;
+  ion-button{
+   display: flex;
+   align-items: center;
+   justify-content: center;
+    &::part(native){
+        height: 50px;
+        border-radius: 25px;
+    }
+}
+}
+
+

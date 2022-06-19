@@ -1,0 +1,24 @@
+.request-date {
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px dashed var(--ion-color-secondary);
+      border-radius: 20px;
+      height: 117px;
+    
+      img {
+        height: 115px;
+        width: 100%;
+        border-radius: 20px;
+      }
+  
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+  }
+  
+  .request-time {
+    margin-bottom: 6px;
+  }

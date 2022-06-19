@@ -1,0 +1,41 @@
+
+
+.map-location {
+  .map-container {
+    background: none !important;
+    height: 167px;
+    margin-top: 10px;
+    border-radius: 20px;
+
+    //background: none !important;
+  }
+
+ 
+}
+
+.request-date {
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed var(--ion-color-secondary);
+    border-radius: 20px;
+    height: 117px;
+    margin-top: 6px;
+    img {
+      height: 115px;
+      width: 100%;
+      border-radius: 20px;
+    }
+
+    ion-icon {
+      font-size: 20px;
+    }
+  }
+}
+
+.request-time {
+  margin-bottom: 6px;
+}
+// ion-content {--background	:none}
+

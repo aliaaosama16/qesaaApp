@@ -1,0 +1,84 @@
+<ion-content>
+  <div class="content" *ngIf="modalType=='authentication'">
+    <div class="ion-text-center image">
+      <img src="./../../../../assets/icon/login-modal.svg" />
+    </div>
+
+    <div class="ion-text-center title">
+      <p class="ion-no-margin fn-21 qesaa-Janna-Bold">
+        {{'please login'|translate}}
+      </p>
+    </div>
+
+    <div class="ion-text-center modal-btn">
+      <ion-button
+        (click)="goLogin()"
+        shape="round"
+        expand="block"
+        color="secondary"
+      >
+        <p class="ion-no-margin fn-20 qesaa-Janna-Bold white-color">
+          {{"signin"|translate}}
+        </p>
+      </ion-button>
+    </div>
+  </div>
+ 
+  <div class="content" *ngIf="modalType=='rating'">
+    <div class="ion-text-center  image">
+      <img class="custom-image"src="./../../../../assets/icon/rating.png" />
+    </div>
+
+    <div class="ion-text-center title">
+      <p class="ion-no-margin fn-21 qesaa-Janna-Bold">
+        {{'rating'|translate}} <span class="name">{{providerName}}</span>
+      </p>
+    </div>
+
+    <div class="rating ion-margin-bottom ion-padding-horizontal">
+      <div (click)="rating(1)">
+        <ion-icon
+          color="secondary"
+          [name]="ratingNumber!=0 ? 'star' :  'star-outline'"
+        ></ion-icon>
+      </div>
+      <div (click)="rating(2)">
+        <ion-icon
+          color="secondary"
+          [name]="(ratingNumber==2 || ratingNumber==3 ||ratingNumber==4 || ratingNumber==5 )? 'star' :  'star-outline'"
+        ></ion-icon>
+      </div>
+      <div (click)="rating(3)">
+        <ion-icon
+          color="secondary"
+          [name]="(ratingNumber==3 ||ratingNumber==4 || ratingNumber==5 )? 'star' :  'star-outline'"
+        ></ion-icon>
+      </div>
+      <div (click)="rating(4)">
+        <ion-icon
+          color="secondary"
+          [name]="( ratingNumber==4 || ratingNumber==5 )? 'star' :  'star-outline'"
+        ></ion-icon>
+      </div>
+      <div (click)="rating(5)">
+        <ion-icon
+          color="secondary"
+          [name]="ratingNumber==5  ? 'star' :  'star-outline'"
+        ></ion-icon>
+      </div>
+    </div>
+
+    <div class="ion-text-center modal-btn">
+      <ion-button
+        (click)="sendRatingProvider()"
+        shape="round"
+        expand="block"
+        color="primary"
+      >
+        <p class="ion-no-margin fn-20 qesaa-Janna-Bold white-color">
+          {{"send"|translate}}
+        </p>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,75 @@
+<app-header
+  [haveBeforeHeader]="true"
+  [title]="'gallery'"
+  [isHome]="false"
+  [hasMarketCart]="false"
+></app-header>
+
+<ion-content>
+  <ion-segment
+    (ionChange)="galleyTypeChoose($event)"
+    [value]="galleyType"
+    color="primary"
+  >
+    <ion-segment-button
+      value="photos"
+      [ngStyle]="{'background-color': galleyType=='photos' ? '#951b80' : '' }"
+
+      [ngClass]="{   
+       
+        'btn-border-right':currentLanguage=='ar',
+        'btn-border-left ':currentLanguage=='en'
+      }"
+    >
+      <ion-label class="fn-18 qesaa-Janna-Bold white-color">
+        {{"images"|translate}}
+      </ion-label>
+    </ion-segment-button>
+    <ion-segment-button
+      value="videos"
+      [ngStyle]="{'background-color': galleyType=='videos' ? '#951b80' : '' }"
+      [ngClass]="{   
+        
+        'btn-border-left':currentLanguage=='ar',
+        'btn-border-right':currentLanguage=='en'
+      }"
+    >
+      <ion-label class="fn-18 qesaa-Janna-Bold white-color">
+        {{"videos"|translate}}
+      </ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div
+    *ngIf="galleyType=='photos' && galleryPhotos.length!=0"
+    class="ion-padding"
+  >
+    <ion-row>
+      <ion-col
+        class="ion-text-center"
+        size="4"
+        *ngFor="let image of galleryPhotos"
+        (click)="openPreview(galleryPhotos,image.id)"
+      >
+        <img [src]="image.image" />
+      </ion-col>
+    </ion-row>
+  </div>
+  <!-- (click)="openPreview(galleryVideos,video.id)" -->
+  <div
+    *ngIf="galleyType=='videos'&& galleryVideos.length!=0"
+    class="ion-padding"
+  >
+    <ion-row>
+      <ion-col
+        class="ion-text-center"
+        size="6"
+        *ngFor="let video of galleryVideos"
+      >
+        <video controls>
+          <source [src]="video.video" type="video/mp4" />
+        </video>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

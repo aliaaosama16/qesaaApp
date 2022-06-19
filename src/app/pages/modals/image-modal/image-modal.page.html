@@ -1,0 +1,39 @@
+<ion-content>
+  <swiper
+    #swiper
+    [config]="configSlider"
+    class="item-images-swiper"
+    [dir]="currentlangauge == 'ar' ? 'rtl' : 'ltr'"
+    *ngIf="orderImage==undefined"
+  >
+    <ng-template swiperSlide *ngFor="let image of images">
+      <div class="swiper-zoom-container">
+        <img class="slider-image" [src]="image.image" />
+      </div>
+    </ng-template>
+  </swiper>
+
+  <swiper
+    #swiper
+    [config]="configSlider"
+    class="item-images-swiper"
+    [dir]="currentlangauge == 'ar' ? 'rtl' : 'ltr'"
+    *ngIf="orderImage!=undefined"
+  >
+    <ng-template swiperSlide>
+      <div class="swiper-zoom-container">
+        <img
+          *ngIf="orderImage!=undefined"
+          class="slider-image"
+          [src]="orderImage"
+        />
+      </div>
+    </ng-template>
+  </swiper>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="primary" (click)="closeModal()">
+      <ion-icon name="close" color="white"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

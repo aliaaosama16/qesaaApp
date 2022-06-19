@@ -1,0 +1,127 @@
+<ion-header class="ion-no-border"  *ngIf="getIntro">
+  <ion-toolbar color="secondary"></ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="boarding-container">
+    <swiper
+      #swiper
+      [config]="boardingConfig"
+      class="custom-swiper"
+      [dir]="currentlangauge == 'ar' ? 'rtl' : 'ltr'"
+      *ngIf="getIntro"
+    >
+      <ng-template swiperSlide>
+        <div class="slide-container">
+          <div class="slide-mage">
+            <!-- <img [src]="introData?.data.first_image" /> -->
+            <ion-img src="./../../../../assets/images/onboarding1.svg"></ion-img>
+          </div>
+          <div class="ion-padding-horizontal ion-text-center ion-margin-bottom">
+            <p class="ion-no-margin fn-24 qesaa-Janna-Bold primary-color">
+              {{introData?.data?.first_title}}
+            </p>
+            <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
+              {{introData?.data?.first_desc}}
+            </p>
+          </div>
+          <div class="indicators">
+            <div class="selected"></div>
+            <div class="not-selected"></div>
+            <div class="not-selected"></div>
+          </div>
+          <div class="slide-footer">
+            <div
+              (click)="nextSlide()"
+              class="fn-18 qesaa-Janna-Bold white-color"
+              [ngClass]="currentlangauge=='ar'?'boarding-btn-ar':'boarding-btn-en'"
+            >
+              {{"next"|translate}}
+            </div>
+            <div class="footer-image" routerLink="/tabs/home">
+              <img src="./../../../../assets/icon/onboarding0.svg" />
+
+              <div class="skip-text fn-16 qesaa-Janna-Regular white-color">
+                {{"skip"|translate}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template swiperSlide>
+        <div class="slide-container">
+          <div class="slide-mage">
+            <!-- <img [src]="introData?.data?.second_image" /> -->
+            <ion-img src="./../../../../assets/images/onboarding2.svg"></ion-img>
+          </div>
+          <div class="ion-padding-horizontal ion-text-center ion-margin-bottom">
+            <p class="ion-no-margin fn-24 qesaa-Janna-Bold primary-color">
+              {{introData?.data?.second_title}}
+            </p>
+            <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
+              {{introData?.data?.second_desc}}
+            </p>
+          </div>
+          <div class="indicators">
+            <div class="not-selected"></div>
+            <div class="selected"></div>
+            <div class="not-selected"></div>
+          </div>
+          <div class="slide-footer">
+            <div
+              (click)="nextSlide()"
+              class="fn-18 qesaa-Janna-Bold white-color"
+              [ngClass]="currentlangauge=='ar'?'boarding-btn-ar':'boarding-btn-en'"
+            >
+              {{"next"|translate}}
+            </div>
+            <div class="footer-image" routerLink="/tabs/home">
+              <img src="./../../../../assets/icon/onboarding0.svg" />
+              <div class="skip-text fn-16 qesaa-Janna-Regular white-color">
+                {{"skip"|translate}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+
+      <ng-template swiperSlide>
+        <div class="slide-container">
+          <div class="slide-mage">
+            <!-- <img [src]="introData?.data?.third_image" /> -->
+            <ion-img src="./../../../../assets/images/onboarding3.svg"></ion-img>
+          </div>
+          <div class="ion-padding-horizontal ion-text-center ion-margin-bottom">
+            <p class="ion-no-margin fn-24 qesaa-Janna-Bold primary-color">
+              {{introData?.data?.third_title}}
+            </p>
+            <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
+              {{introData?.data?.second_desc}}
+            </p>
+          </div>
+          <div class="indicators">
+            <div class="not-selected"></div>
+            <div class="not-selected"></div>
+            <div class="selected"></div>
+          </div>
+          <div class="slide-footer">
+            <div
+              (click)="start()"
+              class="fn-18 qesaa-Janna-Bold white-color"
+              [ngClass]="currentlangauge=='ar'?'boarding-btn-ar':'boarding-btn-en'"
+            >
+              {{"start"|translate}}
+            </div>
+            <div class="footer-image" routerLink="/tabs/home">
+              <img src="./../../../../assets/icon/onboarding0.svg" />
+              <!-- <div class="skip-text fn-16 qesaa-Janna-Regular white-color">
+                {{"skip"|translate}}
+              </div> -->
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </swiper>
+  </div>
+</ion-content>

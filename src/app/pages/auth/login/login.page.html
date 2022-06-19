@@ -1,0 +1,238 @@
+<ion-content class="form-container">
+  <div class="auth-image">
+    <img src="./../../../../assets/images/auth-right.svg" />
+  </div>
+
+  <div class="title ion-padding-horizontal ion-margin-horizontal">
+    <p class="ion-no-margin fn-24 qesaa-Janna-Bold">{{"signin"|translate}}</p>
+  </div>
+
+  <form
+    (ngSubmit)="login()"
+    [formGroup]="loginForm"
+    class="ion-margin-bottom ion-margin-horizontal ion-padding-horizontal"
+  >
+    <!-- <ion-item lines="none" class="ion-margin-bottom custom-item">
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/forms/phone.svg"
+      >
+      </ion-icon>
+      <ion-input
+        class="fn-16 qesaa-Janna-Regular"
+        placeholder="{{'phone number'|translate}}"
+        type="tel"
+        formControlName="phoneNumber"
+      ></ion-input>
+      <div
+        item-end
+        style="
+          display: flex;
+          justify-content: space-around;
+          align-items: center;
+          margin: 0 10px;
+          align-items: flex-start;
+        "
+         (click)="openCountryList()"
+      >
+      <div>
+        <ion-icon color="gray" name="caret-down-outline"></ion-icon>
+      </div>
+        <div>
+          <img src="./../../../../assets/icon/account_icon.svg" />
+        </div>
+        <div style="font-size: 20px; color: gray;   margin: 0 3px;">88</div>
+        <div style="font-size: 20px; color: gray">+</div>
+      </div>
+    </ion-item> -->
+    <!-- <ion-item lines="none" class="ion-margin-bottom">
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/forms/phone.svg"
+      >
+      </ion-icon>
+      <ion-input
+        class="fn-16 qesaa-Janna-Regular"
+        placeholder="{{'phone number'|translate}}"
+        type="tel"
+        formControlName="phoneNumber"
+      ></ion-input>
+
+      <div item-end>
+        <ion-select
+        formControlName="countryCode"
+        (ionChange)="chooseCity($event)"
+       
+        okText='{{"ok"|translate}}'
+        cancelText='{{"cancel"|translate}}'
+        interface="alert"
+        mode="ios"
+      >
+        <ion-select-option
+          class="fn-16 qesaa-Janna-Regular"
+          [value]="city.title"
+          *ngFor="let city of cities"
+        >
+         <ion-row>
+           <ion-col size="6"> {{city.title|translate}}</ion-col>
+           <ion-col size="6">
+           <ion-icon [src]="city.flag"></ion-icon>  
+      </ion-col>
+         </ion-row>
+
+        
+        </ion-select-option>
+      </ion-select>
+      </div>
+    </ion-item> -->
+
+    <ion-item lines="none" class="ion-margin-bottom">
+      <ion-icon
+        class="custom-form-icon"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/forms/phone.svg"
+      >
+      </ion-icon>
+      <ion-intl-tel-input
+        [dir]="currentLanguage == 'ar' ? 'ltr' : 'rtl'"
+        item-end
+        formControlName="phoneNumber"
+        defaultCountryiso="sa"
+        [preferredCountries]="preferredCountries"
+      >
+      </ion-intl-tel-input>
+    </ion-item>
+
+    <div class="error-box fn-12" *ngIf="isSignInSubmitted ">
+      <ion-text
+        color="danger"
+        *ngIf="loginErrorControl.phoneNumber.errors?.required"
+      >
+        <p class="fn-16 qesaa-Janna-Regular">
+          <sub> {{'please enter phone number' | translate}}</sub>
+        </p>
+      </ion-text>
+    </div>
+    <!-- <div *ngIf="phoneNumber.invalid && phoneNumberControl.touched">
+      <ion-text color="danger" *ngIf="phoneNumberControl.errors.required">
+        <p class="ion-no-margin"><sub>Phone is required.</sub></p>
+      </ion-text>
+      <ion-text color="danger" *ngIf="phoneNumberControl.errors.phone">
+        <p class="ion-no-margin"><sub>Phone is not valid.</sub></p>
+      </ion-text>
+    </div> -->
+
+    <!-- <ion-item lines="none" class="ion-margin-bottom">
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'custom-form-select-icon-ar':'custom-form-select-icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/forms/location.svg"
+      ></ion-icon>
+
+      <ion-select
+        formControlName="phoneNumber"
+        (ionChange)="chooseCity($event)"
+        placeholder="{{'city'|translate}}"
+        okText='{{"ok"|translate}}'
+        cancelText='{{"cancel"|translate}}'
+        interface="popover"
+        mode="ios"
+        style=" background-repeat:none;background-image: url('./../../../../assets/icon/account_icon.svg');"
+      >
+        <ion-select-option
+          class="fn-16 qesaa-Janna-Regular"
+          [value]="city.id"
+          *ngFor="let city of cities"
+        >
+         <ion-row>
+           <ion-col size="2"> {{city.title|translate}}</ion-col>
+           <ion-col size="8"> 
+            <ion-icon [src]="city.flag"></ion-icon>   
+          </ion-col>
+         </ion-row>
+        </ion-select-option>
+      </ion-select>
+    </ion-item> -->
+
+    <ion-item lines="none" class="ion-margin-bottom">
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/forms/password.svg"
+      >
+      </ion-icon>
+      <ion-input
+        class="fn-16 qesaa-Janna-Regular"
+        placeholder="{{'password'|translate}}"
+        [type]="inputLoginType"
+        formControlName="password"
+      ></ion-input>
+      <ion-icon
+        (click)="showLoginPassword()"
+        item-end
+        color="gray"
+        [name]="iconLoginName"
+      ></ion-icon>
+    </ion-item>
+
+    <ion-button class="form-btn" expand="block" type="submit" color="primary">
+      <span class="fn-20 qesaa-Janna-Bold"> {{ "login"|translate}} </span>
+    </ion-button>
+  </form>
+
+  <div
+    class="other-content ion-padding-horizontal ion-margin-horizontal ion-text-center"
+  >
+    <div routerLink="/forget-password" class="forget-text ion-margin-top">
+      <p class="ion-no-margin fn-16 qesaa-Janna-Regular red-color">
+        {{"forget-password"|translate}}
+      </p>
+    </div>
+
+    <ion-button
+      class="form-btn"
+      expand="block"
+      routerLink="/register"
+      color="secondary"
+    >
+      <span class="fn-20 qesaa-Janna-Bold white-color">
+        {{ "register"|translate}}
+      </span>
+    </ion-button>
+
+    <div routerLink="/tabs/home" class="forget-text ion-margin-top">
+      <p class="ion-no-margin fn-18 qesaa-Janna-Regular">
+        {{"guest"|translate}}
+      </p>
+    </div>
+
+    <div class="language-contact">
+      <div routerLink="/tabs/contact-with-us" class="ion-text-center contact">
+        <p class="ion-no-margin fn-18 qesaa-Janna-Regular">
+          {{"contact us"|translate}}
+        </p>
+      </div>
+
+      <div class="divider"></div>
+      <div class="ion-text-center contact" (click)="changeLanguage()">
+        <p
+          class="ion-no-margin fn-18 qesaa-Janna-Regular"
+          style="text-transform: capitalize"
+        >
+          {{otherLanguage}}
+        </p>
+      </div>
+    </div>
+  </div>
+</ion-content>

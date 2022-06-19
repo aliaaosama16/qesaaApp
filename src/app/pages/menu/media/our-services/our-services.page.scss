@@ -1,0 +1,25 @@
+.services-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  .service-wrapper {
+    width: 31.3%;
+    margin: 1%;
+    .service {
+      border-radius: 5px;
+      background: var(--ion-color-white);
+      box-shadow: var(--custom-box-shadow);
+      .icon {
+        border-radius: 50%;
+        background-color: var(--ion-color-secondary);
+        margin: 0 auto 12px auto;
+        padding: 12px;
+        width: 50px;
+        height: 50px;
+        ion-icon {
+          font-size: 28px;
+        }
+      }
+    }
+  }
+}

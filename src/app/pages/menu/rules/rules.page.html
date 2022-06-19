@@ -1,0 +1,16 @@
+<app-header  [hasMarketCart]="false" [haveBeforeHeader]="false" [title]="rulesDataResponse?.title" [isHome]="false"></app-header>
+
+<ion-content class="ion-padding">
+    <div class="ion-text-center">
+        <img  src="./../assets/icon/app-logo.svg" style="    width: 176px;
+        height: 180px;
+        object-fit: cover;
+        object-position: top;"/>
+
+        <div class="ion-text-center rules-container">
+            <p class="ion-no-margin fn-14 qesaa-Janna-Regular" [innerHtml]="rulesDataResponse?.desc">
+
+            </p>
+        </div>
+    </div>
+</ion-content>

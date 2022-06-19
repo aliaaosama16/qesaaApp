@@ -1,0 +1,87 @@
+ion-segment {
+  border-radius: 25px 25px 0 0 !important;
+
+  background-color: var(--ion-color-white);
+  ion-segment-button {
+    background-color: var(--ion-color-secondary);
+    height: 50px;
+    --indicator-height: 0px !important;
+    --indicator-color: transparent !important;
+    // &:focus {
+    //   background-color: var(--ion-color-primary);
+    // }
+    --background-checked:var(--ion-color-primary);
+  }
+}
+
+
+.orders-container {
+  background-color: var(--ion-color-white);
+  box-shadow: var(--custom-box-shadow);
+  border-radius: var(--custom-border-10-radius);
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  .order-number {
+    margin: 0 0 18px 0 !important;
+  }
+
+  .order-status {
+    margin: 0 0 17px 0 !important;
+    display: flex;
+  }
+
+  .date {
+    margin-bottom: 7px;
+  }
+
+  ion-icon {
+    font-size: 32px;
+  }
+
+  .custom-margin {
+    margin: 0 6px;
+  }
+
+  ion-button {
+    margin: 0px !important;
+    &::part(native) {
+      border-radius: 25px;
+      height: 40px;
+    }
+  }
+}
+
+.request-container {
+  box-shadow: var(--custom-box-shadow);
+  background-color: var(--ion-color-white);
+  border-radius: var(--custom-border-10-radius);
+  padding: 20px 16px;
+
+  .request-status-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .title {
+      flex-grow: 1;
+    }
+    .requestNumber {
+      flex-grow: 1;
+    }
+    .requestDate {
+      flex-grow: 10;
+    }
+  }
+
+  .request-status {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}

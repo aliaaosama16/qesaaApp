@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  BASE_URL:'https://kesa.sa/api/',
+  Google_API_KEY:'AIzaSyDl02ktqMdvzEwH-_oa7RREoI8Gr-6c9eQ',
+  ImageBaseUrl:'https://kesa.sa/'
 };
 
 /*

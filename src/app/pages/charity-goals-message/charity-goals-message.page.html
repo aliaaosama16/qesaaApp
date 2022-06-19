@@ -1,0 +1,22 @@
+<app-header
+  [haveBeforeHeader]="false"
+  [title]="charityInfoDataResponse?.title"
+  [hasMarketCart]="false"
+></app-header>
+<ion-content class="charity-info" >
+  <div class="page-container" *ngIf="charityInfoDataResponse">
+    <div class="custom-card ion-text-center custom-content-margin">
+      <img [src]="'./../../../assets/icon/'+charityInfoType.title+'.svg'" />
+  
+      <p class="fn-30 qesaa-Janna-Bold primary-color ion-no-margin">
+        {{ charityInfoDataResponse?.title}}
+      </p>
+    </div>
+    <div class="charity-info-content ion-text-center">
+      <p class="fn-18 qesaa-Janna-Regular ion-no-margin">
+        {{charityInfoDataResponse?.desc}}
+      </p>
+    </div>
+  </div>
+
+</ion-content>

@@ -1,0 +1,46 @@
+.family-image {
+  border-radius: 10px;
+  margin-bottom: 20px;
+  img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    object-position: top;
+  }
+}
+
+.family-details {
+  border-radius: 10px;
+  background: var(--ion-color-white);
+  box-shadow: var(--custom-box-shadow);
+  padding: 20px 16px;
+  margin-bottom: 16px;
+
+  .nameandphone {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .title {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      .icon-ar {
+        margin-left: 6px;
+      }
+      .icon-en {
+        margin-right: 6px;
+      }
+      ion-icon {
+        font-size: 20px;
+      }
+    }
+  }
+
+  .divider {
+    margin-top: 14.5px;
+    margin-bottom: 16.6px;
+    border-bottom: 1px solid rgba(var(--ion-color-gray-rgb), 0.4);
+  }
+}

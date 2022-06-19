@@ -1,0 +1,88 @@
+<app-header
+  [haveBeforeHeader]="false"
+  [title]="'contact us'"
+  [isHome]="false"
+  [hasMarketCart]="false"
+></app-header>
+
+<ion-content class="ion-padding-horizontal">
+  <form
+    (ngSubmit)="contactUs()"
+    [formGroup]="contactForm"
+    class="form-container ion-padding-horizontal"
+  >
+    <ion-item lines="none" class="ion-margin-bottom">
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/forms/person.svg"
+      ></ion-icon>
+      <ion-input
+        class="fn-16 qesaa-Janna-Regular"
+        placeholder="{{'user-name'|translate}}"
+        type="text"
+        formControlName="userName"
+        (ionFocus)="inputHaveFocused(true)"
+        (ionBlur)="inputHaveFocused(false)"
+
+      ></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-margin-bottom">
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/forms/phone.svg"
+      ></ion-icon>
+      <ion-input
+        class="fn-16 qesaa-Janna-Regular"
+        placeholder="{{'phone number'|translate}}"
+        type="tel"
+        formControlName="phoneNumber"
+        (ionFocus)="inputHaveFocused(true)"
+        (ionBlur)="inputHaveFocused(false)"
+
+      ></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-margin-bottom">
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/forms/email.svg"
+      ></ion-icon>
+      <ion-input
+        class="fn-16 qesaa-Janna-Regular"
+        placeholder="{{'email-address'|translate}}"
+        type="email"
+        formControlName="email"
+        (ionFocus)="inputHaveFocused(true)"
+        (ionBlur)="inputHaveFocused(false)"
+
+      ></ion-input>
+    </ion-item>
+
+    <ion-item lines="none" class="ion-margin-bottom">
+      <ion-textarea
+        class="ion-padding-horizontal fn-16 qesaa-Janna-Regular"
+        rows="5"
+        placeholder="{{'your message'|translate}}"
+        type="text"
+        formControlName="message"
+        (ionFocus)="inputHaveFocused(true)"
+        (ionBlur)="inputHaveFocused(false)"
+
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-button class="margin-8-top" expand="block" type="submit" color="primary">
+      <span class="fn-20 qesaa-Janna-Bold"> {{ "send"|translate}} </span>
+    </ion-button>
+  </form>
+</ion-content>

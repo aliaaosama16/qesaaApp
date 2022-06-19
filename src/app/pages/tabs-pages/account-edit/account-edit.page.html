@@ -1,0 +1,120 @@
+<app-header
+  [haveBeforeHeader]="false"
+  [title]="'account-edit'"
+  [isHome]="false"
+  [hasMarketCart]="false"
+></app-header>
+
+<ion-content class="ion-padding-horizontal">
+  <div class="user-image ion-text-center" (click)="attachBasicImage()">
+    <ion-avatar>
+      <img *ngIf="profileImage!=''" [src]="profileImage" />
+      <img
+        *ngIf="profileImage==''"
+        src="./../../../../assets/images/profile.svg"
+      />
+    </ion-avatar>
+
+    <p class="ion-no-margin primary-color fn-22 qesaa-Janna-Bold">
+      {{"image change"|translate}}
+    </p>
+  </div>
+
+  <div class="profile-form-container">
+    <form
+      (ngSubmit)="editProfile()"
+      [formGroup]="editProfileForm"
+      class="form-container ion-padding-horizontal"
+    >
+      <ion-item lines="none" class="ion-margin-bottom">
+        <ion-icon
+          class="custom-form-icon"
+          [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+          item-start
+          color="primary"
+          src="./../../../../assets/icon/forms/person.svg"
+        ></ion-icon>
+        <ion-input
+          [value]=" userDetails?.first_name"
+          class="fn-16 qesaa-Janna-Regular"
+          placeholder="{{'user-name'|translate}}"
+          type="text"
+          formControlName="userName"
+          (ionFocus)="inputHaveFocused(true)"
+  (ionBlur)="inputHaveFocused(false)"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin-bottom">
+        <ion-icon
+          class="custom-form-icon"
+          [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+          item-start
+          color="primary"
+          src="./../../../../assets/icon/forms/phone.svg"
+        ></ion-icon>
+        <ion-input
+          [value]=" userDetails?.phone"
+          class="fn-16 qesaa-Janna-Regular"
+          placeholder="{{'phone number'|translate}}"
+          type="tel"
+          formControlName="phoneNumber"
+          (ionFocus)="inputHaveFocused(true)"
+  (ionBlur)="inputHaveFocused(false)"
+        ></ion-input>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin-bottom">
+        <ion-icon
+          class="custom-form-icon"
+          [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+          item-start
+          color="primary"
+          src="./../../../../assets/icon/forms/password.svg"
+        ></ion-icon>
+        <ion-input
+          class="fn-16 qesaa-Janna-Regular"
+          placeholder="{{'password'|translate}}"
+          [type]="inputChangeType"
+          formControlName="password"
+          (ionFocus)="inputHaveFocused(true)"
+  (ionBlur)="inputHaveFocused(false)"
+        ></ion-input>
+        <ion-icon
+          (click)="showChangePassword()"
+          item-end
+          color="gray"
+          [name]="iconChangeName"
+        ></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-margin-bottom">
+        <ion-icon
+          class="custom-form-icon"
+          [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+          item-start
+          color="primary"
+          src="./../../../../assets/icon/forms/password.svg"
+        ></ion-icon>
+        <ion-input
+          class="fn-16 qesaa-Janna-Regular"
+          placeholder="{{'confirm-password'|translate}}"
+          [type]="inputChangeConfirmType"
+          formControlName="confirmPassword"
+          (ionFocus)="inputHaveFocused(true)"
+  (ionBlur)="inputHaveFocused(false)"
+        ></ion-input>
+        <ion-icon
+          (click)="showChangeConfirmPassword()"
+          item-end
+          color="gray"
+          [name]="iconChangeConfirmName"
+        ></ion-icon>
+      </ion-item>
+
+      <ion-button class="form-btn" expand="block" type="submit" color="primary">
+        <span class="fn-20 qesaa-Janna-Bold"> {{ "save"|translate}} </span>
+      </ion-button>
+    </form>
+  </div>
+</ion-content>

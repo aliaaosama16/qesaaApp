@@ -1,0 +1,39 @@
+.request-container {
+  box-shadow: var(--custom-box-shadow);
+  background-color: var(--ion-color-white);
+  border-radius: var(--custom-border-10-radius);
+  padding: 20px 16px;
+
+  .request-status-date {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+
+    .title {
+      flex-grow: 1;
+    }
+    .requestNumber {
+      flex-grow: 1;
+    }
+    .requestDate {
+      flex-grow: 10;
+    }
+  }
+  
+  .request-status{
+    display: flex;
+    flex-direction: row;
+    //justify-content: space-between;
+    align-items: center;
+
+
+    // .title {
+    //   flex-grow: 1;
+    // }
+    // .requestStatus {
+    //   flex-grow: 1;
+    // }
+  }
+}

@@ -1,0 +1,38 @@
+.news-container {
+  border-radius: 10px;
+  background-color: var(--ion-color-white);
+  box-shadow: var(--custom-box-shadow);
+  padding: 19px 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  .icon {
+    // flex-grow: 1;
+    margin-top: 6px;
+  
+    ion-avatar{
+        width: 80px;
+        height: 80px;
+    }
+  }
+  .icon-ar {
+    margin-left: 9px;
+  }
+  .icon-en {
+    margin-right: 9px;
+  }
+  .details {
+    //flex-grow: 3;
+    .title {
+      margin-bottom: 5px;
+    }
+    .description {
+      overflow: hidden;
+      max-height: 3.6em;
+      line-height: 1.8em;
+    }
+    .date {
+      margin-top: 2px;
+    }
+  }
+}

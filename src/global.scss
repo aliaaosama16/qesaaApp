@@ -16,7 +16,7 @@
 @import "~@ionic/angular/css/normalize.css";
 @import "~@ionic/angular/css/structure.css";
 @import "~@ionic/angular/css/typography.css";
-@import '~@ionic/angular/css/display.css';
+@import "~@ionic/angular/css/display.css";
 
 /* Optional CSS utils that can be commented out */
 @import "~@ionic/angular/css/padding.css";
@@ -24,3 +24,529 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+@import "~swiper/css/bundle";
+@import "animate.css";
+
+@font-face {
+  font-family: "Janna-LT-Bold";
+  src: url("./assets/fonts/Bahij-Janna-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Janna-LT-Regular";
+  src: url("./assets/fonts/Bahij-Janna-Regular.ttf") format("truetype");
+}
+:root[mode="ios"]{
+  body {
+    margin-top: constant(safe-area-inset-top);
+    margin-top: env(safe-area-inset-top);
+}
+
+
+}
+:root,
+:root[mode="ios"],
+:root[mode="md"] {
+  --ion-font-Regular-family: "Janna-LT-Regular";
+  --ion-font-Bold-family: "Janna-LT-Bold";
+}
+
+:root[dir="ltr"] {
+  * {
+    text-transform: lowercase;
+  }
+}
+
+:root {
+  ion-fab{
+    transform: translateZ(0);
+  }
+  --custom-box-shadow: 0 3px 6px rgb(0 0 0 / 16%) !important;
+  --custom-border-6-radius: 6px;
+  --custom-border-10-radius: 10px;
+  --ion-background-color: var(--ion-color-white);
+
+  .btn-border-right{
+    border-radius: 0 25px 0 0 !important;
+  }
+  .btn-border-left{
+    border-radius:  25px 0 0 0 !important;
+  }
+  :focus {
+    outline: 0 !important;
+  }
+
+  .swiper {
+    width: 100%;
+    height: 100%;
+  }
+
+  ion-menu {
+    &::part(container) {
+      margin: 2.5vh 0;
+      height: 95vh;
+    }
+  }
+}
+
+ion-menu.ios-menu-header {
+  &::part(container) {
+    margin: 5vh 0 !important;
+    height: 90vh !important;
+  }
+
+  .header-ios-ar {
+    border-radius: 80px 0 0 0 !important;
+  }
+
+  .header-ios-en {
+    border-radius: 0 80px 0 0 !important;
+  }
+}
+
+.custom-6-margin-bottom {
+  margin-bottom: 6px;
+}
+
+.margin-8-top {
+  margin-top: 8px;
+}
+
+.margin-18-bottom {
+  margin-bottom: 18px;
+}
+
+.margin-24-bottom {
+  margin-bottom: 24px;
+}
+
+.custom-border-10-radius {
+  border-radius: var(--custom-border-10-radius);
+}
+
+.custom-border-6-radius {
+  border-radius: var(--custom-border-6-radius);
+}
+
+:root[dir="rtl"] {
+  ion-menu {
+    &::part(container) {
+      border-radius: 80px 0px 0px 80px;
+    }
+  }
+}
+
+:root[dir="ltr"] {
+  ion-menu {
+    &::part(container) {
+      border-radius: 0px 80px 80px 0px;
+    }
+  }
+}
+
+.no-data {
+  text-align: center;
+  margin-top: 30%;
+  p {
+    font-size: 18px;
+    color: var(--ion-color-primary);
+  }
+}
+
+ion-badge {
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
+  text-align: center;
+  span {
+    font-size: 7px;
+  }
+}
+
+.my-custom-class {
+
+  .alert-wrapper{
+    border-radius: 10px !important;
+  }
+  div#alert-1-msg {
+    margin-top: 13px !important;
+    color: var(--ion-color-dark-black) !important;
+  }
+  .alert-button-group.sc-ion-alert-md {
+    display: flex !important;
+    justify-content: space-around !important;
+    button.alert-button.ion-focusable.ion-activatable.sc-ion-alert-md {
+      font-size: 18px !important;
+    }
+  }
+}
+
+.custom-form-container {
+  .error-box {
+    color: var(--ion-color-danger);
+    margin: 10px auto;
+    text-align: center;
+  }
+  .item-has-focus {
+    border: 1px solid var(--ion-color-primary);
+
+    .custom-form-icon {
+      filter: invert(16%) sepia(26%) saturate(6561%) hue-rotate(283deg)
+        brightness(67%) contrast(91%);
+    }
+  }
+
+  ion-item {
+    border: 1px solid var(--ion-color-secondary);
+    border-radius: 24px;
+
+    &:not(:last-of-type) {
+      height: 50px !important;
+    }
+
+    ion-input,
+    ion-textarea {
+      --placeholder-color: var(--ion-color-gray);
+      --placeholder-opacity: 1;
+      --placeholder-font-style: "qesaa-Janna-Regular";
+      --placeholder-font-weight: "Regular";
+      --color: var(--ion-color-primary) !important;
+    }
+
+    .custom-form-icon {
+      font-size: 20px;
+    }
+
+    .icon-ar {
+      margin-left: 17px;
+    }
+
+    .icon-en {
+      margin-right: 17px;
+    }
+
+    &::part(native) {
+      border-radius: 24px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 24px;
+    }
+  }
+
+  ion-button {
+    --border-radius: 100px;
+    height: 50px;
+    --ripple-color: transparent;
+  }
+}
+ion-select {
+  width: 100%;
+  &::part(text) {
+    color: var(--ion-color-gray);
+  }
+}
+.form-container {
+  .custom-item {
+    --inner-padding-end: 0px !important;
+  }
+  // .custom-item::part(native){
+  //   padding-inline-end:0px !important
+  // }
+  .account-type {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
+    .icon-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    ion-button {
+      --background: var(--ion-color-light);
+      --background-activated: var(--ion-color-primary);
+      --background-focused: var(--ion-color-primary);
+      &::part(native) {
+        height: 35px;
+        border-radius: 10px;
+      }
+    }
+
+    .text {
+      color: var(--ion-color-secondary);
+    }
+  }
+  .error-box {
+    color: var(--ion-color-danger);
+    margin: 10px auto;
+    text-align: center;
+  }
+  .item-has-focus {
+    border: 1px solid var(--ion-color-primary);
+
+    .custom-form-icon {
+      background: var(--ion-color-primary);
+    }
+  }
+
+  .rules-container {
+    display: flex;
+    flex-direction: row;
+    .custom-item {
+      border: none !important;
+
+      ion-checkbox {
+        --border-radius: 12px;
+        --size: 24px;
+        margin-inline-end: 6px !important;
+        --ripple-color: transparent;
+      }
+    }
+    .rules {
+      color: var(--ion-color-secondary);
+      margin-top: 12px;
+    }
+  }
+
+  ion-item {
+    border: 1px solid var(--ion-color-secondary);
+    border-radius: 24px;
+
+    ion-input,
+    ion-textarea {
+      --placeholder-color: var(--ion-color-gray);
+      --placeholder-opacity: 1;
+      --placeholder-font-style: "qesaa-Janna-Regular";
+      --placeholder-font-weight: "Regular";
+      --color: var(--ion-color-primary) !important;
+    }
+
+    .custom-form-icon {
+      font-size: 20px;
+      background: var(--ion-color-secondary);
+      padding: 14px;
+      border-radius: 24px;
+    }
+
+    .icon-ar {
+      margin: 0px -1px 0 24px;
+    }
+
+    .icon-en {
+      margin: 0px 24px 0 -1px;
+    }
+
+    &::part(native) {
+      padding-inline-start: 0px !important;
+      padding-inline-end: 0px !important;
+      background: transparent;
+      border-radius: 24px;
+    }
+
+    &:last-of-type {
+      margin-bottom: 24px;
+    }
+  }
+
+  ion-button {
+    --border-radius: 100px;
+    height: 50px;
+    --ripple-color: transparent;
+  }
+}
+
+.unfocused {
+  &::part(native) {
+    --border-color: var(--ion-color-secondary) !important;
+    border-bottom-color: var(--ion-color-secondary) !important;
+  }
+}
+
+.focused {
+  &::part(native) {
+    --border-color: var(--ion-color-primary) !important;
+    border-bottom-color: var(--ion-color-primary) !important;
+  }
+}
+
+ion-content {
+  &::part(background) {
+    background: var(--ion-color-background);
+  }
+
+  --offset-top: 0px !important;
+}
+
+ion-tabs {
+  ion-fab {
+    margin-bottom: 50px; //!important; // 5vh;
+    --ripple-color: transparent;
+    ion-fab-button {
+      &::part(native) {
+        background-color: var(--ion-color-primary);
+        //   background-image: linear-gradient(
+        //     to bottom,
+
+        //     var(--ion-color-primary) 50%,
+        //     var(--ion-color-secondary) 50%
+        //   );
+      }
+      ion-icon {
+        font-size: 30px;
+      }
+    }
+  }
+
+  ion-tab-bar {
+    --border: none;
+
+    .custom-tab-button {
+      &::part(native) {
+        --ion-ripple-effect {
+          color: transparent !important ;
+        }
+      }
+    }
+
+    ion-tab-button {
+      --background: var(--ion-color-white);
+      --color: var(--ion-color-secondary);
+
+      &::part(native) {
+        padding-inline-start: 0px;
+        padding-inline-end: 0px;
+      }
+    }
+  }
+  .my-tabs {
+    position: relative;
+  }
+  .tabs-up {
+    width: 100%;
+    height: 19.5px;
+    border-left: 50vw solid var(--ion-color-background);
+    border-right: 50vw solid var(--ion-color-background);
+    border-bottom: 5vh solid var(--ion-color-white);
+    // height: 6vh;
+    // clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    // background-color: white;
+    // border-bottom: 1px solid white;
+  }
+
+  .custom-content-margin {
+    margin: 0 32px;
+  }
+
+  .charity-info {
+    .custom-card {
+      box-shadow: var(--custom-box-shadow);
+      background-color: var(--ion-color-white);
+      border-radius: 10px;
+      padding-top: 12px;
+      padding-bottom: 15px;
+      img {
+        width: 93.72px;
+      }
+    }
+
+    .charity-info-content {
+      margin: 26px 29px 0 29px;
+    }
+
+    ul {
+      padding: 0px !important;
+      li {
+        &::before {
+          content: "-";
+        }
+        list-style-type: none;
+        p {
+          display: inline;
+        }
+      }
+    }
+  }
+}
+
+.boarding-btn-ar {
+  background-color: var(--ion-color-secondary);
+  border-radius: 100px 0 0 100px;
+  width: 100px;
+  padding: 10px 24px;
+  text-align: left;
+  flex-flow: 1;
+  height: 48px;
+}
+
+.boarding-btn-en {
+  background-color: var(--ion-color-secondary);
+  border-radius: 0 100px 100px 0;
+  width: 100px;
+  padding: 10px 24px;
+  text-align: right;
+  flex-flow: 1;
+  height: 48px;
+}
+
+// ion-modal {
+//   --background: transparent !important;
+//   --backdrop-opacity: var(--ion-backdrop-opacity, 1);
+// }
+
+// .transparent-modal {
+//   --background: rgba(44, 39, 45, 0.2);
+
+//   &::part(content) {
+//     backdrop-filter: blur(12px);
+//   }
+// }
+
+.my-custom-modal {
+  --border-radius: 20px;
+  //--backdrop-opacity: 0.;
+  --min-height: 10vh;
+  --max-height: 37vh;
+  --height: 30vh;
+  padding: 31px;
+
+  .content {
+    padding: 35px 32px;
+    .image {
+      margin-bottom: 15.3px;
+    }
+
+    .custom-image {
+      height: 40px;
+      width: 40px;
+      object-fit: cover;
+    }
+    .title {
+      margin-bottom: 28px;
+      .name {
+        color: var(--ion-color-secondary);
+      }
+    }
+
+    .rating {
+      display: flex;
+      justify-content: space-between;
+      ion-icon {
+        font-size: 30px;
+      }
+    }
+    .modal-btn {
+      ion-button {
+        &::part(native) {
+          height: 50px;
+        }
+      }
+    }
+  }
+}
+
+ion-modal {
+  background: rgba($color: #030303, $alpha: 0.89) !important;
+}

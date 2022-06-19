@@ -1,0 +1,50 @@
+<app-header
+  [haveBeforeHeader]="false"
+  [hasMarketCart]="true"
+  [title]="productDetails?.title"
+  [isHome]="false"
+></app-header>
+
+<ion-content class="ion-padding-horizontal">
+  <div class="page-container" *ngIf="productDetails">
+    <div class="productImage ion-text-center">
+      <div class="icon">
+        <ion-img [src]="productDetails?.image" ></ion-img>
+      </div>
+    </div>
+
+    <div class="names">
+      <p class="product-name ion-no-margin fn-22 qesaa-Janna-Bold">
+        {{productDetails?.title}}
+      </p>
+      <p
+        class="category-name ion-no-margin fn-14 qesaa-Janna-Regular black-text-color"
+      >
+        {{productDetails?.section_title}}
+      </p>
+    </div>
+
+    <div class="description">
+      <h6 class="ion-no-margin fn-22 qesaa-Janna-Bold">
+        {{"product-description"|translate}}
+      </h6>
+
+      <p
+        class="description-text ion-no-margin fn-14 qesaa-Janna-Regular black-text-color"
+      >
+        {{productDetails?.desc}}
+      </p>
+    </div>
+    <div class="add-btn" *ngIf="userStatus==true">
+      <ion-button
+        (click)="addProduct()"
+        color="primary"
+        expand="block"
+        class="fn-20 qesaa-Janna-Bold"
+      
+      >
+        {{ "add-product"|translate}}
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

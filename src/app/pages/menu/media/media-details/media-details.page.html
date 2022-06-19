@@ -1,0 +1,13 @@
+<app-header [haveBeforeHeader]="false"  [hasMarketCart]="false" [title]="mediaDetails?.title" [isHome]="false"></app-header>
+
+<ion-content class="ion-padding-horizontal">
+
+    <div class="media-details-container ion-text-center">
+      <img class="ion-margin-bottom custom-border-10-radius"[src]="mediaDetails?.image">
+      <div class="">
+        <p class="ion-no-margin fn-14 qesaa-Janna-Regular">
+          {{mediaDetails?.desc}}
+        </p>
+      </div>
+    </div>
+  </ion-content>

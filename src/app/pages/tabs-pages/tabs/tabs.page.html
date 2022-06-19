@@ -1,0 +1,49 @@
+<ion-tabs #tabs (ionTabsDidChange)="setCurrentTab()" class="my-tabs">
+  <div *ngIf="!inputFocused">
+    <div class="tabs-up ion-text-center">
+      <ion-fab
+   
+      vertical="bottom"
+      horizontal="center"
+      slot="fixed"
+      [ngClass]="currentPlatform == 'ios' ? 'custom-fab-ios' : ''"
+    >
+      <ion-fab-button (click)="donate()" color="light">
+        <ion-icon
+          class="animate__animated animate__flipInY animate__slower animate__repeat-5"
+          src="./../../../assets/icon/tabs-icons/donate.svg"
+        ></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+    </div>
+
+    
+  </div>
+
+  <!-- --ripple-color: transparent; -->
+  <!-- [ngClass]="selectedTab==tab.tabName?'selected':''"
+  [ngClass]="tab.tabName==''?'custom-tab-button':''" -->
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button
+      [ngClass]="{'selected':selectedTab==tab.tabName,'custom-tab-button':tab.tabName==''}"
+      [tab]="tab.tabName"
+      *ngFor="let tab of tabsData"
+    >
+      <ion-badge
+        *ngIf="tab.tabName=='notifications' && noOfNotifications!=0 && isLogined"
+        color="primary"
+      >
+        <span class="white-color">{{noOfNotifications}}</span>
+      </ion-badge>
+      <ion-icon
+        [src]="selectedTab==tab.tabName? tab.tabActiveIcon:tab.tabNotActiveIcon"
+      ></ion-icon>
+      <ion-label
+        class="fn-14 qesaa-Janna-Regular animate__fadeInDown"
+        [color]="selectedTab==tab.tabName? 'primary' :'secondary'"
+      >
+        {{tab.tabName|translate}}
+      </ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

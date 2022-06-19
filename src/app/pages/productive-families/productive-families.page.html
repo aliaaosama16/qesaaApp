@@ -1,0 +1,49 @@
+<app-header
+  [haveBeforeHeader]="false"
+  [title]="'productive-families'"
+  [isHome]="false"
+  [hasMarketCart]="false"
+></app-header>
+
+<ion-content>
+  <div class="families-container ion-padding-horizontal" *ngIf="families?.length!=0">
+    <!-- <div
+      class="family"
+      *ngFor="let family of families"
+      routerLink="/tabs/home/families/{{family?.id}}"
+    >
+      <div class="family-image">
+        <img [src]="family?.avatar" />
+      </div>
+
+      <div class="family-name ion-text-center">
+        <p class="ion-no-margin fn-18 qesaa-Janna-Bold">
+          {{family?.first_name}}
+        </p>
+      </div>
+    </div> -->
+<ion-row>
+  <ion-col
+  size="6"
+  class="family"
+  *ngFor="let family of families"
+  routerLink="/tabs/home/families/{{family?.id}}"
+>
+  <div class="family-image ion-text-center">
+    <img [src]="family?.avatar" />
+  </div>
+
+  <div class="family-name ion-text-center">
+    <p class="ion-no-margin fn-18 qesaa-Janna-Bold">
+      {{family?.first_name}}
+    </p>
+  </div></ion-col
+>
+</ion-row>
+    
+  </div>
+
+  <div *ngIf="families?.length==0" class="no-data">
+    <p>{{"no prodiders"|translate}}</p>
+  </div>
+</ion-content>

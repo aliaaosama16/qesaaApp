@@ -1,3 +1,86 @@
+<!--  -->
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <ion-split-pane contentId="main-content">
+    <ion-menu
+      contentId="main-content"
+      menuId="main"
+      [ngClass]="currentPlatform == 'ios' ? 'ios-menu-header' : ''"
+    >
+      <ion-header
+        [ngClass]="{
+          'header-ios-ar': currentPlatform == 'ios' && currentLanguage == 'ar',
+          'header-ios-en': currentPlatform == 'ios' && currentLanguage == 'en'
+        }"
+        class="header-image ion-no-border background-color"
+      >
+        <div class="header-logos">
+          <div>
+            <img
+            style="width: 100%"
+              [ngClass]="currentLanguage == 'ar' ? 'image-right' : 'image-left'"
+              src="./../assets/icon/app-icon.svg"
+            />
+          </div>
+          <div class="ion-text-center">
+            <img
+            style="width: 25%"
+              [ngClass]="currentLanguage == 'ar' ? 'image-right' : 'image-left'"
+              src="./../assets/icon/app-logo2.svg"
+            />
+          </div>
+        </div>
+      </ion-header>
+      <!-- [routerLink]="p.url=='share'?? [p.url]" -->
+      <!-- [ngClass]="
+      currentLanguage == 'ar'
+        ? 'animate__fadeInBottomRight'
+        : 'animate__fadeInBottomLeft'
+    " -->
+      <ion-content class="my-menu-content">
+        <ion-list>
+          <ion-menu-toggle
+            auto-hide="false"
+            *ngFor="let p of pages; let i = index"
+            (click)="selectMenuItem(i, p.url)"
+            routerDirection="root"
+            [class.selected]="selectedIndex == i"
+          >
+            <ion-item
+              lines="none"
+              detail="false"
+              class="animate__animated animate__fadeInBottomRight"
+            >
+              <ion-icon
+                slot="start"
+                [src]="selectedIndex == i ? p.iconActive : p.iconInActive"
+                [ngClass]="currentLanguage == 'ar' ? 'icon-ar' : 'icon-en'"
+              ></ion-icon>
+              <ion-label
+                class="fn-16 qesaa-Janna-Regular"
+                [ngStyle]="
+                  currentLanguage == 'ar'
+                    ? { 'margin-right': '10px' }
+                    : { 'margin-left': '10px' }
+                "
+                >{{ p.title | translate }}
+              </ion-label>
+            </ion-item>
+          </ion-menu-toggle>
+        </ion-list>
+      </ion-content>
+
+      <ion-footer class="ion-padding ion-no-border">
+        <div class="menu-footer-images">
+          <div>
+            <img src="./../assets/images/2030vision.svg" />
+          </div>
+          <div>
+            <img src="./../assets/images/maroof_logo.svg" />
+          </div>
+        </div>
+      </ion-footer>
+    </ion-menu>
+
+    <ion-router-outlet id="main-content"></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>
