@@ -9,6 +9,9 @@ import { CallbackID, Geolocation, Position } from '@capacitor/geolocation';
 import * as moment from 'moment';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import { LocationData } from 'src/app/models/provider';
+import { GeneralResponse } from 'src/app/models/general';
+import { ProviderService } from '../provider/provider.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +29,8 @@ export class UtilitiesService {
     private translate: TranslateService,
     private loadingCtrl: LoadingController,
     private plt: Platform,
-    private auth: AuthService
+    private auth: AuthService,
+    private providerService:ProviderService
   ) {}
 
   setPlatform(val) {
@@ -172,6 +176,14 @@ export class UtilitiesService {
             ' ' +
             position['coords'].longitude
         );
+
+        const location: LocationData = {
+          lat: position['coords'].latitude,
+          lng: position['coords'].longitude,
+          user_id: this.auth.userID.value,
+        };
+        this.repeatGettingLocation(location);
+
         this.setUserLocation(
           position['coords'].latitude,
           position['coords'].longitude
@@ -183,6 +195,22 @@ export class UtilitiesService {
     });
   }
 
+  repeatGettingLocation(location) {
+    
+    // this.util.showLoadingSpinner().then((__) => {
+    this.providerService.updateLocation(location).subscribe(
+      (data: GeneralResponse) => {
+        if (data.key == 1) {
+          // this.util.showMessage(data.msg);
+        }
+        //  this.util.dismissLoading();
+      },
+      (err) => {
+        //  this.util.dismissLoading();
+      }
+    );
+    // });
+  }
   setUserLocation(lat, long) {
     this.userLocation.lat = lat;
     this.userLocation.lng = long;

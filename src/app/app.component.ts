@@ -181,26 +181,7 @@ export class AppComponent {
     }
   }
 
-  // repeatGettingLocation() {
-  //   const location: LocationData = {
-  //     lat: this.util.userLocation.lat,
-  //     lng: this.util.userLocation.lng,
-  //     user_id: this.auth.userID.value,
-  //   };
-  //   // this.util.showLoadingSpinner().then((__) => {
-  //   this.providerService.updateLocation(location).subscribe(
-  //     (data: GeneralResponse) => {
-  //       if (data.key == 1) {
-  //         // this.util.showMessage(data.msg);
-  //       }
-  //       //  this.util.dismissLoading();
-  //     },
-  //     (err) => {
-  //       //  this.util.dismissLoading();
-  //     }
-  //   );
-  //   // });
-  // }
+ 
 
   async getUserNotifications() {
     const userID = await Storage.get({ key: 'qesaa-UserID' });
