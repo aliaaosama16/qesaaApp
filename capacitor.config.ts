@@ -1,25 +1,34 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.efada.qesaa.app',// com.efada.qesaa.app  com.efada.qesaa.app 
+  appId: 'com.efada.qesaa.app', // com.efada.qesaa.app  com.efada.qesaa.app
   appName: 'qesaa',
   webDir: 'www',
   bundledWebRuntime: false,
-  plugins: {
-    SplashScreen: {
-      launchShowDuration: 5000,
-      launchAutoHide: true,  //launchAutoHide: false, and splash .hide
-      // androidSplashResourceName:'splash'
+  cordova: {
+    preferences: {
+      "ShowSplashScreen":"false",
+      "SplashScreenDelay":"0",
+      "FadeSplashScreenDuration" :"0",
+      "SplashScreen" :"none",
+      "SplashShowOnlyFirstTime":"false"
     },
-    Keyboard: {
-      resize: 'body',
-      style: 'dark',
-      resizeOnFullScreen: true,
-    },
-    // PushNotifications: {
-    //   presentationOptions: ["badge", "sound", "alert"]
-    // }
   },
+  // plugins: {
+  //   SplashScreen: {
+  //     launchShowDuration: 5000,
+  //     launchAutoHide: true, //launchAutoHide: false, and splash .hide
+  //     // androidSplashResourceName:'splash'
+  //   },
+  //   Keyboard: {
+  //     resize: 'body',
+  //     style: 'dark',
+  //     resizeOnFullScreen: true,
+  //   },
+  //   // PushNotifications: {
+  //   //   presentationOptions: ["badge", "sound", "alert"]
+  //   // }
+  // },
   android: {
     allowMixedContent: true,
   },

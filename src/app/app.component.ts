@@ -126,7 +126,9 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      //   SplashScreen.hide();
+      setTimeout(() => {
+        SplashScreen.hide();
+      }, 4000);
 
       this.languageService.setInitialAppLanguage();
 
@@ -180,8 +182,6 @@ export class AppComponent {
       this.sectionsService.setCartCount();
     }
   }
-
- 
 
   async getUserNotifications() {
     const userID = await Storage.get({ key: 'qesaa-UserID' });

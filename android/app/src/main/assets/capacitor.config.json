@@ -3,15 +3,13 @@
 	"appName": "qesaa",
 	"webDir": "www",
 	"bundledWebRuntime": false,
-	"plugins": {
-		"SplashScreen": {
-			"launchShowDuration": 5000,
-			"launchAutoHide": true
-		},
-		"Keyboard": {
-			"resize": "body",
-			"style": "dark",
-			"resizeOnFullScreen": true
+	"cordova": {
+		"preferences": {
+			"ShowSplashScreen": "false",
+			"SplashScreenDelay": "0",
+			"FadeSplashScreenDuration": "0",
+			"SplashScreen": "none",
+			"SplashShowOnlyFirstTime": "false"
 		}
 	},
 	"android": {
