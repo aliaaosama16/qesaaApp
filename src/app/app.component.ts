@@ -12,7 +12,7 @@ import { LogOutData, Status } from './models/auth';
 import { Storage } from '@capacitor/storage';
 import { GeneralResponse } from './models/general';
 import { interval } from 'rxjs';
-import { SplashScreen } from '@capacitor/splash-screen';
+//import { SplashScreen } from '@capacitor/splash-screen';
 import { CallbackID, Geolocation, Position } from '@capacitor/geolocation';
 
 @Component({
@@ -126,9 +126,9 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      setTimeout(() => {
-        SplashScreen.hide();
-      }, 4000);
+      // setTimeout(() => {
+      //   SplashScreen.hide();
+      // }, 4000);
 
       this.languageService.setInitialAppLanguage();
 
