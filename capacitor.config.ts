@@ -5,18 +5,27 @@ const config: CapacitorConfig = {
   appName: 'qesaa',
   webDir: 'www',
   bundledWebRuntime: false,
-  cordova: {
-    preferences: {
-      "ShowSplashScreen":"false",
-      "SplashScreenDelay":"0",
-      "FadeSplashScreenDuration" :"0",
-      "SplashScreen" :"none",
-      "SplashShowOnlyFirstTime":"false"
-    },
-  },
+  // cordova: {
+  //   preferences: {
+  //     ShowSplashScreen: 'false',
+  //     SplashScreenDelay: '0',
+  //     FadeSplashScreenDuration: '0',
+  //     SplashScreen: 'none',
+  //     SplashShowOnlyFirstTime: 'false',
+  //   },
+  // },
   // plugins: {
   //   SplashScreen: {
-  //     launchShowDuration: 5000,
+  //     launchShowDuration: 50,
+
+  //     launchAutoHide: false,
+
+  //   },
+  // },
+  // plugins: {
+  //   SplashScreen: {
+  //     launchShowDuration: 4000,
+  //     backgroundColor:'#eae7e8',
   //     launchAutoHide: true, //launchAutoHide: false, and splash .hide
   //     // androidSplashResourceName:'splash'
   //   },
@@ -29,6 +38,13 @@ const config: CapacitorConfig = {
   //   //   presentationOptions: ["badge", "sound", "alert"]
   //   // }
   // },
+  plugins: {
+    SplashScreen: {
+      launchAutoHide: false,
+      splashFullScreen: false,
+      splashImmersive: false,
+    },
+  },
   android: {
     allowMixedContent: true,
   },

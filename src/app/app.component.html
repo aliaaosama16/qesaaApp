@@ -5,6 +5,8 @@
       contentId="main-content"
       menuId="main"
       [ngClass]="currentPlatform == 'ios' ? 'ios-menu-header' : ''"
+      autoHide="false"
+      type="overlay"
     >
       <ion-header
         [ngClass]="{
@@ -35,7 +37,9 @@
       currentLanguage == 'ar'
         ? 'animate__fadeInBottomRight'
         : 'animate__fadeInBottomLeft'
-    " -->
+    "
+    auto-hide="false"
+  -->
       <ion-content class="my-menu-content">
         <ion-list>
           <ion-menu-toggle

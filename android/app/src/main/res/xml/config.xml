@@ -3,9 +3,4 @@
   <access origin="*" />
   
   
-  <preference name="ShowSplashScreen" value="false" />
-  <preference name="SplashScreenDelay" value="0" />
-  <preference name="FadeSplashScreenDuration" value="0" />
-  <preference name="SplashScreen" value="none" />
-  <preference name="SplashShowOnlyFirstTime" value="false" />
 </widget>

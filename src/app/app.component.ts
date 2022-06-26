@@ -14,6 +14,7 @@ import { GeneralResponse } from './models/general';
 import { interval } from 'rxjs';
 //import { SplashScreen } from '@capacitor/splash-screen';
 import { CallbackID, Geolocation, Position } from '@capacitor/geolocation';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -126,9 +127,9 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // setTimeout(() => {
-      //   SplashScreen.hide();
-      // }, 4000);
+      setTimeout(() => {
+        SplashScreen.hide();
+      },50);
 
       this.languageService.setInitialAppLanguage();
 
