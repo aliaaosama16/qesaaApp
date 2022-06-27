@@ -44,12 +44,23 @@
 }
 
 :root[dir="ltr"] {
+  
   * {
     text-transform: lowercase;
   }
 }
 
 :root {
+
+  .split-pane-main .menu-content .menu-content-reveal .menu-content-open{
+    box-shadow: none !important;
+   }
+   .md .ios .menu-content-reveal{
+    box-shadow: none !important;
+   }
+   ion-router-outlet#main-content{
+    box-shadow: none !important;
+   }
   ion-fab{
     transform: translateZ(0);
   }

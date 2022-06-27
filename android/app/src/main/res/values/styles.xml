@@ -19,7 +19,7 @@
 
 
     <style name="AppTheme.NoActionBarLaunch" parent="AppTheme.NoActionBar">
-        <item name="android:windowDisablePreview">true</item>
-        <item name="android:background">@drawable/splash</item>
+        <item name="android:windowDisablePreview">false</item>
+
     </style>
 </resources>

@@ -2,6 +2,9 @@ ion-split-pane{
   --border	:none !important;
 }
 
+.split-pane-visible > ion-menu {
+  max-width: 200px!important;
+}
 .header-image {
 
   .header-logos{

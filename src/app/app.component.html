@@ -1,12 +1,12 @@
-<!--  -->
+<!-- autoHide="false"  -->
 <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu
       contentId="main-content"
       menuId="main"
       [ngClass]="currentPlatform == 'ios' ? 'ios-menu-header' : ''"
-      autoHide="false"
-      type="overlay"
+     
+      type="reveal"
     >
       <ion-header
         [ngClass]="{
@@ -43,7 +43,7 @@
       <ion-content class="my-menu-content">
         <ion-list>
           <ion-menu-toggle
-            auto-hide="false"
+           
             *ngFor="let p of pages; let i = index"
             (click)="selectMenuItem(i, p.url)"
             routerDirection="root"
@@ -85,6 +85,6 @@
       </ion-footer>
     </ion-menu>
 
-    <ion-router-outlet id="main-content"></ion-router-outlet>
+    <ion-router-outlet id="main-content" [dir]="currentLanguage=='ar'?'rtl':'ltr'"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>
