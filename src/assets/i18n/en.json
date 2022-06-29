@@ -198,5 +198,6 @@
   "you should agree to rules":"you should agree to rules",
   "order sent successfully": "order sent successfully",
   "requests are available for cleints only":"requests are available for clients only",
-  "track client location":"track client location"
+  "track client location":"track client location",
+  "error occurs":"error occurs"
 }

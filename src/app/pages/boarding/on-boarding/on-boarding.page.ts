@@ -30,8 +30,8 @@ export class OnBoardingPage implements OnInit {
     private langaugeService: LanguageService,
     private router: Router,
     private menuCtrl: MenuController,
-    private util:UtilitiesService,
-    private general:GeneralService
+    private util: UtilitiesService,
+    private general: GeneralService
   ) {
     this.currentlangauge = this.langaugeService.getLanguage();
     this.menuCtrl.enable(false, 'main');
@@ -59,19 +59,20 @@ export class OnBoardingPage implements OnInit {
 
   getIntroData() {
     this.util.showLoadingSpinner().then((__) => {
-      this.general.intro().subscribe(
-        (data: Intro) => {
-          this.introData = data;
-         // console.log('INTRO ' + JSON.stringify(this.introData));
-          this.util.dismissLoading();
-          this.getIntro = true;
-        },
-        (err) => {
-          this.util.dismissLoading();
-          this.getIntro = false;
-        }
-      );
+      this.general
+        .intro({ lang: this.langaugeService.getLanguage() })
+        .subscribe(
+          (data: Intro) => {
+            this.introData = data;
+            // console.log('INTRO ' + JSON.stringify(this.introData));
+            this.util.dismissLoading();
+            this.getIntro = true;
+          },
+          (err) => {
+            this.util.dismissLoading();
+            this.getIntro = false;
+          }
+        );
     });
   }
-
 }

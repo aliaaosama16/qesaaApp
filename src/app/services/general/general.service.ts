@@ -8,6 +8,7 @@ import {
   GeneralResponse,
   GeneralSectionResponse,
   ImageInfo,
+  Language,
   UserData,
 } from 'src/app/models/general';
 import { LanguageService } from '../language/language.service';
@@ -35,14 +36,12 @@ export class GeneralService {
     return this.familiesBasicImage;
   }
 
-
   setFamiliesProductImage(image) {
     this.familiesProductImage = image;
   }
   getFamiliesProductImage() {
     return this.familiesProductImage;
   }
-
 
   setProfileImage(image) {
     this.profileImage = image;
@@ -51,7 +50,6 @@ export class GeneralService {
     return this.profileImage;
   }
 
-
   setDonationImage(image) {
     this.donationImage = image;
   }
@@ -59,9 +57,8 @@ export class GeneralService {
     return this.donationImage;
   }
 
-
-  intro(): Observable<Intro> {
-    return this.httpclient.get<Intro>(`${environment.BASE_URL}intro`);
+  intro(data: Language): Observable<Intro> {
+    return this.httpclient.post<Intro>(`${environment.BASE_URL}intro`, data);
   }
 
   staticPages(data: StaticPageData): Observable<StaticPageResponse> {

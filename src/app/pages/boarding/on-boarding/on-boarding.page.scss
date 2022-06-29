@@ -59,16 +59,26 @@ ion-content {
           img {
             height: 100%;
           }
-          .skip-text {
+          .img-en{
+            transform: rotateY(3.142rad) !important;
+          }
+
+          .skip-text-ar {
             top: 40%;
             left: 10%;
+            position: absolute;
+          }
+
+          .skip-text-en {
+            top: 40%;
+            right:  10%;
             position: absolute;
           }
         }
       }
     }
   }
-
+  //
   //   .swiper-slide.swiper-slide-active {
   //     width: 100% !important;
   //   }

@@ -1,10 +1,12 @@
-<!--  -->
+<!-- autoHide="false"  -->
 <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu
       contentId="main-content"
       menuId="main"
       [ngClass]="currentPlatform == 'ios' ? 'ios-menu-header' : ''"
+     
+      type="reveal"
     >
       <ion-header
         [ngClass]="{
@@ -16,14 +18,14 @@
         <div class="header-logos">
           <div>
             <img
-            style="width: 100%"
+              style="width: 100%"
               [ngClass]="currentLanguage == 'ar' ? 'image-right' : 'image-left'"
               src="./../assets/icon/app-icon.svg"
             />
           </div>
           <div class="ion-text-center">
             <img
-            style="width: 25%"
+              style="width: 25%"
               [ngClass]="currentLanguage == 'ar' ? 'image-right' : 'image-left'"
               src="./../assets/icon/app-logo2.svg"
             />
@@ -35,11 +37,13 @@
       currentLanguage == 'ar'
         ? 'animate__fadeInBottomRight'
         : 'animate__fadeInBottomLeft'
-    " -->
+    "
+    auto-hide="false"
+  -->
       <ion-content class="my-menu-content">
         <ion-list>
           <ion-menu-toggle
-            auto-hide="false"
+           
             *ngFor="let p of pages; let i = index"
             (click)="selectMenuItem(i, p.url)"
             routerDirection="root"
@@ -81,6 +85,6 @@
       </ion-footer>
     </ion-menu>
 
-    <ion-router-outlet id="main-content"></ion-router-outlet>
+    <ion-router-outlet id="main-content" [dir]="currentLanguage=='ar'?'rtl':'ltr'"></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

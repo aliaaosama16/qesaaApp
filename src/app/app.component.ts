@@ -12,8 +12,9 @@ import { LogOutData, Status } from './models/auth';
 import { Storage } from '@capacitor/storage';
 import { GeneralResponse } from './models/general';
 import { interval } from 'rxjs';
-import { SplashScreen } from '@capacitor/splash-screen';
+//import { SplashScreen } from '@capacitor/splash-screen';
 import { CallbackID, Geolocation, Position } from '@capacitor/geolocation';
+import { SplashScreen } from '@capacitor/splash-screen';
 
 @Component({
   selector: 'app-root',
@@ -126,7 +127,9 @@ export class AppComponent {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      //   SplashScreen.hide();
+      setTimeout(() => {
+        SplashScreen.hide();
+      },50);
 
       this.languageService.setInitialAppLanguage();
 
@@ -180,8 +183,6 @@ export class AppComponent {
       this.sectionsService.setCartCount();
     }
   }
-
- 
 
   async getUserNotifications() {
     const userID = await Storage.get({ key: 'qesaa-UserID' });

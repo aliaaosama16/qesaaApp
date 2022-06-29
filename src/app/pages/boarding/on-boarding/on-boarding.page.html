@@ -39,9 +39,9 @@
               {{"next"|translate}}
             </div>
             <div class="footer-image" routerLink="/tabs/home">
-              <img src="./../../../../assets/icon/onboarding0.svg" />
+              <img [ngClass]="currentlangauge=='en'?'img-en':''" src="./../../../../assets/icon/onboarding0.svg" />
 
-              <div class="skip-text fn-16 qesaa-Janna-Regular white-color">
+              <div class=" fn-16 qesaa-Janna-Regular white-color" [ngClass]="currentlangauge=='ar'?'skip-text-ar':'skip-text-en'">
                 {{"skip"|translate}}
               </div>
             </div>
@@ -77,8 +77,8 @@
               {{"next"|translate}}
             </div>
             <div class="footer-image" routerLink="/tabs/home">
-              <img src="./../../../../assets/icon/onboarding0.svg" />
-              <div class="skip-text fn-16 qesaa-Janna-Regular white-color">
+              <img [ngClass]="currentlangauge=='en'?'img-en':''" src="./../../../../assets/icon/onboarding0.svg" />
+              <div class=" fn-16 qesaa-Janna-Regular white-color" [ngClass]="currentlangauge=='ar'?'skip-text-ar':'skip-text-en'">
                 {{"skip"|translate}}
               </div>
             </div>
@@ -114,7 +114,7 @@
               {{"start"|translate}}
             </div>
             <div class="footer-image" routerLink="/tabs/home">
-              <img src="./../../../../assets/icon/onboarding0.svg" />
+              <img [ngClass]="currentlangauge=='en'?'img-en':''" src="./../../../../assets/icon/onboarding0.svg" />
               <!-- <div class="skip-text fn-16 qesaa-Janna-Regular white-color">
                 {{"skip"|translate}}
               </div> -->

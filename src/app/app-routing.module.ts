@@ -5,7 +5,7 @@ import { ShowBoardingPageGuard } from './guards/boarding/show-boarding-page.guar
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'boarding',
+    redirectTo: 'splash',
     pathMatch: 'full',
   },
   {
