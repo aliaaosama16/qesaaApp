@@ -28,15 +28,15 @@
 		<true/>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>user can upload image</string>
+	<string>get your profile picture</string>
 	<key>NSLocationAlwaysUsageDescription </key>
-	<string>get location for donation</string>
+	<string>need location to get nearby providers</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>get location for donation</string>
+	<string>need location to get nearby providers</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>user can upload image</string>
+	<string>get your profile picture</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>user can upload image</string>
+	<string>get your profile picture</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
