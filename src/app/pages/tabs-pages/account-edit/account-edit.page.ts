@@ -84,8 +84,8 @@ export class AccountEditPage implements OnInit {
           Validators.maxLength(10),
         ],
       ],
-      password: [''],
-      confirmPassword: [''],
+      //password: [''],
+      //confirmPassword: [''],
     });
   }
 
@@ -100,23 +100,23 @@ export class AccountEditPage implements OnInit {
     await this.uploadImage.getImageConverted(image, 'profile');
   }
 
-  showChangePassword() {
-    this.showChangePass = !this.showChangePass;
-    this.iconChangeName = this.showChangePass
-      ? 'eye-outline'
-      : 'eye-off-outline';
-    this.inputChangeType = this.showChangePass ? 'text' : 'password';
-  }
+  // showChangePassword() {
+  //   this.showChangePass = !this.showChangePass;
+  //   this.iconChangeName = this.showChangePass
+  //     ? 'eye-outline'
+  //     : 'eye-off-outline';
+  //   this.inputChangeType = this.showChangePass ? 'text' : 'password';
+  // }
 
-  showChangeConfirmPassword() {
-    this.showChangeConfirmPass = !this.showChangeConfirmPass;
-    this.iconChangeConfirmName = this.showChangeConfirmPass
-      ? 'eye-outline'
-      : 'eye-off-outline';
-    this.inputChangeConfirmType = this.showChangeConfirmPass
-      ? 'text'
-      : 'password';
-  }
+  // showChangeConfirmPassword() {
+  //   this.showChangeConfirmPass = !this.showChangeConfirmPass;
+  //   this.iconChangeConfirmName = this.showChangeConfirmPass
+  //     ? 'eye-outline'
+  //     : 'eye-off-outline';
+  //   this.inputChangeConfirmType = this.showChangeConfirmPass
+  //     ? 'text'
+  //     : 'password';
+  // }
 
   editProfile() {
     var profileImage = '';
@@ -129,7 +129,7 @@ export class AccountEditPage implements OnInit {
       user_id: this.auth.userID.value,
       first_name: this.editProfileForm.value.userName,
       phone: this.editProfileForm.value.phoneNumber,
-      password: this.editProfileForm.value.password,
+     // password: this.editProfileForm.value.password,
       avatar: profileImage,
     };
     this.util.showLoadingSpinner().then((__) => {

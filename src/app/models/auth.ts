@@ -8,7 +8,7 @@ import { UserType } from './userType';
 
 export interface LoginData extends Language {
   phone: number;
-  password: string;
+  password?: string;
   device_id: string;
   user_type?: UserType;
   phone_code?:string
@@ -18,7 +18,7 @@ export interface RegisterData extends UserData {
   user_type: UserType;
   first_name: string;
   phone: number;
-  password: string;
+  password?: string;
   city_id?: number;
   neighborhood_id?: number;
   instagram?: string;

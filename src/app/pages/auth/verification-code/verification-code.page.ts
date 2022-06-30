@@ -14,6 +14,10 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./verification-code.page.scss'],
 })
 export class VerificationCodePage implements OnInit {
+  n1:string;
+  n2:string;
+  n3:string;
+  n4:string;
 
   inputFocusNumber1: boolean = false;
   inputFocusNumber2: boolean = false;
@@ -60,13 +64,19 @@ export class VerificationCodePage implements OnInit {
             this.util.showMessage(data.msg);
            // this.util.showMessage('login now');
            // this.data.setPreviousPage('signin');
-            this.router.navigateByUrl('/login');
+            this.router.navigateByUrl('/tabs');
+            this.codeValues='';
+            //this.n1=this.n2=this.n3=this.n4=''
           } else {
             this.util.showMessage(data.msg);
+            this.codeValues='';
+           // this.n1=this.n2=this.n3=this.n4=''
           }
           this.util.dismissLoading();
         },
         (err) => {
+          this.codeValues='';
+          //this.n1=this.n2=this.n3=this.n4=''
           this.util.dismissLoading();
         }
       );
