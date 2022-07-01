@@ -20,7 +20,7 @@ import { IonIntlTelInputValidators } from 'ion-intl-tel-input';
 })
 export class RegisterPage implements OnInit {
   preferredCountries:string[]=['sa','kw','ae','qa','bh','om'];
-  selectedIndex: number;
+  selectedIndex: number=0;
   userTypes: any[] = [
     {
       id: UserType.client,
@@ -54,7 +54,7 @@ export class RegisterPage implements OnInit {
   neighborhoods: GeneralSectionResponse[];
   showProviderOptions:boolean=false;
   showMarketOptions:boolean=false;
-  userType:string;
+  userType:string=UserType.client;
   constructor(
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
@@ -98,7 +98,7 @@ export class RegisterPage implements OnInit {
       console.log('registerForm valid');
       this.registerForm.value.userType=this.userType
       this.registerData = {
-        user_type:this.registerForm.value.userType,
+        user_type:this.registerForm.value.userType ,
         lang: this.langaugeservice.getLanguage(),
         first_name: this.registerForm.value.userName,
         phone: this.registerForm.value.phoneNumber.nationalNumber,

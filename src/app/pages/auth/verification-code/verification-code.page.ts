@@ -2,11 +2,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilitiesService } from './../../../services/utilities/utilities.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { ActivationData, AuthResponse } from 'src/app/models/auth';
 import { DataService } from 'src/app/services/data/data.service';
 import { MenuController } from '@ionic/angular';
+import { Location } from '@angular/common';
+import { UserData } from 'src/app/models/general';
 
 @Component({
   selector: 'app-verification-code',
@@ -14,10 +16,15 @@ import { MenuController } from '@ionic/angular';
   styleUrls: ['./verification-code.page.scss'],
 })
 export class VerificationCodePage implements OnInit {
-  n1:string;
-  n2:string;
-  n3:string;
-  n4:string;
+  input1: string;
+  input2: string;
+  input3: string;
+  input4: string;
+
+  @ViewChild('n1') number1;
+  // @ViewChild('n1') number2:ElementRef;
+  // @ViewChild('n1') number3:ElementRef;
+  // @ViewChild('n1') number4:ElementRef;
 
   inputFocusNumber1: boolean = false;
   inputFocusNumber2: boolean = false;
@@ -26,16 +33,17 @@ export class VerificationCodePage implements OnInit {
   codeValues: string;
   code: number;
   activationData: ActivationData;
-  currentLanguage:string='';
+  currentLanguage: string = '';
   constructor(
     private languaService: LanguageService,
     private formBuilder: FormBuilder,
-    private auth:AuthService,
-    private util:UtilitiesService,
-    private language:LanguageService,
-    private router:Router,
-    private activatedRoute:ActivatedRoute,
-    private menuCtrl:MenuController
+    private auth: AuthService,
+    private util: UtilitiesService,
+    private language: LanguageService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private menuCtrl: MenuController,
+    private location: Location
   ) {
     this.menuCtrl.enable(false, 'main');
     this.currentLanguage = this.languaService.getLanguage();
@@ -43,39 +51,45 @@ export class VerificationCodePage implements OnInit {
 
   ngOnInit() {
     //this.buildForm();
+    //this.number1.setFocus();
   }
 
   confirmVerificationCode() {
+    this.codeValues = this.input1 + this.input2 + this.input3 + this.input4;
     this.code = parseInt(this.codeValues);
-    console.log('code is :' + this.codeValues.substring(9));
+    // console.log('code is :' + this.codeValues.substring(9));
 
     this.activationData = {
       lang: this.language.getLanguage(),
-      user_id:parseInt( this.activatedRoute.snapshot.paramMap.get('userID')),
-      code: parseInt( this.codeValues.substring(9)),
+      user_id: parseInt(this.activatedRoute.snapshot.paramMap.get('userID')),
+      code: parseInt(this.codeValues),
       device_id: this.util.deviceID,
     };
+    // console.log( 'inputs : '+ this.input1,this. input2,this.input3,this.input4)
+    //  //console.log('code sent is :'+this.activationData.code)
 
+    console.log('code values :' + this.codeValues);
     this.util.showLoadingSpinner().then((__) => {
       this.auth.activeAccount(this.activationData).subscribe(
         (data: AuthResponse) => {
           if (data.key == 1) {
             console.log('activeAccount  res :' + JSON.stringify(data));
             this.util.showMessage(data.msg);
-           // this.util.showMessage('login now');
-           // this.data.setPreviousPage('signin');
+            // this.util.showMessage('login now');
+            // this.data.setPreviousPage('signin');
             this.router.navigateByUrl('/tabs');
-            this.codeValues='';
-            //this.n1=this.n2=this.n3=this.n4=''
+            this.codeValues = '';
+            //  //this.n1=this.n2=this.n3=this.n4=''
+            // this.number1.nativeElement.clear;
           } else {
             this.util.showMessage(data.msg);
-            this.codeValues='';
-           // this.n1=this.n2=this.n3=this.n4=''
+            this.codeValues = '';
+            // this.n1=this.n2=this.n3=this.n4=''
           }
           this.util.dismissLoading();
         },
         (err) => {
-          this.codeValues='';
+          this.codeValues = '';
           //this.n1=this.n2=this.n3=this.n4=''
           this.util.dismissLoading();
         }
@@ -100,7 +114,7 @@ export class VerificationCodePage implements OnInit {
     console.log('length is ' + length);
     const maxLength = input.attributes.maxlength.value;
     console.log('maxLength is ' + maxLength);
-    this.codeValues += ev.target.value;
+    //this.codeValues += ev.target.value;
     console.log(this.codeValues);
     if (length >= maxLength) {
       nextInput.setFocus();
@@ -109,5 +123,31 @@ export class VerificationCodePage implements OnInit {
 
   onOtpChange($event) {
     console.log('numbers' + JSON.stringify($event));
+  }
+
+  goBack() {
+    this.location.back();
+  }
+
+  resendCode() {
+    const userData:UserData={
+      lang: this.language.getLanguage(),
+      user_id: parseInt(this.activatedRoute.snapshot.paramMap.get('userID')),
+    }
+    this.util.showLoadingSpinner().then((__) => {
+      this.auth.resendCode(userData).subscribe(
+        (data: AuthResponse) => {
+          if (data.key == 1) {
+            this.util.showMessage(data.msg);
+          } else {
+            this.util.showMessage(data.msg);
+          }
+          this.util.dismissLoading();
+        },
+        (err) => {
+          this.util.dismissLoading();
+        }
+      );
+    });
   }
 }

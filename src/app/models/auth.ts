@@ -37,6 +37,7 @@ export interface ActivationData extends UserData {
   device_id: string;
 }
 
+
 export interface LogOutData extends UserData {
   device_id: string;
 }
