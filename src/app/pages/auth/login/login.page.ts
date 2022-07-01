@@ -77,7 +77,7 @@ export class LoginPage implements OnInit {
       lang: this.langaugeservice.getLanguage(),
       phone: this.loginForm.value.phoneNumber.nationalNumber,
       phone_code: this.loginForm.value.phoneNumber.dialCode,
-      password: this.loginForm.value.password,
+      //password: this.loginForm.value.password,
       device_id: this.util.deviceID,
       // user_type: this.loginForm.value.userType,
     };
@@ -88,7 +88,7 @@ export class LoginPage implements OnInit {
         (data: AuthResponse) => {
           if (data.key == 1) {
             console.log('login res :' + JSON.stringify(data));
-            if (data.data.is_active) {
+            if (data.data.is_active && data.data.is_login) {
               if(data?.data?.user_type=='provider'){
                 this.util.updateProviderLocation();
               }
@@ -97,7 +97,8 @@ export class LoginPage implements OnInit {
               this.auth.setUserID(data.data.id);
               this.auth.storeUserType(data.data.user_type);
               this.loginForm.reset();
-            } else if (!data.data.is_active) {
+            } else if (!data.data.is_active || (data.data.is_active && !data.data.is_login)) {
+              this.util.showMessage(data.msg);
               this.router.navigateByUrl(`/verification-code/${data.data.id}`);
             }
           } else {

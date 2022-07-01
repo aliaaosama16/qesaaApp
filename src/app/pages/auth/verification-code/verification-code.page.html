@@ -13,28 +13,28 @@
 
 
   <form (ngSubmit)="confirmVerificationCode()" class="ion-margin-bottom ion-margin-horizontal  ion-padding-horizontal">
-    <div class="code-conatiner">
+    <div class="code-conatiner" [dir]="currentLanguage=='ar'?'ltr':''">
       <div>
         <ion-item lines="none" [ngClass]="inputFocusNumber1 ? 'code-focused' : 'code-unfocused' ">
-          <ion-input class="otp ion-padding-top ion-text-center" #n1 min="0" max="9" maxlength="1" (keyup)="next($event,n2,'n1')" type="tel">
+          <ion-input class="otp ion-padding-top ion-text-center" #n1  name="n1" min="0" max="9" maxlength="1" name="n1" (keyup)="next($event,n2,'n1')" type="tel">
           </ion-input>
         </ion-item>
       </div>
       <div>
         <ion-item lines="none" [ngClass]="inputFocusNumber2 ? 'code-focused' : 'code-unfocused' ">
-          <ion-input class="otp ion-padding-top ion-text-center" #n2 min="0" max="9" maxlength="1" (keyup)="next($event,n3,'n2')" type="tel">
+          <ion-input class="otp ion-padding-top ion-text-center" #n2  name="n2" min="0" max="9" maxlength="1" (keyup)="next($event,n3,'n2')" type="tel">
           </ion-input>
         </ion-item>
       </div>
       <div>
         <ion-item lines="none" [ngClass]="inputFocusNumber3 ? 'code-focused' : 'code-unfocused' ">
-          <ion-input class="otp ion-padding-top ion-text-center" #n3 min="0" max="9" maxlength="1" (keyup)="next($event,n4,'n3')" type="tel">
+          <ion-input class="otp ion-padding-top ion-text-center" #n3 name="n3" min="0" max="9" maxlength="1" (keyup)="next($event,n4,'n3')" type="tel">
           </ion-input>
         </ion-item>
       </div>
       <div>
         <ion-item lines="none" [ngClass]="inputFocusNumber4 ? 'code-focused' : 'code-unfocused' ">
-          <ion-input class="otp ion-padding-top ion-text-center" #n4 min="0" max="9" maxlength="1" (keyup)="next($event,'','n4')" type="tel">
+          <ion-input class="otp ion-padding-top ion-text-center" #n4  name="n4" min="0" max="9" maxlength="1" (keyup)="next($event,'','n4')" type="tel">
           </ion-input>
         </ion-item>
       </div>

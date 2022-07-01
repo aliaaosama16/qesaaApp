@@ -68,6 +68,7 @@ export interface AuthDataResponse {
   lang?: string;
   avatar: string;
   see_family?:boolean;
+  is_login:boolean
 }
 
 export interface ImageInfo extends Language {

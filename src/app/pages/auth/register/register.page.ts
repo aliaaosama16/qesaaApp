@@ -103,7 +103,7 @@ export class RegisterPage implements OnInit {
         first_name: this.registerForm.value.userName,
         phone: this.registerForm.value.phoneNumber.nationalNumber,
         phone_code:this.registerForm.value.phoneNumber.dialCode,
-        password: this.registerForm.value.password,
+       // password: this.registerForm.value.password,
         city_id: this.registerForm.value.city,
         neighborhood_id:this.registerForm.value.neighborhood
       };
