@@ -228,6 +228,13 @@ export class AuthService {
     );
   }
 
+  resendCode(data: UserData ): Observable<GeneralResponse> {
+    return this.httpclient.post<GeneralResponse>(
+      `${environment.BASE_URL}resend-code`,
+      data
+    );
+  }
+
   logout(data: LogOutData): Observable<AuthResponse> {
     return this.httpclient.post<AuthResponse>(
       `${environment.BASE_URL}logout`,

@@ -28,6 +28,7 @@
   font-family: "Janna-LT-Regular";
   src: url("./assets/fonts/Bahij-Janna-Regular.ttf") format("truetype");
 }
+
 :root[mode="ios"]{
   body {
     margin-top: constant(safe-area-inset-top);
