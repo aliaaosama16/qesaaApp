@@ -1,4 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { LaunchNavigator } from '@awesome-cordova-plugins/launch-navigator/ngx';
 import { Platform } from '@ionic/angular';
 
 import { AuthService } from 'src/app/services/auth/auth.service';
@@ -20,7 +21,7 @@ export class DriverLocationPage implements OnInit {
   userType: string;
   constructor(
     private plt: Platform,
-  
+    private launchNavigator: LaunchNavigator,
     private auth: AuthService,
     private util: UtilitiesService
   ) {
@@ -108,6 +109,39 @@ export class DriverLocationPage implements OnInit {
       icon: './../../../../assets/icon/location_pin.svg',
     });
   }
+  trackOnMap() {
+    // let options: LaunchNavigatorOptions = {
+    //   start: [this.util.userLocation.lat, this.util.userLocation.lng],
+    //   app: this.launchNavigator.APP.GOOGLE_MAPS,// APPLE_MAPS
+    // };
 
+    // this.launchNavigator
+    //   .navigate(
+    //     [this.util.userLocation.lat, this.util.userLocation.lng],
+    //     options
+    //   )
+    //   .then(
+    //     (success) => console.log('Launched navigator'),
+    //     (error) => console.log('Error launching navigator', error)
+    //   );
+
+    this.launchNavigator
+      .isAppAvailable(this.launchNavigator.APP.GOOGLE_MAPS)
+      .then((isAvailable: any) => {
+        var app;
+        if (isAvailable) {
+          app = this.launchNavigator.APP.GOOGLE_MAPS;
+        } else {
+          console.warn(
+            'Google Maps not available - falling back to user selection'
+          );
+          app = this.launchNavigator.APP.USER_SELECT;
+        }
+        this.launchNavigator.navigate([this.lat, this.lng], {
+          app: app,
+          start: [this.util.userLocation.lat, this.util.userLocation.lng],
+        });
+      });
+  }
 
 }

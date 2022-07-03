@@ -6,7 +6,7 @@
 ></app-header>
 
 <ion-content class="ion-padding-horizontal">
-  <div class="services-container">
+  <!-- <div class="services-container">
     <div
       class="service-wrapper ion-margin-bottom"
       *ngFor="let service of services"
@@ -22,5 +22,30 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
+
+  <ion-row>
+    <ion-col   *ngFor="let service of services"  
+    size-xs="4"
+    size-sm="4"
+    size-md="3"
+    size-lg="3"
+    size-xl="3">
+      <div
+      class="service-wrapper ion-margin-bottom"
+     
+      routerLink="/tabs/our-services/details/{{service.id}}"
+    >
+      <div class="service ion-padding ion-text-center">
+        <div class="icon">
+          <img [src]="service?.image" />
+        </div>
+
+        <div class="ion-text-center">
+          <p class="ion-no-margin fn-14 qesaa-Janna-Bold">{{service?.title}}</p>
+        </div>
+      </div>
+    </div>
+    </ion-col>
+  </ion-row>
 </ion-content>

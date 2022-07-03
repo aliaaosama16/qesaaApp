@@ -21,6 +21,7 @@ import {
 } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { IonIntlTelInputModule } from 'ion-intl-tel-input';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@awesome-cordova-plugins/launch-navigator/ngx';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -56,6 +57,7 @@ export function createTranslateLoader(http: HttpClient) {
       useClass: InterceptorService,
       multi: true,
     },
+    LaunchNavigator
   ],
   bootstrap: [AppComponent],
 })

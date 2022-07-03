@@ -51,13 +51,11 @@ export class VerificationCodePage implements OnInit {
 
   ngOnInit() {
     //this.buildForm();
-    //this.number1.setFocus();
   }
 
   confirmVerificationCode() {
     this.codeValues = this.input1 + this.input2 + this.input3 + this.input4;
     this.code = parseInt(this.codeValues);
-    // console.log('code is :' + this.codeValues.substring(9));
 
     this.activationData = {
       lang: this.language.getLanguage(),
@@ -65,8 +63,6 @@ export class VerificationCodePage implements OnInit {
       code: parseInt(this.codeValues),
       device_id: this.util.deviceID,
     };
-    // console.log( 'inputs : '+ this.input1,this. input2,this.input3,this.input4)
-    //  //console.log('code sent is :'+this.activationData.code)
 
     console.log('code values :' + this.codeValues);
     this.util.showLoadingSpinner().then((__) => {
@@ -74,23 +70,22 @@ export class VerificationCodePage implements OnInit {
         (data: AuthResponse) => {
           if (data.key == 1) {
             console.log('activeAccount  res :' + JSON.stringify(data));
-            this.util.showMessage(data.msg);
-            // this.util.showMessage('login now');
-            // this.data.setPreviousPage('signin');
-            this.router.navigateByUrl('/tabs');
-            this.codeValues = '';
-            //  //this.n1=this.n2=this.n3=this.n4=''
-            // this.number1.nativeElement.clear;
+            this.util.showMessage(data.msg).then(()=>{
+              this.router.navigateByUrl('/tabs');
+              this.codeValues = '';
+            });
+           
           } else {
-            this.util.showMessage(data.msg);
-            this.codeValues = '';
-            // this.n1=this.n2=this.n3=this.n4=''
+            this.util.showMessage(data.msg).then(()=>{
+              this.codeValues = '';
+            });
+           
           }
           this.util.dismissLoading();
         },
         (err) => {
           this.codeValues = '';
-          //this.n1=this.n2=this.n3=this.n4=''
+
           this.util.dismissLoading();
         }
       );
@@ -130,10 +125,10 @@ export class VerificationCodePage implements OnInit {
   }
 
   resendCode() {
-    const userData:UserData={
+    const userData: UserData = {
       lang: this.language.getLanguage(),
       user_id: parseInt(this.activatedRoute.snapshot.paramMap.get('userID')),
-    }
+    };
     this.util.showLoadingSpinner().then((__) => {
       this.auth.resendCode(userData).subscribe(
         (data: AuthResponse) => {

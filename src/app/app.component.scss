@@ -8,8 +8,9 @@ ion-split-pane{
 .header-image {
 
   .header-logos{
-    display: flex;
-    //justify-content: space-between;
+    display: grid;
+    grid-template-columns: 2fr 5fr;
+    justify-items: center;
     align-items: center;
   }
   img {

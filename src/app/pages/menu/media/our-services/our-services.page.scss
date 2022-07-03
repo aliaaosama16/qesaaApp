@@ -1,10 +1,10 @@
-.services-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+// .services-container {
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: wrap;
   .service-wrapper {
-    width: 31.3%;
-    margin: 1%;
+    // width: 31.3%;
+    // margin: 1%;
     .service {
       border-radius: 5px;
       background: var(--ion-color-white);
@@ -22,4 +22,4 @@
       }
     }
   }
-}
+//}

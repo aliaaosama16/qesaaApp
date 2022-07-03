@@ -231,6 +231,15 @@
 
 .partners {
   margin-top: 20px;
+
+  .partenrs-section{
+    img{
+      //width: 100px;
+      height: 120px;
+      object-fit: contain;
+      object-position: center;
+    }
+  }
 }
 
 .feedback {
