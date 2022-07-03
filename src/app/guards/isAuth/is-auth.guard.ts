@@ -29,9 +29,10 @@ export class IsAuthGuard implements CanActivate {
     state: RouterStateSnapshot
   ): Promise<boolean> {
     const loginStatus = await Storage.get({ key: 'qesaa-activation-status' });
+    const isLoginedStatus = await Storage.get({ key: 'qesaa-is-login-status' });
     console.log('login status' + loginStatus.value);
-    if (loginStatus.value ) {
-      this.auth.isLogined();
+    if (loginStatus.value && isLoginedStatus.value) {
+      this.auth.isLogined(true);
       return true;
     } else {
       // this.router.navigateByUrl('/login-modal');
@@ -44,10 +45,10 @@ export class IsAuthGuard implements CanActivate {
     const modal = await this.modalController.create({
       component: CustomModalPage,
       cssClass: 'my-custom-modal',
-      canDismiss:true,
-      componentProps:{
-        modalType:'authentication'
-      }
+      canDismiss: true,
+      componentProps: {
+        modalType: 'authentication',
+      },
     });
     return await modal.present();
   }

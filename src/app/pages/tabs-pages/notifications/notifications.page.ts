@@ -13,6 +13,7 @@ import { LanguageService } from 'src/app/services/language/language.service';
 import { NotificationsService } from 'src/app/services/notifications/notifications.service';
 import { UtilitiesService } from 'src/app/services/utilities/utilities.service';
 import { Storage } from '@capacitor/storage';
+import { DataService } from 'src/app/services/data/data.service';
 
 @Component({
   selector: 'app-notifications',
@@ -35,7 +36,8 @@ export class NotificationsPage implements OnInit {
     private userNotifications: NotificationsService,
     private alertController: AlertController,
     private translate: TranslateService,
-    private auth: AuthService
+    private auth: AuthService,
+    private dataService:DataService
   ) {
     this.platform = this.util.platform;
     this.auth.getStoredUserID();
@@ -76,7 +78,14 @@ export class NotificationsPage implements OnInit {
     });
   }
 
-  openOrederDetails(orderID) {
+  openOrederDetails(orderID,orderType) {
+      // 'volunteers' 'charity-market'
+      if(orderType=='order'){
+        this.dataService.setPage('volunteers');
+      }else { 
+        this.dataService.setPage('charity-market');
+      }
+      
     this.router.navigateByUrl(
       `/tabs/my-orders/details/` + orderID
     );

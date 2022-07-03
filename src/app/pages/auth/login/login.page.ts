@@ -94,7 +94,8 @@ export class LoginPage implements OnInit {
               this.auth.setUserID(data.data.id);
               this.auth.storeUserType(data.data.user_type);
               this.loginForm.reset();
-            } else if (data.data.is_login) {
+            }
+            if (data.data.is_login) {
               if (data?.data?.user_type == 'provider') {
                 this.util.updateProviderLocation();
               }

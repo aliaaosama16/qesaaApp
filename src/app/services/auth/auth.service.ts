@@ -33,7 +33,7 @@ export class AuthService {
   userID = new BehaviorSubject(0);
   noOfNotifications = new BehaviorSubject(0);
   userToken: string = '';
-  providerCallBackID:string;
+  providerCallBackID: string;
   constructor(
     private httpclient: HttpClient,
     private languageService: LanguageService,
@@ -48,14 +48,29 @@ export class AuthService {
   }
 
   storeStatusAfterLogin(data: AuthResponse) {
-    this.isLogined();
+    this.isLogined(data?.data?.is_login);
     this.setUserID(data?.data?.id);
     this.storeToken(data?.data?.api_token);
-    this.storeActivationStatus(data.data.is_active);
+    this.storeIsLoginStatus(data?.data?.is_active);
+    this.storeActivationStatus(data?.data?.is_active);
     this.storeUserId(data?.data?.id);
     this.storeUserType(data?.data?.user_type);
     this.setNoOfNotifications(data?.data?.id);
-    this.canBuyFromMarket(data?.data.see_family);
+    this.canBuyFromMarket(data?.data?.see_family);
+  }
+
+  async storeActivationStatus(status: boolean) {
+    await Storage.set({
+      key: 'qesaa-activation-status',
+      value: status.toString(),
+    });
+  }
+
+  async storeIsLoginStatus(status: boolean) {
+    await Storage.set({
+      key: 'qesaa-is-login-status',
+      value: status.toString(),
+    });
   }
 
   async canBuyFromMarket(status: any) {
@@ -94,8 +109,8 @@ export class AuthService {
     //await Storage.clear();
   }
 
-  isLogined() {
-    this.isAuthenticated.next(true);
+  isLogined(loginStatus: boolean) {
+    this.isAuthenticated.next(loginStatus);
   }
 
   isLogout() {
@@ -166,13 +181,6 @@ export class AuthService {
     });
   }
 
-  async storeActivationStatus(status: boolean) {
-    await Storage.set({
-      key: 'qesaa-activation-status',
-      value: status.toString(),
-    });
-  }
-
   async store(key: any, value: any) {
     await Storage.set({
       key: key,
@@ -228,7 +236,7 @@ export class AuthService {
     );
   }
 
-  resendCode(data: UserData ): Observable<GeneralResponse> {
+  resendCode(data: UserData): Observable<GeneralResponse> {
     return this.httpclient.post<GeneralResponse>(
       `${environment.BASE_URL}resend-code`,
       data

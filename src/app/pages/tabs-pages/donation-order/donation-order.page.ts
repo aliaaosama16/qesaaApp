@@ -35,7 +35,6 @@ export class DonationOrderPage implements OnInit {
   @ViewChild('map', { static: false }) mapElement: ElementRef;
   @ViewChild('popoverDatetime', { static: false }) popoverDatetime: ElementRef;
 
-  
   map: google.maps.Map;
   home: google.maps.Marker;
   lat: number = 0;
@@ -108,9 +107,8 @@ export class DonationOrderPage implements OnInit {
           Validators.maxLength(10),
         ],
       ],
-
-      city: ['', [Validators.required, Validators.minLength(2)]],
-      neighborhood: ['', [Validators.required, Validators.minLength(2)]],
+      city: ['', [Validators.minLength(2)]],
+      neighborhood: ['', [Validators.minLength(2)]],
       lat: ['', [Validators.required]],
       lng: ['', [Validators.required]],
       requestDate: ['', [Validators.required, Validators.minLength(2)]],
@@ -162,7 +160,7 @@ export class DonationOrderPage implements OnInit {
   getSelectedDate(date) {
     this.donationForm.value.requestDate = moment(date).format('YYYY-MM-DD');
     console.log('converted date :' + moment(date).format('YYYY-MM-DD'));
-   
+
     return this.donationForm.value.requestDate;
   }
 
@@ -256,6 +254,7 @@ export class DonationOrderPage implements OnInit {
   }
 
   chooseCity($event) {
+    this.donationForm.value.neighborhood='';
     const cityData: CitysData = {
       lang: this.languageService.getLanguage(),
       user_id: this.auth.userID.value,
@@ -300,8 +299,7 @@ export class DonationOrderPage implements OnInit {
   donate() {
     // this.donationForm.value.lat = this.util.userLocation.lat;
     // this.donationForm.value.lng = this.util.userLocation.lng;
-  
-  
+
     this.donationForm.value.image = this.general.getDonationImage();
 
     console.log('donation form : ' + JSON.stringify(this.donationForm.value));
@@ -325,11 +323,16 @@ export class DonationOrderPage implements OnInit {
       this.sectionsService.storeOrder(storeOrderData).subscribe(
         (data: GeneralResponse) => {
           if (data.key == 1) {
-          // this.util.showMessage(data.msg).then((_) => {
-              this.showOrderNotice();
-           // });
+            // this.util.showMessage(data.msg).then((_) => {
+            this.showOrderNotice();
+            // });
           } else {
-            this.util.showMessage(data.msg);
+            if(data.msg=="neighborhood id مطلوب"){
+              this.util.showMessage('enter city ');
+            }else{
+              this.util.showMessage(data.msg);
+            }
+            
           }
           this.util.dismissLoading();
         },

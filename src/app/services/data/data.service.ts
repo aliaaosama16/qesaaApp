@@ -6,16 +6,24 @@ import { environment } from 'src/environments/environment.prod';
 import { HttpClient } from '@angular/common/http';
 import { CitysData, CitysResponse, UserData } from 'src/app/models/general';
 import { Observable } from 'rxjs';
-import { AppData,  } from '../../models/data';
+import { AppData } from '../../models/data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class DataService {
   pageData: PageData;
-  constructor(private httpclient:HttpClient) {}
+  page: string;
+  constructor(private httpclient: HttpClient) {}
 
-  setPageData(title: StaticPageTitle,image?:string,  content?: string) {
+  setPage(page: string) {
+    this.page = page;
+  }
+
+  getPage() {
+    return this.page;
+  }
+  setPageData(title: StaticPageTitle, image?: string, content?: string) {
     this.pageData = { title: title, image: title, content: content };
   }
 

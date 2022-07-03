@@ -16,11 +16,11 @@ ion-content {
   .boarding-container {
     height: 100%;
     .slide-container {
-      display: flex;
+      display: grid;
       justify-content: space-between;
       flex-direction: column;
       height: 100% !important;
-
+      grid-template-rows:2fr 4fr 1fr 2fr;
       .slide-mage {
         img {
           width: 100%;

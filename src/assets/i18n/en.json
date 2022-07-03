@@ -201,5 +201,6 @@
   "track client location":"track client location",
   "error occurs":"error occurs",
   "resend code": "resend code",
-  "goBack":"goBack"
+  "goBack":"goBack",
+  "enter city ":"enter neighborhood"
 }

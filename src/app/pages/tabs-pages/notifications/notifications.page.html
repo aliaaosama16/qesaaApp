@@ -17,7 +17,7 @@
     class="ion-margin-bottom"
     *ngFor="let notification of notifications"
   >
-    <ion-item lines="none" (click)="openOrederDetails(notification.order_id)">
+    <ion-item lines="none" (click)="openOrederDetails(notification.order_id,notification.type)">
       <div class="notification-container">
         <div class="icon">
           <ion-icon

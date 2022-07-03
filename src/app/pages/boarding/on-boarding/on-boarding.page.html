@@ -14,16 +14,19 @@
       <ng-template swiperSlide>
         <div class="slide-container">
           <div class="slide-mage">
-            <!-- <img [src]="introData?.data.first_image" /> -->
-            <ion-img src="./../../../../assets/images/onboarding1.svg"></ion-img>
+            <img [src]="introData?.data.first_image" />
+            <!-- <img src="./../../../../assets/images/onboarding1.svg"/> -->
           </div>
           <div class="ion-padding-horizontal ion-text-center ion-margin-bottom">
             <p class="ion-no-margin fn-24 qesaa-Janna-Bold primary-color">
               {{introData?.data?.first_title}}
             </p>
-            <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
-              {{introData?.data?.first_desc}}
-            </p>
+          
+            <div style="overflow-y: scroll;" class="ion-margin-horizontal">
+              <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
+                {{introData?.data?.first_desc}}
+              </p>
+            </div>
           </div>
           <div class="indicators">
             <div class="selected"></div>
@@ -52,16 +55,18 @@
       <ng-template swiperSlide>
         <div class="slide-container">
           <div class="slide-mage">
-            <!-- <img [src]="introData?.data?.second_image" /> -->
-            <ion-img src="./../../../../assets/images/onboarding2.svg"></ion-img>
+            <img [src]="introData?.data?.second_image" />
+            <!-- <img src="./../../../../assets/images/onboarding2.svg"/> -->
           </div>
           <div class="ion-padding-horizontal ion-text-center ion-margin-bottom">
             <p class="ion-no-margin fn-24 qesaa-Janna-Bold primary-color">
               {{introData?.data?.second_title}}
             </p>
-            <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
-              {{introData?.data?.second_desc}}
-            </p>
+            <div style="overflow-y: scroll;" class="ion-margin-horizontal">
+              <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
+                {{introData?.data?.second_desc}}
+              </p>
+            </div>
           </div>
           <div class="indicators">
             <div class="not-selected"></div>
@@ -89,16 +94,18 @@
       <ng-template swiperSlide>
         <div class="slide-container">
           <div class="slide-mage">
-            <!-- <img [src]="introData?.data?.third_image" /> -->
-            <ion-img src="./../../../../assets/images/onboarding3.svg"></ion-img>
+            <img [src]="introData?.data?.third_image" />
+            <!-- <img src="./../../../../assets/images/onboarding3.svg"/> -->
           </div>
           <div class="ion-padding-horizontal ion-text-center ion-margin-bottom">
             <p class="ion-no-margin fn-24 qesaa-Janna-Bold primary-color">
               {{introData?.data?.third_title}}
             </p>
-            <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
-              {{introData?.data?.second_desc}}
-            </p>
+            <div style="overflow-y: scroll;" class="ion-margin-horizontal">
+              <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
+                {{introData?.data?.third_desc}}
+              </p>
+            </div>
           </div>
           <div class="indicators">
             <div class="not-selected"></div>

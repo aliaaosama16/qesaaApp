@@ -158,9 +158,9 @@ export class AppComponent {
 
   async getLoginStatus() {
     const loginStatus = await Storage.get({ key: 'qesaa-activation-status' });
-
-    if (loginStatus.value) {
-      this.auth.isLogined();
+    const isLoginedStatus = await Storage.get({ key: 'qesaa-is-login-status' });
+    if (loginStatus.value && isLoginedStatus.value) {
+      this.auth.isLogined(true);
       this.getUserNotifications();
       this.getStoredUserType();
       this.getUserMarketStatus();
