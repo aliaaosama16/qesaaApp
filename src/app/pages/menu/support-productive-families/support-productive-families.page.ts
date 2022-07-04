@@ -39,6 +39,9 @@ export class SupportProductiveFamiliesPage implements OnInit {
   productImage: any = '';
   cities: GeneralSectionResponse[];
   neighborhoods: GeneralSectionResponse[];
+  city: GeneralSectionResponse;
+  neighborhood: GeneralSectionResponse;
+  noNeighborhoods: boolean = true;
   constructor(
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
@@ -73,7 +76,7 @@ export class SupportProductiveFamiliesPage implements OnInit {
         ],
       ],
       city: ['', [Validators.required, Validators.minLength(2)]],
-      neighborhood: ['', [Validators.required, Validators.minLength(2)]],
+      neighborhood: ['', [ Validators.minLength(2)]],
       twitterLink: ['', [Validators.required, Validators.minLength(2)]],
       instgramLink: ['', [Validators.required, Validators.minLength(2)]],
       basicImage: [
@@ -178,14 +181,20 @@ export class SupportProductiveFamiliesPage implements OnInit {
     const cityData: CitysData = {
       lang: this.languageService.getLanguage(),
       user_id: this.auth.userID.value,
-      city_id: $event.target.value,
+      city_id: $event?.value?.id,
     };
     this.util.showLoadingSpinner().then((__) => {
       this.dataService.getNeighborhoods(cityData).subscribe(
         (data: CitysResponse) => {
           this.util.dismissLoading();
           if (data.key == 1) {
-            this.neighborhoods = data.data;
+            if (data.data.length == 0) {
+              this.noNeighborhoods = false;
+              this.productAdditionForm.value.neighborhood='';
+            } else {
+              this.noNeighborhoods = true;
+              this.neighborhoods = data.data;
+            }
           } else {
             this.util.showMessage(data.msg);
           }
@@ -199,7 +208,7 @@ export class SupportProductiveFamiliesPage implements OnInit {
 
   chooseNeighborhood($event) {
     console.log('Neighborhood : ' + $event.target.value);
-    this.productAdditionForm.value.neighborhood = $event.target.value;
+    this.productAdditionForm.value.neighborhood =  $event?.value?.id;
   }
 
   // support productive families
@@ -221,8 +230,8 @@ export class SupportProductiveFamiliesPage implements OnInit {
       first_name: this.productAdditionForm.value.userName,
       phone: this.productAdditionForm.value.phoneNumber,
       password: '123456',
-      city_id: this.productAdditionForm.value.city,
-      neighborhood_id: this.productAdditionForm.value.neighborhood,
+      city_id: this.productAdditionForm.value.city.id,
+      neighborhood_id: this.productAdditionForm.value.neighborhood.id,
       avatar: this.general.getFamiliesBasicImage(),
       license_image: this.general.getFamiliesProductImage(),
     };

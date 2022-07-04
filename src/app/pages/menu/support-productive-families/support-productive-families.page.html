@@ -74,7 +74,7 @@
       <!-- <ion-input class="fn-16 qesaa-Janna-Regular" placeholder="{{'city'|translate}}" type="text"
         formControlName="city"></ion-input> -->
 
-      <ion-select
+      <!-- <ion-select
         formControlName="city"
         (ionChange)="chooseCity($event)"
         placeholder="{{'city'|translate}}"
@@ -90,7 +90,17 @@
         >
           {{city.title|translate}}
         </ion-select-option>
-      </ion-select>
+      </ion-select> -->
+      <ionic-selectable
+        formControlName="city"
+        [items]="cities"
+        itemValueField="id"
+        itemTextField="title"
+        [canSearch]="true"
+        (onChange)="chooseCity($event)"
+        placeholder="{{'city'|translate}}"
+      >
+      </ionic-selectable>
     </ion-item>
 
     <div class="custom-6-margin-bottom">
@@ -110,7 +120,7 @@
       <!-- <ion-input class="fn-16 qesaa-Janna-Regular" placeholder="{{'the area or neighborhood'|translate}}" type="text"
         formControlName="neighborhood"></ion-input> -->
 
-      <ion-select
+      <!-- <ion-select
         formControlName="neighborhood"
         (ionChange)="chooseNeighborhood($event)"
         placeholder="{{'the area or neighborhood'|translate}}"
@@ -126,7 +136,18 @@
         >
           {{neighborhood.title}}
         </ion-select-option>
-      </ion-select>
+      </ion-select> -->
+      <ionic-selectable
+      formControlName="neighborhood"
+      [items]="neighborhoods"
+      itemValueField="id"
+      itemTextField="title"
+      [canSearch]="true"
+      (onChange)="chooseNeighborhood($event)"
+      placeholder="{{'the area or neighborhood'|translate}}"
+      [isEnabled]="noNeighborhoods"
+    >
+    </ionic-selectable>
     </ion-item>
 
     <div class="custom-6-margin-bottom">

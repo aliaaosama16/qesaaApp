@@ -72,7 +72,23 @@ export class VerificationCodePage implements OnInit {
             console.log('activeAccount  res :' + JSON.stringify(data));
             this.util.showMessage(data.msg);
             setTimeout(() => {
-              this.router.navigateByUrl('/tabs');
+             // this.auth.storeStatusAfterLogin(data);
+              // this.auth.setUserID(data.data.id);
+              // this.auth.storeUserType(data.data.user_type);
+              // this.router.navigateByUrl('/tabs');
+
+
+              if (data.data.is_active && data.data.is_login) {
+                this.auth.storeStatusAfterLogin(data);
+                this.auth.setUserID(data.data.id);
+                this.auth.storeUserType(data.data.user_type);
+                if (data?.data?.user_type == 'provider') {
+                  this.util.updateProviderLocation();
+                }
+                this.router.navigateByUrl('/tabs/home');
+              }
+
+              
             }, 2000);
            
            

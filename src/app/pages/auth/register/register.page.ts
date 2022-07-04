@@ -116,9 +116,9 @@ export class RegisterPage implements OnInit {
              
               setTimeout(() => {
                 this.auth.userID.next(data.data.id);
-                this.auth.storeStatusAfterRegisteration(data);  
+                //this.auth.storeStatusAfterRegisteration(data);  
                 this.router.navigateByUrl(`/verification-code/${data.data.id}`);
-              }, 2000);
+              }, 2010);
               
               this.registerForm.reset();
             } else {

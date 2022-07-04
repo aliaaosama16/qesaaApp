@@ -89,13 +89,12 @@ export class LoginPage implements OnInit {
           if (data.key == 1) {
             console.log('login res :' + JSON.stringify(data));
 
-            if (data.data.is_active) {
+           
+            if (data.data.is_active && data.data.is_login) {
               this.auth.storeStatusAfterLogin(data);
               this.auth.setUserID(data.data.id);
               this.auth.storeUserType(data.data.user_type);
               this.loginForm.reset();
-            }
-            if (data.data.is_login) {
               if (data?.data?.user_type == 'provider') {
                 this.util.updateProviderLocation();
               }
@@ -107,7 +106,7 @@ export class LoginPage implements OnInit {
               this.util.showMessage(data.msg);
               setTimeout(() => {
                 this.router.navigateByUrl(`/verification-code/${data.data.id}`);
-              }, 2000);
+              }, 2010);
             }
           } else {
             this.util.showMessage(data.msg);
