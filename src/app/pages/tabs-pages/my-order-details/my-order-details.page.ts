@@ -87,6 +87,7 @@ export class MyOrderDetailsPage implements OnInit {
       componentProps: {
         lat: this.orderDetails.provider_lat,
         lng: this.orderDetails.provider_lng,
+        
       },
       initialBreakpoint: 0.75,
       breakpoints: [0, 0.5, 0.75, 1],
@@ -149,7 +150,9 @@ export class MyOrderDetailsPage implements OnInit {
         (data: OrderResponse) => {
           if (data.key == 1) {
             //this.orderDetails = data.data;
-            this.util.showMessage(data.msg).then(() => {
+            this.util.showMessage(data.msg);
+
+            setTimeout(() => {
               const orderData: OrderData = {
                 lang: this.languageService.getLanguage(),
                 user_id: this.auth.userID.value,
@@ -158,7 +161,7 @@ export class MyOrderDetailsPage implements OnInit {
                 ),
               };
               this.showOrderByOederID(orderData);
-            });
+            }, 2000);
           }
           this.util.dismissLoading();
         },

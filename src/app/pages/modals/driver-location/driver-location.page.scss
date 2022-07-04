@@ -1,8 +1,8 @@
-ion-content {
-  display: flex;
-  align-items: flex-start;
-  text-align: center;
-  justify-content: center;
+// ion-content {
+//   display: flex;
+//   align-items: flex-start;
+//   text-align: center;
+//   justify-content: center;
   .map-container {
     height: 100%;
     border-radius: 20px;
@@ -10,12 +10,12 @@ ion-content {
     --background: transparent !important;
   }
 
-  .btn {
-    width: 50%;
+//   .btn {
+//     width: 50%;
 
-    margin: 20px auto;
-    &::part(native) {
-      height: 50px;
-    }
-  }
-}
+//     margin: 20px auto;
+//     &::part(native) {
+//       height: 50px;
+//     }
+//   }
+// }

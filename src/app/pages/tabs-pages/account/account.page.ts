@@ -155,14 +155,18 @@ export class AccountPage implements OnInit {
       this.auth.logout(logoutData).subscribe(
         (data: AuthResponse) => {
           if (data.key == 1) {
-            this.util.showMessage(data.msg).then((_) => {
+            this.util.showMessage(data.msg);
+            
+            setTimeout(()=>{
               this.auth.removeRegistrationData().then(async (_) => {
                 this.router.navigateByUrl('/tabs/home');
                 if (this.auth.userType.value == 'provider') {
                   this.removeWatchDriverLocation();
                 }
               });
-            });
+            },2000)
+            
+           
             console.log('logout data :' + JSON.stringify(this.userData));
           } else {
           }

@@ -1,6 +1,6 @@
-<!-- <ion-header class="ion-no-border"  *ngIf="getIntro">
+<ion-header class="ion-no-border"  *ngIf="getIntro">
   <ion-toolbar color="secondary"></ion-toolbar>
-</ion-header> -->
+</ion-header>
 
 <ion-content>
   <div class="boarding-container">
@@ -14,25 +14,27 @@
       <ng-template swiperSlide>
         <div class="slide-container">
           <div class="slide-mage">
-            <img [src]="introData?.data.first_image" />
+            <img [src]="introData?.data?.first_image" />
             <!-- <img src="./../../../../assets/images/onboarding1.svg"/> -->
           </div>
-          <div class="ion-padding-horizontal ion-text-center ion-margin-bottom">
+          <div class="ion-padding-horizontal ion-text-center ">
             <p class="ion-no-margin fn-24 qesaa-Janna-Bold primary-color">
               {{introData?.data?.first_title}}
             </p>
           
-            <div style="overflow-y: scroll;" class="ion-margin-horizontal">
+            <div  class="ion-margin-horizontal intro-description">
               <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
                 {{introData?.data?.first_desc}}
               </p>
             </div>
+
+            <div class="indicators ion-margin-top">
+              <div class="selected"></div>
+              <div class="not-selected"></div>
+              <div class="not-selected"></div>
+            </div>
           </div>
-          <div class="indicators">
-            <div class="selected"></div>
-            <div class="not-selected"></div>
-            <div class="not-selected"></div>
-          </div>
+         
           <div class="slide-footer">
             <div
               (click)="nextSlide()"
@@ -58,21 +60,22 @@
             <img [src]="introData?.data?.second_image" />
             <!-- <img src="./../../../../assets/images/onboarding2.svg"/> -->
           </div>
-          <div class="ion-padding-horizontal ion-text-center ion-margin-bottom">
+          <div class="ion-padding-horizontal ion-text-center ">
             <p class="ion-no-margin fn-24 qesaa-Janna-Bold primary-color">
               {{introData?.data?.second_title}}
             </p>
-            <div style="overflow-y: scroll;" class="ion-margin-horizontal">
+            <div  class="ion-margin-horizontal intro-description">
               <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
                 {{introData?.data?.second_desc}}
               </p>
             </div>
+            <div class="indicators ion-margin-top">
+              <div class="not-selected"></div>
+              <div class="selected"></div>
+              <div class="not-selected"></div>
+            </div>
           </div>
-          <div class="indicators">
-            <div class="not-selected"></div>
-            <div class="selected"></div>
-            <div class="not-selected"></div>
-          </div>
+          
           <div class="slide-footer">
             <div
               (click)="nextSlide()"
@@ -97,21 +100,22 @@
             <img [src]="introData?.data?.third_image" />
             <!-- <img src="./../../../../assets/images/onboarding3.svg"/> -->
           </div>
-          <div class="ion-padding-horizontal ion-text-center ion-margin-bottom">
+          <div class="ion-padding-horizontal ion-text-center ">
             <p class="ion-no-margin fn-24 qesaa-Janna-Bold primary-color">
               {{introData?.data?.third_title}}
             </p>
-            <div style="overflow-y: scroll;" class="ion-margin-horizontal">
+            <div  class="ion-margin-horizontal intro-description">
               <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
                 {{introData?.data?.third_desc}}
               </p>
             </div>
+            <div class="indicators ion-margin-top">
+              <div class="not-selected"></div>
+              <div class="not-selected"></div>
+              <div class="selected"></div>
+            </div>
           </div>
-          <div class="indicators">
-            <div class="not-selected"></div>
-            <div class="not-selected"></div>
-            <div class="selected"></div>
-          </div>
+         
           <div class="slide-footer">
             <div
               (click)="start()"

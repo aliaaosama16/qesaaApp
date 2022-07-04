@@ -7,7 +7,11 @@ import {
   UserData,
 } from './../../../models/general';
 import { UtilitiesService } from './../../../services/utilities/utilities.service';
-import { ModalController, Platform } from '@ionic/angular';
+import {
+  ActionSheetController,
+  ModalController,
+  Platform,
+} from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { LanguageService } from 'src/app/services/language/language.service';
@@ -18,13 +22,19 @@ import { DataService } from 'src/app/services/data/data.service';
 declare var google: any;
 import * as moment from 'moment';
 import { AuthService } from 'src/app/services/auth/auth.service';
-import { Camera, CameraResultType } from '@capacitor/camera';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 import { DomSanitizer } from '@angular/platform-browser';
 import { GeneralService } from 'src/app/services/general/general.service';
 import { UploadImageService } from 'src/app/services/uploadImage/upload-image.service';
 import { AuthResponse } from 'src/app/models/auth';
 import { Router } from '@angular/router';
 import { NoticeModalPage } from '../../modals/notice-modal/notice-modal.page';
+import { TranslateService } from '@ngx-translate/core';
+import {
+  NativeGeocoder,
+  NativeGeocoderResult,
+  NativeGeocoderOptions,
+} from '@awesome-cordova-plugins/native-geocoder/ngx';
 
 @Component({
   selector: 'app-donation-order',
@@ -50,6 +60,7 @@ export class DonationOrderPage implements OnInit {
   userData: AuthDataResponse;
   requestDate = '';
   inputFocused: boolean = false;
+  address: string;
   constructor(
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
@@ -62,7 +73,10 @@ export class DonationOrderPage implements OnInit {
     private uploadImage: UploadImageService,
     private sanitizer: DomSanitizer,
     private router: Router,
-    public modalController: ModalController
+    public modalController: ModalController,
+    private actionSheetController: ActionSheetController,
+    private translate: TranslateService,
+    private nativeGeocoder: NativeGeocoder
   ) {
     this.currentLanguage = this.languageService.getLanguage();
     this.plt.keyboardDidShow.subscribe((ev) => {
@@ -146,11 +160,45 @@ export class DonationOrderPage implements OnInit {
     this.donationForm.value.requestTime = $event.target.value;
   }
 
-  async attachImage() {
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: this.translate.instant('get photo'),
+      cssClass: 'my-custom-class',
+      buttons: [
+        {
+          text: this.translate.instant('from gallery'),
+          role: 'destructive',
+          id: 'delete-button',
+          data: {
+            type: 'delete',
+          },
+          handler: () => {
+            console.log('gallery clicked');
+            this.attachImage(CameraSource.Photos);
+          },
+        },
+        {
+          text: this.translate.instant('from camera'),
+          data: 10,
+          handler: () => {
+            console.log('camera clicked');
+            this.attachImage(CameraSource.Camera);
+          },
+        },
+      ],
+    });
+    await actionSheet.present();
+
+    const { role, data } = await actionSheet.onDidDismiss();
+    console.log('onDidDismiss resolved with role and data', role, data);
+  }
+
+  async attachImage(source: CameraSource) {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Uri,
+      source: source,
     });
     this.requestImage = this.sanitizer.bypassSecurityTrustUrl(image.webPath);
     console.log('taken image by camera  :' + this.requestImage);
@@ -206,6 +254,7 @@ export class DonationOrderPage implements OnInit {
   }
 
   addMarker(lat, lng) {
+    
     let latLng = new google.maps.LatLng(lat, lng);
 
     this.home = new google.maps.Marker({
@@ -215,7 +264,7 @@ export class DonationOrderPage implements OnInit {
       draggable: true,
       icon: './../../../../assets/icon/location-pin-small.svg',
     });
-
+    this.reverseGeocode(this.lat, this.long);
     google.maps.event.addListener(this.home, 'dragend', (event) => {
       //alert(JSON.stringify(event))
       //
@@ -225,11 +274,40 @@ export class DonationOrderPage implements OnInit {
       console.log('new location :' + this.lat + '  ' + this.long);
       //    alert(res.coords.latitude+'   '+res.coords.longitude)
       //  })
+      this.reverseGeocode(this.lat, this.long);
     });
+
+    this.reverseGeocode(this.lat, this.long);
+
     //   google.maps.event.addListener(this.home, 'dragend', (ev){
 
     //      alert(this.home.getPosition()); // new LatLng-Object after dragend-event...
     // });
+  }
+
+  reverseGeocode(lat, lng) {
+    let options: NativeGeocoderOptions = {
+      useLocale: true,
+      maxResults: 5,
+    };
+
+    this.nativeGeocoder
+      .reverseGeocode(lat, lng, options)
+      .then((result: NativeGeocoderResult[]) => {
+        //console.log(JSON.stringify(result[0]));
+        this.address =
+          result[0].countryName +
+          ' ' +
+          result[0].administrativeArea +
+          ' ' +
+          result[0].subAdministrativeArea +
+          ' ' +
+          result[0].locality +
+          ' ' +
+          result[0].postalCode;
+        console.log(this.address);
+      })
+      .catch((error: any) => console.log(error));
   }
 
   getAllCities() {
@@ -254,7 +332,7 @@ export class DonationOrderPage implements OnInit {
   }
 
   chooseCity($event) {
-    this.donationForm.value.neighborhood='';
+    this.donationForm.value.neighborhood = '';
     const cityData: CitysData = {
       lang: this.languageService.getLanguage(),
       user_id: this.auth.userID.value,
@@ -303,21 +381,24 @@ export class DonationOrderPage implements OnInit {
     this.donationForm.value.image = this.general.getDonationImage();
 
     console.log('donation form : ' + JSON.stringify(this.donationForm.value));
-    const storeOrderData: StoreOrderData = {
-      lang: this.languageService.getLanguage(),
-      user_id: this.auth.userID.value,
-      type: StoreOrderType.volunteer,
-      name: this.donationForm.value.userName,
-      phone: this.donationForm.value.phoneNumber,
-      city_id: this.donationForm.value.city,
-      neighborhood_id: this.donationForm.value.neighborhood,
-      lat: this.lat,
-      lng: this.long,
-      date: moment(this.donationForm.value.requestDate).format('YYYY-MM-DD'),
-      time: this.donationForm.value.requestTime,
-      notes: this.donationForm.value.notices,
-      image: this.general.getDonationImage(),
-    };
+    if(this.donationForm.value.neighborhood!=''){
+      const storeOrderData: StoreOrderData = {
+        lang: this.languageService.getLanguage(),
+        user_id: this.auth.userID.value,
+        type: StoreOrderType.volunteer,
+        name: this.donationForm.value.userName,
+        phone: this.donationForm.value.phoneNumber,
+        city_id: this.donationForm.value.city,
+        neighborhood_id: this.donationForm.value.neighborhood,
+        lat: this.lat,
+        lng: this.long,
+        date: moment(this.donationForm.value.requestDate).format('YYYY-MM-DD'),
+        time: this.donationForm.value.requestTime,
+        notes: this.donationForm.value.notices,
+        image: this.general.getDonationImage(),
+      };
+
+
     console.log(' storeOrderData  ' + JSON.stringify(storeOrderData));
     this.util.showLoadingSpinner().then((__) => {
       this.sectionsService.storeOrder(storeOrderData).subscribe(
@@ -327,12 +408,11 @@ export class DonationOrderPage implements OnInit {
             this.showOrderNotice();
             // });
           } else {
-            if(data.msg=="neighborhood id مطلوب"){
+            if (data.msg == 'neighborhood id مطلوب') {
               this.util.showMessage('enter city ');
-            }else{
+            } else {
               this.util.showMessage(data.msg);
             }
-            
           }
           this.util.dismissLoading();
         },
@@ -341,6 +421,48 @@ export class DonationOrderPage implements OnInit {
         }
       );
     });
+    }else{
+      const storeOrderData: StoreOrderData = {
+        lang: this.languageService.getLanguage(),
+        user_id: this.auth.userID.value,
+        type: StoreOrderType.volunteer,
+        name: this.donationForm.value.userName,
+        phone: this.donationForm.value.phoneNumber,
+        city_id: this.donationForm.value.city,
+        
+        lat: this.lat,
+        lng: this.long,
+        date: moment(this.donationForm.value.requestDate).format('YYYY-MM-DD'),
+        time: this.donationForm.value.requestTime,
+        notes: this.donationForm.value.notices,
+        image: this.general.getDonationImage(),
+      };
+
+
+    console.log(' storeOrderData  ' + JSON.stringify(storeOrderData));
+    this.util.showLoadingSpinner().then((__) => {
+      this.sectionsService.storeOrder(storeOrderData).subscribe(
+        (data: GeneralResponse) => {
+          if (data.key == 1) {
+            // this.util.showMessage(data.msg).then((_) => {
+            this.showOrderNotice();
+            // });
+          } else {
+            if (data.msg == 'neighborhood id مطلوب') {
+              this.util.showMessage('enter city ');
+            } else {
+              this.util.showMessage(data.msg);
+            }
+          }
+          this.util.dismissLoading();
+        },
+        (err) => {
+          this.util.dismissLoading();
+        }
+      );
+    });
+    }
+   
   }
 
   async showOrderNotice() {

@@ -67,7 +67,10 @@ export class ChangePasswordPage implements OnInit {
               if (data.key == 1) {
                 console.log('changePassword res :' + JSON.stringify(data));
                 this.util.showMessage(data.msg);
-                this.router.navigateByUrl('/login');
+                setTimeout(() => {
+                  this.router.navigateByUrl('/login');
+                }, 2000);
+                
               } else {
                 this.util.showMessage(data.msg);
               }

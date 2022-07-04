@@ -1,20 +1,38 @@
-<app-header [hasMarketCart]="false" [haveBeforeHeader]="false" [title]="'add product'" [isHome]="false"></app-header>
+<app-header
+  [hasMarketCart]="false"
+  [haveBeforeHeader]="false"
+  [title]="'add product'"
+  [isHome]="false"
+></app-header>
 
 <ion-content class="ion-padding-horizontal">
-  <form (ngSubmit)="addProduct()" [formGroup]="productAdditionForm"
-    class="custom-form-container ion-margin-bottom ion-padding-horizontal">
+  <form
+    (ngSubmit)="addProduct()"
+    [formGroup]="productAdditionForm"
+    class="custom-form-container ion-margin-bottom ion-padding-horizontal"
+  >
     <div class="custom-6-margin-bottom">
       <p class="ion-no-margin fn-16 qesaa-Janna-Bold">
         {{ 'user-name'|translate}}
       </p>
     </div>
     <ion-item lines="none" class="ion-margin-bottom">
-      <ion-icon class="custom-form-icon" [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'" item-start
-        color="primary" src="./../../../../assets/icon/donate/person-inactive.svg">
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/donate/person-inactive.svg"
+      >
       </ion-icon>
-      <ion-input class="fn-16 qesaa-Janna-Regular" placeholder="{{'user-name'|translate}}" type="text"
-        formControlName="userName" (ionFocus)="inputHaveFocused(true)"
-        (ionBlur)="inputHaveFocused(false)"></ion-input>
+      <ion-input
+        class="fn-16 qesaa-Janna-Regular"
+        placeholder="{{'user-name'|translate}}"
+        type="text"
+        formControlName="userName"
+        (ionFocus)="inputHaveFocused(true)"
+        (ionBlur)="inputHaveFocused(false)"
+      ></ion-input>
     </ion-item>
 
     <div class="custom-6-margin-bottom">
@@ -24,11 +42,21 @@
     </div>
 
     <ion-item lines="none" class="ion-margin-bottom">
-      <ion-icon class="custom-form-icon" [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'" item-start
-        color="primary" src="./../../../../assets/icon/donate/phone-inactive.svg"></ion-icon>
-      <ion-input class="fn-16 qesaa-Janna-Regular" placeholder="{{'phone number'|translate}}" type="tel"
-        formControlName="phoneNumber" (ionFocus)="inputHaveFocused(true)"
-        (ionBlur)="inputHaveFocused(false)"></ion-input>
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/donate/phone-inactive.svg"
+      ></ion-icon>
+      <ion-input
+        class="fn-16 qesaa-Janna-Regular"
+        placeholder="{{'phone number'|translate}}"
+        type="tel"
+        formControlName="phoneNumber"
+        (ionFocus)="inputHaveFocused(true)"
+        (ionBlur)="inputHaveFocused(false)"
+      ></ion-input>
     </ion-item>
 
     <div class="custom-6-margin-bottom">
@@ -36,12 +64,17 @@
     </div>
 
     <ion-item lines="none" class="ion-margin-bottom">
-      <ion-icon class="custom-form-icon" [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'" item-start
-        color="primary" src="./../../../../assets/icon/donate/city-inactive.svg"></ion-icon>
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/donate/city-inactive.svg"
+      ></ion-icon>
       <!-- <ion-input class="fn-16 qesaa-Janna-Regular" placeholder="{{'city'|translate}}" type="text"
         formControlName="city"></ion-input> -->
 
-        <ion-select
+      <ion-select
         formControlName="city"
         (ionChange)="chooseCity($event)"
         placeholder="{{'city'|translate}}"
@@ -67,15 +100,20 @@
     </div>
 
     <ion-item lines="none" class="ion-margin-bottom">
-      <ion-icon class="custom-form-icon" [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'" item-start
-        color="primary" src="./../../../../assets/icon/donate/city-inactive.svg"></ion-icon>
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/donate/city-inactive.svg"
+      ></ion-icon>
       <!-- <ion-input class="fn-16 qesaa-Janna-Regular" placeholder="{{'the area or neighborhood'|translate}}" type="text"
         formControlName="neighborhood"></ion-input> -->
 
-        <ion-select
+      <ion-select
         formControlName="neighborhood"
         (ionChange)="chooseNeighborhood($event)"
-        placeholder="{{'the area or neighborhood'|translate}}" 
+        placeholder="{{'the area or neighborhood'|translate}}"
         okText='{{"ok"|translate}}'
         cancelText='{{"cancel"|translate}}'
         interface="popover"
@@ -98,11 +136,21 @@
     </div>
 
     <ion-item lines="none" class="ion-margin-bottom">
-      <ion-icon class="custom-form-icon" [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'" item-start
-        color="primary" src="./../../../../assets/icon/donate/request-inactive.svg"></ion-icon>
-      <ion-input class="fn-16 qesaa-Janna-Regular" placeholder="{{ 'enter instgram link'|translate}}" type="text"
-        formControlName="instgramLink" (ionFocus)="inputHaveFocused(true)"
-        (ionBlur)="inputHaveFocused(false)"></ion-input>
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/donate/request-inactive.svg"
+      ></ion-icon>
+      <ion-input
+        class="fn-16 qesaa-Janna-Regular"
+        placeholder="{{ 'enter instgram link'|translate}}"
+        type="text"
+        formControlName="instgramLink"
+        (ionFocus)="inputHaveFocused(true)"
+        (ionBlur)="inputHaveFocused(false)"
+      ></ion-input>
     </ion-item>
 
     <div class="custom-6-margin-bottom">
@@ -112,43 +160,59 @@
     </div>
 
     <ion-item lines="none" class="ion-margin-bottom">
-      <ion-icon class="custom-form-icon" [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'" item-start
-        color="primary" src="./../../../../assets/icon/family/twitter_inactive.svg"></ion-icon>
-      <ion-input class="fn-16 qesaa-Janna-Regular" placeholder="{{'enter twitter link'|translate}}" type="text"
-        formControlName="twitterLink" (ionFocus)="inputHaveFocused(true)"
-        (ionBlur)="inputHaveFocused(false)"></ion-input>
+      <ion-icon
+        class="custom-form-icon"
+        [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+        item-start
+        color="primary"
+        src="./../../../../assets/icon/family/twitter_inactive.svg"
+      ></ion-icon>
+      <ion-input
+        class="fn-16 qesaa-Janna-Regular"
+        placeholder="{{'enter twitter link'|translate}}"
+        type="text"
+        formControlName="twitterLink"
+        (ionFocus)="inputHaveFocused(true)"
+        (ionBlur)="inputHaveFocused(false)"
+      ></ion-input>
     </ion-item>
 
     <div class="request-date ion-margin-bottom">
-      <div class="custom-6-margin-bottom ">
+      <div class="custom-6-margin-bottom">
         <p class="ion-no-margin fn-16 qesaa-Janna-Bold">
           {{ "basic image"|translate}}
         </p>
       </div>
 
       <div class="image-container">
-        <div (click)="attachBasicImage()" *ngIf="basicImage==''" class="ion-text-center">
+        <div
+          (click)="attachImageActionSheet('basic')"
+          *ngIf="basicImage==''"
+          class="ion-text-center"
+        >
           <ion-icon src="./../../../../assets/icon/camera.svg"></ion-icon>
 
           <p class="ion-no-margin fn-16 qesaa-Janna-Regular gray-color">
             {{"attach image"|translate}}
           </p>
-
-
         </div>
         <img *ngIf="basicImage!=''" [src]="basicImage" />
       </div>
     </div>
 
-    <div class=" request-date ion-margin-bottom">
-      <div class="custom-6-margin-bottom ">
+    <div class="request-date ion-margin-bottom">
+      <div class="custom-6-margin-bottom">
         <p class="ion-no-margin fn-16 qesaa-Janna-Bold">
           {{ "product image"|translate}}
         </p>
       </div>
 
       <div class="image-container">
-        <div (click)="attachProductImage()" *ngIf="productImage==''" class="ion-text-center">
+        <div
+          (click)="attachImageActionSheet('product')"
+          *ngIf="productImage==''"
+          class="ion-text-center"
+        >
           <ion-icon src="./../../../../assets/icon/camera.svg"></ion-icon>
 
           <p class="ion-no-margin fn-16 qesaa-Janna-Regular gray-color">
@@ -159,7 +223,12 @@
       </div>
     </div>
 
-    <ion-button class="form-btn ion-margin-top" expand="block" type="submit" color="primary">
+    <ion-button
+      class="form-btn ion-margin-top"
+      expand="block"
+      type="submit"
+      color="primary"
+    >
       <span class="fn-20 qesaa-Janna-Bold"> {{ "add"|translate}} </span>
     </ion-button>
   </form>

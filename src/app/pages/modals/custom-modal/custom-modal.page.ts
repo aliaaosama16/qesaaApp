@@ -76,10 +76,13 @@ export class CustomModalPage implements OnInit {
         this.sectionsProvider.rateProvider(rateData).subscribe(
           (data: GeneralResponse) => {
             if (data.key == 1) {
-              this.util.showMessage(data.msg)
-              .then(() => {
+              this.util.showMessage(data.msg);
+              
+              setTimeout(() => {
                 this.modal.dismiss();
-              });
+              }, 2000);
+               
+             
             } else {
               this.util.showMessage(data.msg);
             }

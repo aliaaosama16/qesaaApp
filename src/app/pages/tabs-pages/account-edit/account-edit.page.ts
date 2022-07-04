@@ -14,6 +14,8 @@ import {
 import { DomSanitizer } from '@angular/platform-browser';
 import { UploadImageService } from 'src/app/services/uploadImage/upload-image.service';
 import { GeneralService } from 'src/app/services/general/general.service';
+import { ActionSheetController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-account-edit',
   templateUrl: './account-edit.page.html',
@@ -37,7 +39,9 @@ export class AccountEditPage implements OnInit {
     private auth: AuthService,
     private sanitizer: DomSanitizer,
     private general: GeneralService,
-    private uploadImage: UploadImageService
+    private uploadImage: UploadImageService,
+    private actionSheetController: ActionSheetController,
+    private translate: TranslateService,
   ) {
     this.currentLanguage = this.languageService.getLanguage();
   }
@@ -89,11 +93,45 @@ export class AccountEditPage implements OnInit {
     });
   }
 
-  async attachBasicImage() {
+  async presentActionSheet() {
+    const actionSheet = await this.actionSheetController.create({
+      header: this.translate.instant('get photo'),
+      cssClass: 'my-custom-class',
+      buttons: [
+        {
+          text: this.translate.instant('from gallery'),
+          role: 'destructive',
+          id: 'delete-button',
+          data: {
+            type: 'delete',
+          },
+          handler: () => {
+            console.log('gallery clicked');
+            this.attachBasicImage(CameraSource.Photos);
+          },
+        },
+        {
+          text: this.translate.instant('from camera'),
+          data: 10,
+          handler: () => {
+            console.log('camera clicked');
+            this.attachBasicImage(CameraSource.Camera);
+          },
+        },
+      ],
+    });
+    await actionSheet.present();
+
+    const { role, data } = await actionSheet.onDidDismiss();
+    console.log('onDidDismiss resolved with role and data', role, data);
+  }
+
+  async attachBasicImage(source: CameraSource) {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Uri,
+      source:source
     });
     this.profileImage = this.sanitizer.bypassSecurityTrustUrl(image.webPath);
     console.log('taken image by camera  :' + this.profileImage);

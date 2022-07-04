@@ -113,9 +113,13 @@ export class RegisterPage implements OnInit {
             if (data.key == 1) {
               console.log('register res :' + JSON.stringify(data));
               this.util.showMessage(data.msg);
-              this.auth.userID.next(data.data.id);
-              this.auth.storeStatusAfterRegisteration(data);
-              this.router.navigateByUrl(`/verification-code/${data.data.id}`);
+             
+              setTimeout(() => {
+                this.auth.userID.next(data.data.id);
+                this.auth.storeStatusAfterRegisteration(data);  
+                this.router.navigateByUrl(`/verification-code/${data.data.id}`);
+              }, 2000);
+              
               this.registerForm.reset();
             } else {
               this.util.showMessage(data.msg);

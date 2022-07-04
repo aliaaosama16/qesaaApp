@@ -508,7 +508,7 @@ ion-tabs {
 // }
 
 .my-custom-modal {
-  --border-radius: 20px;
+  --border-radius: 20px !important;
   //--backdrop-opacity: 0.;
   --min-height: 10vh;
   --max-height: 37vh;

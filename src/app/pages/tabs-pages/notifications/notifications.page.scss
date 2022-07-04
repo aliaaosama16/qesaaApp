@@ -1,5 +1,5 @@
 ion-item-sliding {
-  border-radius: var(--custom-border-10-radius);
+  border-radius: var(--custom-border-10-radius) !important;
   box-shadow: var(--custom-box-shadow);
   ion-item {
     --inner-padding-end: 0 !important;

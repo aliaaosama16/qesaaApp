@@ -22,6 +22,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { IonIntlTelInputModule } from 'ion-intl-tel-input';
 import { LaunchNavigator, LaunchNavigatorOptions } from '@awesome-cordova-plugins/launch-navigator/ngx';
+import { NativeGeocoder, NativeGeocoderResult, NativeGeocoderOptions } from '@awesome-cordova-plugins/native-geocoder/ngx';
 
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, 'assets/i18n/', '.json');
@@ -57,7 +58,8 @@ export function createTranslateLoader(http: HttpClient) {
       useClass: InterceptorService,
       multi: true,
     },
-    LaunchNavigator
+    LaunchNavigator,
+    NativeGeocoder
   ],
   bootstrap: [AppComponent],
 })

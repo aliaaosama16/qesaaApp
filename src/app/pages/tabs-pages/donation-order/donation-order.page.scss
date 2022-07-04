@@ -5,7 +5,7 @@
     background: none !important;
     height: 167px;
     margin-top: 10px;
-    border-radius: 20px;
+    border-radius: 20px !important;
 
     //background: none !important;
   }
@@ -19,7 +19,7 @@
     justify-content: center;
     align-items: center;
     border: 1px dashed var(--ion-color-secondary);
-    border-radius: 20px;
+    border-radius: 20px !important;
     height: 117px;
     margin-top: 6px;
     img {

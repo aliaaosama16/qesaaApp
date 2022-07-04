@@ -24,6 +24,7 @@ import { AuthResponse, RegisterData } from 'src/app/models/auth';
 import { Router } from '@angular/router';
 import { UserType } from 'src/app/models/userType';
 import { TranslateService } from '@ngx-translate/core';
+import { ActionSheetController } from '@ionic/angular';
 const IMAGE_DIR = 'stored-images';
 
 @Component({
@@ -41,15 +42,16 @@ export class SupportProductiveFamiliesPage implements OnInit {
   constructor(
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
-    private langaugeservice:LanguageService,
+    private langaugeservice: LanguageService,
     private sanitizer: DomSanitizer,
-    private router:Router,
+    private router: Router,
     private general: GeneralService,
     private uploadImage: UploadImageService,
     private util: UtilitiesService,
     private dataService: DataService,
-    private auth:AuthService,
-    private translate:TranslateService
+    private auth: AuthService,
+    private translate: TranslateService,
+    private actionSheetController: ActionSheetController
   ) {}
 
   ngOnInit() {
@@ -85,27 +87,69 @@ export class SupportProductiveFamiliesPage implements OnInit {
     });
   }
 
-  async attachBasicImage() {
+  async attachImageActionSheet(imageType: string) {
+    const actionSheet = await this.actionSheetController.create({
+      header: this.translate.instant('get photo'),
+      cssClass: 'my-custom-class',
+      buttons: [
+        {
+          text: this.translate.instant('from gallery'),
+          role: 'destructive',
+          id: 'delete-button',
+          data: {
+            type: 'delete',
+          },
+          handler: () => {
+            console.log('gallery clicked');
+            if (imageType == 'basic') {
+              this.attachBasicImage(CameraSource.Photos);
+            } else {
+              this.attachProductImage(CameraSource.Photos);
+            }
+          },
+        },
+        {
+          text: this.translate.instant('from camera'),
+          data: 10,
+          handler: () => {
+            console.log('camera clicked');
+            if (imageType == 'basic') {
+              this.attachBasicImage(CameraSource.Camera);
+            } else {
+              this.attachProductImage(CameraSource.Camera);
+            }
+          },
+        },
+      ],
+    });
+    await actionSheet.present();
+
+    const { role, data } = await actionSheet.onDidDismiss();
+    console.log('onDidDismiss resolved with role and data', role, data);
+  }
+
+  async attachBasicImage(source: CameraSource) {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Uri,
+      source: source,
     });
     this.basicImage = this.sanitizer.bypassSecurityTrustUrl(image.webPath);
     console.log('taken image by camera  :' + this.basicImage);
-    await this.uploadImage.getImageConverted(image,'basic');
+    await this.uploadImage.getImageConverted(image, 'basic');
   }
 
-  async attachProductImage() {
+  async attachProductImage(source: CameraSource) {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
       resultType: CameraResultType.Uri,
+      source: source,
     });
     this.productImage = this.sanitizer.bypassSecurityTrustUrl(image.webPath);
     console.log('taken image by camera  :' + this.basicImage);
-    await this.uploadImage.getImageConverted(image,'product');
-   
+    await this.uploadImage.getImageConverted(image, 'product');
   }
 
   getAllCities() {
@@ -160,42 +204,43 @@ export class SupportProductiveFamiliesPage implements OnInit {
 
   // support productive families
   addProduct() {
-    this.productAdditionForm.value.basicImage = this.general.getFamiliesBasicImage();
+    this.productAdditionForm.value.basicImage =
+      this.general.getFamiliesBasicImage();
     console.log('bsic image  :' + this.general.getFamiliesBasicImage());
-    this.productAdditionForm.value.productImage = this.general.getFamiliesProductImage();
-    console.log(
-      'product image  :' + this.general.getFamiliesProductImage()
-    );
+    this.productAdditionForm.value.productImage =
+      this.general.getFamiliesProductImage();
+    console.log('product image  :' + this.general.getFamiliesProductImage());
     console.log(
       'support productive families ' +
         JSON.stringify(this.productAdditionForm.value)
     );
 
-    
-  
-    const registerData:RegisterData = {
-      user_type:UserType.market,
+    const registerData: RegisterData = {
+      user_type: UserType.market,
       lang: this.langaugeservice.getLanguage(),
-      first_name: this.productAdditionForm.value.userName, 
+      first_name: this.productAdditionForm.value.userName,
       phone: this.productAdditionForm.value.phoneNumber,
       password: '123456',
-      city_id:this.productAdditionForm.value.city,
-      neighborhood_id:this.productAdditionForm.value.neighborhood,
-      avatar:this.general.getFamiliesBasicImage(),
-      license_image:this.general.getFamiliesProductImage()
+      city_id: this.productAdditionForm.value.city,
+      neighborhood_id: this.productAdditionForm.value.neighborhood,
+      avatar: this.general.getFamiliesBasicImage(),
+      license_image: this.general.getFamiliesProductImage(),
     };
     this.util.showLoadingSpinner().then((__) => {
       this.auth.register(registerData).subscribe(
         (data: AuthResponse) => {
           if (data.key == 1) {
             console.log('registerFamily res :' + JSON.stringify(data));
-            this.util.showMessage(this.translate.instant('family created successfully')).then((_)=>{
+            this.util.showMessage(
+              this.translate.instant('family created successfully')
+            );
+
+            setTimeout(() => {
               this.router.navigateByUrl('/tabs/home/families');
-            });
+            }, 2000);
+
             // this.auth.userID.next(data.data.id);
             // this.auth.storeStatusAfterRegisteration(data);
-            
-            
           } else {
             this.util.showMessage(data.msg);
           }
@@ -211,5 +256,4 @@ export class SupportProductiveFamiliesPage implements OnInit {
   inputHaveFocused(inputFocusStatus) {
     this.util.inputStatus(inputFocusStatus);
   }
-
 }

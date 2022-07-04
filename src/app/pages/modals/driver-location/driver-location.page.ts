@@ -18,7 +18,7 @@ export class DriverLocationPage implements OnInit {
   // lat: number = 31;
   // long: number = 31;
   infowindow = new google.maps.InfoWindow();
-  userType: string;
+  //userType: string;
   constructor(
     private plt: Platform,
     private launchNavigator: LaunchNavigator,
@@ -29,7 +29,7 @@ export class DriverLocationPage implements OnInit {
     //   lat: 31,
     //   lng: 31,
     // };
-    this.userType = this.auth.userType.value;
+    // this.userType = this.auth.userType.value;
   }
 
   // async createMap() {
@@ -108,6 +108,14 @@ export class DriverLocationPage implements OnInit {
       animation: google.maps.Animation.DROP,
       icon: './../../../../assets/icon/location_pin.svg',
     });
+
+    if (this.auth.userType.value == 'provider') {
+      google.maps.event.addListener(this.home, 'click', (event) => {
+        console.log('marker clicked');
+        this.trackOnMap();
+        // let opt
+      });
+    }
   }
   trackOnMap() {
     // let options: LaunchNavigatorOptions = {
@@ -143,5 +151,4 @@ export class DriverLocationPage implements OnInit {
         });
       });
   }
-
 }

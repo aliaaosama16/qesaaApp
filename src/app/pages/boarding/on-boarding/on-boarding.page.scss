@@ -3,9 +3,10 @@ mat-toolbar {
   height: calc(56px + env(safe-area-inset-top));
 }
 
-ion-toolbar{
-  --border-color	:var(--ion-color-secondary) !important;
-  --border-width:1px !important;
+ion-toolbar {
+  --border-color: var(--ion-color-secondary) !important;
+  --border-width: 1px !important;
+  height: 30px;
 }
 
 ion-content {
@@ -20,11 +21,18 @@ ion-content {
       justify-content: space-between;
       flex-direction: column;
       height: 100% !important;
-      grid-template-rows:2fr 4fr 1fr 2fr;
+      grid-template-rows: 2fr 7fr 1fr;
       .slide-mage {
         img {
           width: 100%;
         }
+      }
+
+      .intro-description {
+        // overflow-y: scroll;
+        // height: 124px;
+        margin: 12px 0 16px 0 ;
+        
       }
 
       .indicators {
@@ -59,7 +67,7 @@ ion-content {
           img {
             height: 100%;
           }
-          .img-en{
+          .img-en {
             transform: rotateY(3.142rad) !important;
           }
 
@@ -71,7 +79,7 @@ ion-content {
 
           .skip-text-en {
             top: 40%;
-            right:  10%;
+            right: 10%;
             position: absolute;
           }
         }

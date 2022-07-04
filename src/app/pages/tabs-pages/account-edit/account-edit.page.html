@@ -6,7 +6,7 @@
 ></app-header>
 
 <ion-content class="ion-padding-horizontal">
-  <div class="user-image ion-text-center" (click)="attachBasicImage()">
+  <div class="user-image ion-text-center" (click)="presentActionSheet()">
     <ion-avatar>
       <img *ngIf="profileImage!=''" [src]="profileImage" />
       <img

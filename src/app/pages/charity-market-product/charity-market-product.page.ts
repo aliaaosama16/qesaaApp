@@ -73,10 +73,11 @@ export class CharityMarketProductPage implements OnInit {
           if (data.key == 1) {
             //this.productDetails = data.data;
             console.log('get priduct by  :' + this.productDetails);
-            this.util.showMessage(data.msg).then((_) => {
+            this.util.showMessage(data.msg);
+            setTimeout(() => {
               this.sectionsService.setCartCount();
-              //this.router.navigateByUrl('/tabs/home/market/products');
-            });
+            }, 2000);
+           
           } else {
             this.util.showMessage(data.msg);
           }

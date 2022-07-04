@@ -54,7 +54,11 @@ export class ForgetPasswordPage implements OnInit {
             if (data.key == 1) {
               console.log('forget password res :' + JSON.stringify(data));
               this.util.showMessage(data.msg);
-              this.router.navigateByUrl('/change-password/' + data.data.id);
+
+              setTimeout(() => {
+                this.router.navigateByUrl('/change-password/' + data.data.id);
+              }, 2000);
+              
             } else {
               this.util.showMessage(data.msg);
             }

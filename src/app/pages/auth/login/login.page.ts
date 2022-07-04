@@ -104,9 +104,10 @@ export class LoginPage implements OnInit {
               !data.data.is_active ||
               (data.data.is_active && !data.data.is_login)
             ) {
-              this.util.showMessage(data.msg).then(() => {
+              this.util.showMessage(data.msg);
+              setTimeout(() => {
                 this.router.navigateByUrl(`/verification-code/${data.data.id}`);
-              });
+              }, 2000);
             }
           } else {
             this.util.showMessage(data.msg);

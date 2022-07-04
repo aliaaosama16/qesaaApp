@@ -114,6 +114,12 @@
       <div #map class="map-container"></div>
     </div>
 
+    <!-- <div class="ion-margin-bottom">
+      <p class="ion-no-margin fn-16 qesaa-Janna-Bold">
+        العنوان هو {{address}}
+      </p>
+    </div> -->
+
     <div class="request-time">
       <p class="ion-no-margin fn-16 qesaa-Janna-Regular">
         {{"request-date"|translate}}
@@ -188,7 +194,7 @@
 
       <div class="image-container">
         <div
-          (click)="attachImage()"
+          (click)="presentActionSheet()"
           *ngIf="requestImage==''"
           class="ion-text-center"
         >

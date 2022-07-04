@@ -70,10 +70,11 @@ export class VerificationCodePage implements OnInit {
         (data: AuthResponse) => {
           if (data.key == 1) {
             console.log('activeAccount  res :' + JSON.stringify(data));
-            this.util.showMessage(data.msg).then(()=>{
+            this.util.showMessage(data.msg);
+            setTimeout(() => {
               this.router.navigateByUrl('/tabs');
-              this.codeValues = '';
-            });
+            }, 2000);
+           
            
           } else {
             this.util.showMessage(data.msg).then(()=>{

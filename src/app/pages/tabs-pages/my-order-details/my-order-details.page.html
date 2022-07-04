@@ -243,6 +243,20 @@
     *ngIf=" orderDetails?.status==  'in_way' "
   >
     <ion-button
+      (click)="contactWithWhatsapp()"
+      color="primary"
+      expand="block"
+      class="fn-20 qesaa-Janna-Bold"
+    >
+    {{ "contact with driver via whatsapp"|translate}}
+    </ion-button>
+  </div>
+
+    <div
+    class="ion-padding-horizontal ion-margin-bottom"
+    *ngIf=" orderDetails?.status==  'in_way' "
+  >
+    <ion-button
       (click)="clientTrack()"
       color="primary"
       expand="block"

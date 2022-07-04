@@ -33,7 +33,7 @@ export class InterceptorService {
     if (error.status === 0) {
       // A client-side or network error occurred. Handle it accordingly.
       console.error('An error occurred:', error.error);
-      this.util.showMessage(error.statusText=='UnKnown Error'?this.transalte.instant("error occurs"):'');
+      this.util.showMessage(error.statusText);// =='UnKnown Error'?this.transalte.instant("error occurs"):''
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
