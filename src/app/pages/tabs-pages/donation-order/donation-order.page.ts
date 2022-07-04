@@ -61,6 +61,9 @@ export class DonationOrderPage implements OnInit {
   requestDate = '';
   inputFocused: boolean = false;
   address: string;
+  city: GeneralSectionResponse;
+  neighborhood: GeneralSectionResponse;
+  noNeighborhoods: boolean = true;
   constructor(
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
@@ -254,7 +257,6 @@ export class DonationOrderPage implements OnInit {
   }
 
   addMarker(lat, lng) {
-    
     let latLng = new google.maps.LatLng(lat, lng);
 
     this.home = new google.maps.Marker({
@@ -332,19 +334,26 @@ export class DonationOrderPage implements OnInit {
   }
 
   chooseCity($event) {
+    console.log('city  : ' + $event?.value?.id);
     this.donationForm.value.neighborhood = '';
     const cityData: CitysData = {
       lang: this.languageService.getLanguage(),
       user_id: this.auth.userID.value,
-      city_id: $event.target.value,
+      city_id: $event?.value?.id,
     };
-    this.donationForm.value.city = $event.target.value;
+    this.donationForm.value.city = $event?.value?.id;
     this.util.showLoadingSpinner().then((__) => {
       this.dataService.getNeighborhoods(cityData).subscribe(
         (data: CitysResponse) => {
           this.util.dismissLoading();
           if (data.key == 1) {
-            this.neighborhoods = data.data;
+            if (data.data.length == 0) {
+              this.noNeighborhoods = false;
+              this.donationForm.value.neighborhood='';
+            } else {
+              this.noNeighborhoods = true;
+              this.neighborhoods = data.data;
+            }
           } else {
             this.util.showMessage(data.msg);
           }
@@ -357,8 +366,8 @@ export class DonationOrderPage implements OnInit {
   }
 
   chooseNeighborhood($event) {
-    console.log('Neighborhood : ' + $event.target.value);
-    this.donationForm.value.neighborhood = $event.target.value;
+    console.log('Neighborhood : ' + $event?.value?.id);
+    this.donationForm.value.neighborhood = $event?.value?.id;
   }
 
   getUserData(userData: UserData) {
@@ -381,15 +390,15 @@ export class DonationOrderPage implements OnInit {
     this.donationForm.value.image = this.general.getDonationImage();
 
     console.log('donation form : ' + JSON.stringify(this.donationForm.value));
-    if(this.donationForm.value.neighborhood!=''){
+    if (this.donationForm.value.neighborhood != '') {
       const storeOrderData: StoreOrderData = {
         lang: this.languageService.getLanguage(),
         user_id: this.auth.userID.value,
         type: StoreOrderType.volunteer,
         name: this.donationForm.value.userName,
         phone: this.donationForm.value.phoneNumber,
-        city_id: this.donationForm.value.city,
-        neighborhood_id: this.donationForm.value.neighborhood,
+        city_id: this.donationForm.value.city.id,
+        neighborhood_id: this.donationForm.value.neighborhood.id,
         lat: this.lat,
         lng: this.long,
         date: moment(this.donationForm.value.requestDate).format('YYYY-MM-DD'),
@@ -398,38 +407,37 @@ export class DonationOrderPage implements OnInit {
         image: this.general.getDonationImage(),
       };
 
-
-    console.log(' storeOrderData  ' + JSON.stringify(storeOrderData));
-    this.util.showLoadingSpinner().then((__) => {
-      this.sectionsService.storeOrder(storeOrderData).subscribe(
-        (data: GeneralResponse) => {
-          if (data.key == 1) {
-            // this.util.showMessage(data.msg).then((_) => {
-            this.showOrderNotice();
-            // });
-          } else {
-            if (data.msg == 'neighborhood id مطلوب') {
-              this.util.showMessage('enter city ');
+      console.log(' storeOrderData  ' + JSON.stringify(storeOrderData));
+      this.util.showLoadingSpinner().then((__) => {
+        this.sectionsService.storeOrder(storeOrderData).subscribe(
+          (data: GeneralResponse) => {
+            if (data.key == 1) {
+              // this.util.showMessage(data.msg).then((_) => {
+              this.showOrderNotice();
+              // });
             } else {
-              this.util.showMessage(data.msg);
+              if (data.msg == 'neighborhood id مطلوب') {
+                this.util.showMessage('enter city ');
+              } else {
+                this.util.showMessage(data.msg);
+              }
             }
+            this.util.dismissLoading();
+          },
+          (err) => {
+            this.util.dismissLoading();
           }
-          this.util.dismissLoading();
-        },
-        (err) => {
-          this.util.dismissLoading();
-        }
-      );
-    });
-    }else{
+        );
+      });
+    } else {
       const storeOrderData: StoreOrderData = {
         lang: this.languageService.getLanguage(),
         user_id: this.auth.userID.value,
         type: StoreOrderType.volunteer,
         name: this.donationForm.value.userName,
         phone: this.donationForm.value.phoneNumber,
-        city_id: this.donationForm.value.city,
-        
+        city_id: this.donationForm.value.city.id,
+
         lat: this.lat,
         lng: this.long,
         date: moment(this.donationForm.value.requestDate).format('YYYY-MM-DD'),
@@ -438,31 +446,29 @@ export class DonationOrderPage implements OnInit {
         image: this.general.getDonationImage(),
       };
 
-
-    console.log(' storeOrderData  ' + JSON.stringify(storeOrderData));
-    this.util.showLoadingSpinner().then((__) => {
-      this.sectionsService.storeOrder(storeOrderData).subscribe(
-        (data: GeneralResponse) => {
-          if (data.key == 1) {
-            // this.util.showMessage(data.msg).then((_) => {
-            this.showOrderNotice();
-            // });
-          } else {
-            if (data.msg == 'neighborhood id مطلوب') {
-              this.util.showMessage('enter city ');
+      console.log(' storeOrderData  ' + JSON.stringify(storeOrderData));
+      this.util.showLoadingSpinner().then((__) => {
+        this.sectionsService.storeOrder(storeOrderData).subscribe(
+          (data: GeneralResponse) => {
+            if (data.key == 1) {
+              // this.util.showMessage(data.msg).then((_) => {
+              this.showOrderNotice();
+              // });
             } else {
-              this.util.showMessage(data.msg);
+              if (data.msg == 'neighborhood id مطلوب') {
+                this.util.showMessage('enter city ');
+              } else {
+                this.util.showMessage(data.msg);
+              }
             }
+            this.util.dismissLoading();
+          },
+          (err) => {
+            this.util.dismissLoading();
           }
-          this.util.dismissLoading();
-        },
-        (err) => {
-          this.util.dismissLoading();
-        }
-      );
-    });
+        );
+      });
     }
-   
   }
 
   async showOrderNotice() {

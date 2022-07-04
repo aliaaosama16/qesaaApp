@@ -59,7 +59,7 @@
         src="./../../../../assets/icon/donate/location-inactive.svg"
       ></ion-icon>
 
-      <ion-select
+      <!-- <ion-select
         formControlName="city"
         (ionChange)="chooseCity($event)"
         placeholder="{{'city'|translate}}"
@@ -75,7 +75,18 @@
         >
           {{city.title|translate}}
         </ion-select-option>
-      </ion-select>
+      </ion-select> -->
+
+      <ionic-selectable
+        formControlName="city"
+        [items]="cities"
+        itemValueField="id"
+        itemTextField="title"
+        [canSearch]="true"
+        (onChange)="chooseCity($event)"
+        placeholder="{{'city'|translate}}"
+      >
+      </ionic-selectable>
     </ion-item>
 
     <ion-item lines="none" class="ion-margin-bottom">
@@ -87,7 +98,7 @@
         src="./../../../../assets/icon/donate/location-inactive.svg"
       ></ion-icon>
 
-      <ion-select
+      <!-- <ion-select
         formControlName="neighborhood"
         (ionChange)="chooseNeighborhood($event)"
         placeholder="{{'the area or neighborhood'|translate}}"
@@ -103,7 +114,19 @@
         >
           {{neighborhood.title}}
         </ion-select-option>
-      </ion-select>
+      </ion-select>-->
+
+      <ionic-selectable
+        formControlName="neighborhood"
+        [items]="neighborhoods"
+        itemValueField="id"
+        itemTextField="title"
+        [canSearch]="true"
+        (onChange)="chooseNeighborhood($event)"
+        placeholder="{{'the area or neighborhood'|translate}}"
+        [isEnabled]="noNeighborhoods"
+      >
+      </ionic-selectable>
     </ion-item>
 
     <div class="map-location ion-margin-bottom">
@@ -204,10 +227,7 @@
             {{"attach request image"|translate}}
           </p>
         </div>
-        <img
-          *ngIf="requestImage!=''"
-          [src]="requestImage"
-        />
+        <img *ngIf="requestImage!=''" [src]="requestImage" />
       </div>
     </div>
 

@@ -6,6 +6,10 @@
 ></app-header>
 
 <ion-content class="ion-padding-horizontal" *ngIf="orderDetails">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <div class="order-details ion-padding">
     <div class="request-data">
       <div class="text primary-color fn-16 qesaa-Janna-Bold">
@@ -37,12 +41,12 @@
         {{'cleint-name'|translate}}
       </div>
       <div class="value fn-16 qesaa-Janna-Regular">
-        {{ orderType=='volunteers'? orderDetails?.name :
-        orderDetails.user_name}}
+        {{ orderDetails.type=='volunteer'? orderDetails?.name :
+        orderDetails?.user_name}}
       </div>
     </div>
 
-    <div class="client-data" *ngIf="orderType=='volunteers'">
+    <div class="client-data" *ngIf="orderDetails.type=='volunteer'">
       <div class="text primary-color fn-16 qesaa-Janna-Bold">
         {{'city'|translate}}
       </div>
@@ -60,7 +64,7 @@
       </div>
     </div>
 
-    <div class="client-data" *ngIf="orderType=='volunteers'">
+    <div class="client-data" *ngIf="orderDetails.type=='volunteer'">
       <div class="text primary-color fn-16 qesaa-Janna-Bold">
         {{'the area or neighborhood'|translate}}
       </div>
@@ -81,7 +85,7 @@
 
   <div
     class="order-images"
-    *ngIf="orderDetails?.type=='volunteer' && orderDetails?.image"
+    *ngIf="orderDetails.type=='volunteer' && orderDetails?.image"
   >
     <p class="title ion-no-margin fn-16 qesaa-Janna-Bold">
       {{"order images"|translate}}

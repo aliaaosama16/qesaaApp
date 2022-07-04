@@ -87,7 +87,6 @@ export class MyOrderDetailsPage implements OnInit {
       componentProps: {
         lat: this.orderDetails.provider_lat,
         lng: this.orderDetails.provider_lng,
-        
       },
       initialBreakpoint: 0.75,
       breakpoints: [0, 0.5, 0.75, 1],
@@ -176,6 +175,28 @@ export class MyOrderDetailsPage implements OnInit {
     console.log(this.orderDetails?.provider_full_phone);
     window.open(
       `https://api.whatsapp.com/send?phone=+${this.orderDetails?.provider_full_phone}&text=hi`
+    );
+  }
+
+  doRefresh($event) {
+    //
+
+    const orderData: OrderData = {
+      lang: this.languageService.getLanguage(),
+      user_id: this.auth.userID.value,
+      order_id: parseInt(this.activatedRoute.snapshot.paramMap.get('id')),
+    };
+
+    this.orderService.showOrderByOederID(orderData).subscribe(
+      (data: OrderResponse) => {
+        if (data.key == 1) {
+          this.orderDetails = data.data;
+        }
+        $event.target.complete();
+      },
+      (err) => {
+        $event.target.complete();
+      }
     );
   }
 }
