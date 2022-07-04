@@ -85,7 +85,7 @@ export class OurPresencePage implements OnInit {
 
     let mapOptions: google.maps.MapOptions = {
       center: latLng,
-      zoom: 14,
+      zoom:5,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       styles: styles,
       mapTypeControl: false,
@@ -106,7 +106,7 @@ export class OurPresencePage implements OnInit {
   focusMap(lat, lng) {
     let latLng = new google.maps.LatLng(lat, lng);
     this.map.setCenter(latLng);
-    this.map.setZoom(12);
+    this.map.setZoom(5);
   }
 
   addMarker(lat, lng, title) {
@@ -123,9 +123,9 @@ export class OurPresencePage implements OnInit {
     let infoWindow = new google.maps.InfoWindow({
       content: title
     });
-    this.home.addListener('click', () => {
-      infoWindow.open(this.map, this.home);
-    });
+    // this.home.addListener('click', () => {
+    //   infoWindow.open(this.map, this.home);
+    // });
   
   }
 }
