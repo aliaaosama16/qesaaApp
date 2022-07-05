@@ -64,6 +64,7 @@ export class DonationOrderPage implements OnInit {
   city: GeneralSectionResponse;
   neighborhood: GeneralSectionResponse;
   noNeighborhoods: boolean = true;
+  selectNeighborhood: boolean = false;
   constructor(
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
@@ -334,6 +335,7 @@ export class DonationOrderPage implements OnInit {
   }
 
   chooseCity($event) {
+    this.selectNeighborhood=false;
     console.log('city  : ' + $event?.value?.id);
     this.donationForm.value.neighborhood = '';
     const cityData: CitysData = {
@@ -368,6 +370,7 @@ export class DonationOrderPage implements OnInit {
   chooseNeighborhood($event) {
     console.log('Neighborhood : ' + $event?.value?.id);
     this.donationForm.value.neighborhood = $event?.value?.id;
+    this.selectNeighborhood=true;
   }
 
   getUserData(userData: UserData) {
@@ -390,7 +393,8 @@ export class DonationOrderPage implements OnInit {
     this.donationForm.value.image = this.general.getDonationImage();
 
     console.log('donation form : ' + JSON.stringify(this.donationForm.value));
-    if (this.donationForm.value.neighborhood != '') {
+    if (this.donationForm.value.neighborhood != '' && this.selectNeighborhood==true) {
+      console.log('there is  neighborhood')
       const storeOrderData: StoreOrderData = {
         lang: this.languageService.getLanguage(),
         user_id: this.auth.userID.value,
@@ -430,14 +434,14 @@ export class DonationOrderPage implements OnInit {
         );
       });
     } else {
+      console.log('there is  no neighborhood')
       const storeOrderData: StoreOrderData = {
         lang: this.languageService.getLanguage(),
         user_id: this.auth.userID.value,
         type: StoreOrderType.volunteer,
         name: this.donationForm.value.userName,
         phone: this.donationForm.value.phoneNumber,
-        city_id: this.donationForm.value.city.id,
-
+        city_id: this.donationForm.value.city,
         lat: this.lat,
         lng: this.long,
         date: moment(this.donationForm.value.requestDate).format('YYYY-MM-DD'),
@@ -462,6 +466,7 @@ export class DonationOrderPage implements OnInit {
               }
             }
             this.util.dismissLoading();
+            //this.donationForm.reset()
           },
           (err) => {
             this.util.dismissLoading();

@@ -76,7 +76,6 @@
           {{city.title|translate}}
         </ion-select-option>
       </ion-select> -->
-
       <ionic-selectable
         formControlName="city"
         [items]="cities"
@@ -85,6 +84,7 @@
         [canSearch]="true"
         (onChange)="chooseCity($event)"
         placeholder="{{'city'|translate}}"
+        closeButtonText="{{'cancel'|translate}}"
       >
       </ionic-selectable>
     </ion-item>
@@ -125,6 +125,7 @@
         (onChange)="chooseNeighborhood($event)"
         placeholder="{{'the area or neighborhood'|translate}}"
         [isEnabled]="noNeighborhoods"
+       closeButtonText="{{'cancel'|translate}}"
       >
       </ionic-selectable>
     </ion-item>

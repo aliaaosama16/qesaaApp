@@ -10,11 +10,13 @@ import { UtilitiesService } from './services/utilities/utilities.service';
 import { Share } from '@capacitor/share';
 import { LogOutData, Status } from './models/auth';
 import { Storage } from '@capacitor/storage';
-import { GeneralResponse } from './models/general';
+import { GeneralResponse, UserData } from './models/general';
 import { interval } from 'rxjs';
 //import { SplashScreen } from '@capacitor/splash-screen';
 import { CallbackID, Geolocation, Position } from '@capacitor/geolocation';
 import { SplashScreen } from '@capacitor/splash-screen';
+import { AppData } from './models/data';
+import { DataService } from './services/data/data.service';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +34,8 @@ export class AppComponent {
   logoutData: LogOutData;
   currentPlatform: string;
   splash: boolean = false;
+  marfoofLink: string;
+
   pages = [
     {
       title: 'about',
@@ -114,7 +118,8 @@ export class AppComponent {
     private router: Router,
     private auth: AuthService,
     private sectionsService: SectionsProductsService,
-    private providerService: ProviderService
+    private providerService: ProviderService,
+    private dataService: DataService
   ) {
     this.initializeApp();
 
@@ -129,7 +134,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       setTimeout(() => {
         SplashScreen.hide();
-      },50);
+      }, 50);
 
       this.languageService.setInitialAppLanguage();
 
@@ -206,5 +211,28 @@ export class AppComponent {
     } else {
       this.router.navigateByUrl(url);
     }
+  }
+
+  getMaroofLink() {
+    const userData: UserData = {
+      lang: this.languageService.getLanguage(),
+    };
+    this.util.showLoadingSpinner().then((__) => {
+      this.dataService.appData(userData).subscribe(
+        (data: AppData) => {
+          this.util.dismissLoading();
+          if (data.key == 1) {
+            //this.marfoofLink = data.maroof;
+            window.open(data?.maroof)
+          } else {
+            this.util.showMessage(data.msg);
+          }
+        },
+        (err) => {
+          this.util.dismissLoading();
+        }
+      );
+    });
+    
   }
 }
