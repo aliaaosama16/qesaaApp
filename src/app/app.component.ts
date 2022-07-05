@@ -3,7 +3,7 @@ import { ProviderService } from './services/provider/provider.service';
 import { SectionsProductsService } from 'src/app/services/sections-products/sections-products.service';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { AuthService } from './services/auth/auth.service';
 import { LanguageService } from './services/language/language.service';
 import { UtilitiesService } from './services/utilities/utilities.service';
@@ -17,6 +17,7 @@ import { CallbackID, Geolocation, Position } from '@capacitor/geolocation';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { AppData } from './models/data';
 import { DataService } from './services/data/data.service';
+import { OneSignal } from '@awesome-cordova-plugins/onesignal/ngx';
 
 @Component({
   selector: 'app-root',
@@ -73,12 +74,12 @@ export class AppComponent {
       iconActive: './../assets/icon/menu-icons/donate-active.svg',
       iconInActive: './../assets/icon/menu-icons/volunteer.svg',
     },
-    {
-      title: 'Supporting productive families',
-      url: '/tabs/support-productive-families',
-      iconActive: './../assets/icon/menu-icons/families-active.svg',
-      iconInActive: './../assets/icon/menu-icons/families-inactive.svg',
-    },
+    // {
+    //   title: 'Supporting productive families',
+    //   url: '/tabs/support-productive-families',
+    //   iconActive: './../assets/icon/menu-icons/families-active.svg',
+    //   iconInActive: './../assets/icon/menu-icons/families-inactive.svg',
+    // },
     {
       title: 'share app',
       url: 'share',
@@ -119,7 +120,9 @@ export class AppComponent {
     private auth: AuthService,
     private sectionsService: SectionsProductsService,
     private providerService: ProviderService,
-    private dataService: DataService
+    private dataService: DataService,
+    private oneSignal: OneSignal,
+    private alertCtrl:AlertController
   ) {
     this.initializeApp();
 
@@ -141,7 +144,7 @@ export class AppComponent {
       this.util.getPlatformType();
       this.util.getDeviceID();
 
-      // this.fcmService.initFcm();
+      this.setupPush();
 
       this.util.getUserLocation();
       this.getLoginStatus();
@@ -205,7 +208,7 @@ export class AppComponent {
 
   selectMenuItem(index, url) {
     this.selectedIndex = index;
-    if (index == 7) {
+    if (index ==6) {
       console.log('share app');
       this.shareApp();
     } else {
@@ -234,5 +237,47 @@ export class AppComponent {
       );
     });
     
+  }
+
+  setupPush() {
+
+    // I recommend to put these into your environment.ts
+    this.oneSignal.startInit('8a9d6d2b-bee7-4edd-b2e1-1b7ab872c521', '778904577393');
+ 
+    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
+ 
+    // Notifcation was received in general
+    this.oneSignal.handleNotificationReceived().subscribe(data => {
+      let msg = data.payload.body;
+      let title = data.payload.title;
+      let additionalData = data.payload.additionalData;
+      this.showAlert(title, msg, additionalData.task);
+    });
+ 
+    // Notification was really clicked/opened
+    this.oneSignal.handleNotificationOpened().subscribe(data => {
+      // Just a note that the data is a different place here!
+      let additionalData = data.notification.payload.additionalData;
+ 
+      this.showAlert('Notification opened', 'You already read this before', additionalData.task);
+    });
+ 
+    this.oneSignal.endInit();
+  }
+
+  async showAlert(title, msg, task) {
+    const alert = await this.alertCtrl.create({
+      header: title,
+      subHeader: msg,
+      buttons: [
+        {
+          text: `Action: ${task}`,
+          handler: () => {
+            // E.g: Navigate to a specific screen
+          }
+        }
+      ]
+    })
+    alert.present();
   }
 }

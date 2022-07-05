@@ -308,7 +308,7 @@ export class DonationOrderPage implements OnInit {
           result[0].locality +
           ' ' +
           result[0].postalCode;
-        console.log(this.address);
+          console.log('address : ' + this.address);
       })
       .catch((error: any) => console.log(error));
   }
@@ -335,7 +335,7 @@ export class DonationOrderPage implements OnInit {
   }
 
   chooseCity($event) {
-    this.selectNeighborhood=false;
+    this.selectNeighborhood = false;
     console.log('city  : ' + $event?.value?.id);
     this.donationForm.value.neighborhood = '';
     const cityData: CitysData = {
@@ -351,7 +351,7 @@ export class DonationOrderPage implements OnInit {
           if (data.key == 1) {
             if (data.data.length == 0) {
               this.noNeighborhoods = false;
-              this.donationForm.value.neighborhood='';
+              this.donationForm.value.neighborhood = '';
             } else {
               this.noNeighborhoods = true;
               this.neighborhoods = data.data;
@@ -370,7 +370,7 @@ export class DonationOrderPage implements OnInit {
   chooseNeighborhood($event) {
     console.log('Neighborhood : ' + $event?.value?.id);
     this.donationForm.value.neighborhood = $event?.value?.id;
-    this.selectNeighborhood=true;
+    this.selectNeighborhood = true;
   }
 
   getUserData(userData: UserData) {
@@ -389,90 +389,100 @@ export class DonationOrderPage implements OnInit {
   donate() {
     // this.donationForm.value.lat = this.util.userLocation.lat;
     // this.donationForm.value.lng = this.util.userLocation.lng;
+    if (this.lat != 0 && this.long != 0) {
+      this.donationForm.value.image = this.general.getDonationImage();
 
-    this.donationForm.value.image = this.general.getDonationImage();
+      console.log('donation form : ' + JSON.stringify(this.donationForm.value));
+      if (
+        this.donationForm.value.neighborhood != '' &&
+        this.selectNeighborhood == true
+      ) {
+        console.log('there is  neighborhood');
+        const storeOrderData: StoreOrderData = {
+          lang: this.languageService.getLanguage(),
+          user_id: this.auth.userID.value,
+          type: StoreOrderType.volunteer,
+          name: this.donationForm.value.userName,
+          phone: this.donationForm.value.phoneNumber,
+          city_id: this.donationForm.value.city.id,
+          neighborhood_id: this.donationForm.value.neighborhood.id,
+          lat: this.lat,
+          lng: this.long,
+          date: moment(this.donationForm.value.requestDate).format(
+            'YYYY-MM-DD'
+          ),
+          time: this.donationForm.value.requestTime,
+          notes: this.donationForm.value.notices,
+          image: this.general.getDonationImage(),
+        };
 
-    console.log('donation form : ' + JSON.stringify(this.donationForm.value));
-    if (this.donationForm.value.neighborhood != '' && this.selectNeighborhood==true) {
-      console.log('there is  neighborhood')
-      const storeOrderData: StoreOrderData = {
-        lang: this.languageService.getLanguage(),
-        user_id: this.auth.userID.value,
-        type: StoreOrderType.volunteer,
-        name: this.donationForm.value.userName,
-        phone: this.donationForm.value.phoneNumber,
-        city_id: this.donationForm.value.city.id,
-        neighborhood_id: this.donationForm.value.neighborhood.id,
-        lat: this.lat,
-        lng: this.long,
-        date: moment(this.donationForm.value.requestDate).format('YYYY-MM-DD'),
-        time: this.donationForm.value.requestTime,
-        notes: this.donationForm.value.notices,
-        image: this.general.getDonationImage(),
-      };
-
-      console.log(' storeOrderData  ' + JSON.stringify(storeOrderData));
-      this.util.showLoadingSpinner().then((__) => {
-        this.sectionsService.storeOrder(storeOrderData).subscribe(
-          (data: GeneralResponse) => {
-            if (data.key == 1) {
-              // this.util.showMessage(data.msg).then((_) => {
-              this.showOrderNotice();
-              // });
-            } else {
-              if (data.msg == 'neighborhood id مطلوب') {
-                this.util.showMessage('enter city ');
+        console.log(' storeOrderData  ' + JSON.stringify(storeOrderData));
+        this.util.showLoadingSpinner().then((__) => {
+          this.sectionsService.storeOrder(storeOrderData).subscribe(
+            (data: GeneralResponse) => {
+              if (data.key == 1) {
+                // this.util.showMessage(data.msg).then((_) => {
+                this.showOrderNotice();
+                // });
               } else {
-                this.util.showMessage(data.msg);
+                if (data.msg == 'neighborhood id مطلوب') {
+                  this.util.showMessage('enter city ');
+                } else {
+                  this.util.showMessage(data.msg);
+                }
               }
+              this.util.dismissLoading();
+            },
+            (err) => {
+              this.util.dismissLoading();
             }
-            this.util.dismissLoading();
-          },
-          (err) => {
-            this.util.dismissLoading();
-          }
-        );
-      });
-    } else {
-      console.log('there is  no neighborhood')
-      const storeOrderData: StoreOrderData = {
-        lang: this.languageService.getLanguage(),
-        user_id: this.auth.userID.value,
-        type: StoreOrderType.volunteer,
-        name: this.donationForm.value.userName,
-        phone: this.donationForm.value.phoneNumber,
-        city_id: this.donationForm.value.city,
-        lat: this.lat,
-        lng: this.long,
-        date: moment(this.donationForm.value.requestDate).format('YYYY-MM-DD'),
-        time: this.donationForm.value.requestTime,
-        notes: this.donationForm.value.notices,
-        image: this.general.getDonationImage(),
-      };
+          );
+        });
+      } else {
+        console.log('there is  no neighborhood');
+        const storeOrderData: StoreOrderData = {
+          lang: this.languageService.getLanguage(),
+          user_id: this.auth.userID.value,
+          type: StoreOrderType.volunteer,
+          name: this.donationForm.value.userName,
+          phone: this.donationForm.value.phoneNumber,
+          city_id: this.donationForm.value.city.id,
+          lat: this.lat,
+          lng: this.long,
+          date: moment(this.donationForm.value.requestDate).format(
+            'YYYY-MM-DD'
+          ),
+          time: this.donationForm.value.requestTime,
+          notes: this.donationForm.value.notices,
+          image: this.general.getDonationImage(),
+        };
 
-      console.log(' storeOrderData  ' + JSON.stringify(storeOrderData));
-      this.util.showLoadingSpinner().then((__) => {
-        this.sectionsService.storeOrder(storeOrderData).subscribe(
-          (data: GeneralResponse) => {
-            if (data.key == 1) {
-              // this.util.showMessage(data.msg).then((_) => {
-              this.showOrderNotice();
-              // });
-            } else {
-              if (data.msg == 'neighborhood id مطلوب') {
-                this.util.showMessage('enter city ');
+        console.log(' storeOrderData  ' + JSON.stringify(storeOrderData));
+        this.util.showLoadingSpinner().then((__) => {
+          this.sectionsService.storeOrder(storeOrderData).subscribe(
+            (data: GeneralResponse) => {
+              if (data.key == 1) {
+                // this.util.showMessage(data.msg).then((_) => {
+                this.showOrderNotice();
+                // });
               } else {
-                this.util.showMessage(data.msg);
+                if (data.msg == 'neighborhood id مطلوب') {
+                  this.util.showMessage('enter city ');
+                } else {
+                  this.util.showMessage(data.msg);
+                }
               }
+              this.util.dismissLoading();
+              //this.donationForm.reset()
+            },
+            (err) => {
+              this.util.dismissLoading();
             }
-            this.util.dismissLoading();
-            //this.donationForm.reset()
-          },
-          (err) => {
-            this.util.dismissLoading();
-          }
-        );
-      });
+          );
+        });
+      }
+    }else{
+      this.util.showMessage("please make sure gps is open")
     }
   }
 

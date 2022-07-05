@@ -86,3 +86,8 @@ export interface CitysData extends UserData {
 export interface CitysResponse extends GeneralResponse {
   data: GeneralSectionResponse[];
 }
+
+export interface LocationAddessResponse extends GeneralResponse {
+  data: string;
+}
+

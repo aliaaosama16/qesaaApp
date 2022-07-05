@@ -139,7 +139,7 @@
   "the area or neighborhood":"area or neighborhood",
   "order images":"order images",
   "order notices":"order notices",
-  "track driver":"track driver",
+  "track driver":"driver location",
   "contact with driver":"contact with driver",
   "notifications-settings":"notifications settings",
   "help-center":"help center",
@@ -205,5 +205,8 @@
   "enter city ":"enter neighborhood",
   "get photo": "get photo",
   "from gallery": "pick from gallery",
-  "from camera":"take photo from camera"
+  "from camera":"take photo from camera",
+  "address":"address",
+  "please make sure gps is open": "please make sure gps is open",
+  "track provider":"track provider"
 }

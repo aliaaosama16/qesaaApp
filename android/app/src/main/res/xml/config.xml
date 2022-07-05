@@ -6,6 +6,10 @@
     <param name="android-package" value="cordova.plugin.nativegeocoder.NativeGeocoder"/>
   </feature>
 
+  <feature name="OneSignalPush">
+    <param name="android-package" value="com.onesignal.cordova.OneSignalPush"/>
+  </feature>
+
   <feature name="LaunchNavigator">
     <param name="android-package" value="uk.co.workingedge.phonegap.plugin.LaunchNavigatorPlugin"/>
   </feature>

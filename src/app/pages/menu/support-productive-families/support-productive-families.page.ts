@@ -42,6 +42,7 @@ export class SupportProductiveFamiliesPage implements OnInit {
   city: GeneralSectionResponse;
   neighborhood: GeneralSectionResponse;
   noNeighborhoods: boolean = true;
+  selectNeighborhood: boolean = false;
   constructor(
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
@@ -178,6 +179,7 @@ export class SupportProductiveFamiliesPage implements OnInit {
   }
 
   chooseCity($event) {
+    this.selectNeighborhood=false;
     const cityData: CitysData = {
       lang: this.languageService.getLanguage(),
       user_id: this.auth.userID.value,
@@ -207,6 +209,7 @@ export class SupportProductiveFamiliesPage implements OnInit {
   }
 
   chooseNeighborhood($event) {
+    this.selectNeighborhood=true;
     console.log('Neighborhood : ' + $event.target.value);
     this.productAdditionForm.value.neighborhood =  $event?.value?.id;
   }

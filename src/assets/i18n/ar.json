@@ -139,7 +139,7 @@
   "the area or neighborhood": "المنطقة أو الحي",
   "order images": "صور الطلب",
   "order notices": "ملاحظات الطلب",
-  "track driver": "تتبع السائق",
+  "track driver": "موقع السائق",
   "contact with driver": "تواصل مع السائق ",
   "notifications-settings": "اعدادات التنبيهات",
   "help-center": "مركز المساعدة",
@@ -205,5 +205,9 @@
   "enter city ":" قم باختيار المنطقة",
   "get photo":"اخترالصورة",
   "from gallery":"من الالبوم",
-  "from camera":"التقط صورة بالكاميرا"
+  "from camera":"التقط صورة بالكاميرا",
+  "address":"العنوان",
+  "please make sure gps is open":"تاكد من تفعيل خدمة تشغيل الموقع",
+  "track provider":"تتبع السائق"
+  
 }

@@ -6,7 +6,6 @@
 ></app-header>
 
 <ion-content class="ion-padding-horizontal" *ngIf="orderDetails">
-
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -79,6 +78,16 @@
         *ngIf="currentlangauge=='en'"
       >
         {{orderDetails?.neighborhood_title_en}}
+      </div>
+    </div>
+
+    <div class="client-data" *ngIf="orderDetails.type=='volunteer'">
+      <div class="text primary-color fn-16 qesaa-Janna-Bold">
+        {{'address'|translate}}
+      </div>
+
+      <div class="value fn-16 qesaa-Janna-Regular" style="width: 50%">
+        {{address}}
       </div>
     </div>
   </div>
@@ -167,6 +176,20 @@
         {{ "track driver"|translate}}
       </ion-button>
     </div>
+
+    <div
+    class="ion-padding-horizontal ion-margin-bottom"
+    *ngIf=" orderDetails?.status==  'in_way' "
+  >
+    <ion-button
+      (click)="trackLocation(orderDetails?.provider_lat,orderDetails?.provider_lng)"
+      color="primary"
+      expand="block"
+      class="fn-20 qesaa-Janna-Bold"
+    >
+      {{ "track provider"|translate}}
+    </ion-button>
+  </div>
     <div
       class="ion-padding-horizontal ion-margin-bottom"
       *ngIf=" orderDetails?.status==  'in_way' "
@@ -195,6 +218,7 @@
     </div>
 
     <div
+      *ngIf="orderDetails?.provider_phone!=''"
       class="ion-padding-horizontal ion-text-center contact-conatiner ion-margin-horizontal"
     >
       <a
@@ -243,32 +267,45 @@
     </div>
 
     <div
-    class="ion-padding-horizontal ion-margin-bottom"
-    *ngIf=" orderDetails?.status==  'in_way' "
-  >
-    <ion-button
-      (click)="contactWithWhatsapp()"
-      color="primary"
-      expand="block"
-      class="fn-20 qesaa-Janna-Bold"
+      class="ion-padding-horizontal ion-margin-bottom"
+      *ngIf=" orderDetails?.status==  'in_way' "
     >
-    {{ "contact with driver via whatsapp"|translate}}
-    </ion-button>
-  </div>
+      <ion-button
+        (click)="contactWithWhatsapp()"
+        color="primary"
+        expand="block"
+        class="fn-20 qesaa-Janna-Bold"
+      >
+        {{ "contact with driver via whatsapp"|translate}}
+      </ion-button>
+    </div>
 
     <div
-    class="ion-padding-horizontal ion-margin-bottom"
-    *ngIf=" orderDetails?.status==  'in_way' "
-  >
-    <ion-button
-      (click)="clientTrack()"
-      color="primary"
-      expand="block"
-      class="fn-20 qesaa-Janna-Bold"
+      class="ion-padding-horizontal ion-margin-bottom"
+      *ngIf=" orderDetails?.status==  'in_way' "
     >
-      {{ "track client"|translate}}
-    </ion-button>
-  </div>
-    
+      <ion-button
+        (click)="clientTrack()"
+        color="primary"
+        expand="block"
+        class="fn-20 qesaa-Janna-Bold"
+      >
+        {{ "track client"|translate}}
+      </ion-button>
+    </div>
+
+    <div
+      class="ion-padding-horizontal ion-margin-bottom"
+      *ngIf=" orderDetails?.status==  'in_way' "
+    >
+      <ion-button
+        (click)="trackLocation(orderDetails?.lat,orderDetails?.lng)"
+        color="primary"
+        expand="block"
+        class="fn-20 qesaa-Janna-Bold"
+      >
+        {{ "track client location"|translate}}
+      </ion-button>
+    </div>
   </div>
 </ion-content>

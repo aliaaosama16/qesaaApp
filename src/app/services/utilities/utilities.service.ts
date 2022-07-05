@@ -168,7 +168,7 @@ export class UtilitiesService {
 
   async updateProviderLocation() {
     await Geolocation.watchPosition(
-      { enableHighAccuracy: true },
+      { enableHighAccuracy: true ,timeout:300000},
       (position: Position) => {
         console.log(
           'location :' +

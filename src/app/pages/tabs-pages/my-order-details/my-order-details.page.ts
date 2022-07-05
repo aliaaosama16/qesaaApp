@@ -13,6 +13,9 @@ import { CustomModalPage } from '../../modals/custom-modal/custom-modal.page';
 import { DataService } from 'src/app/services/data/data.service';
 import { ProviderService } from 'src/app/services/provider/provider.service';
 import { ChangeStatusData } from 'src/app/models/provider';
+import { LocationAddessResponse, UserLocation } from '../../../models/general';
+import { GeneralResponse } from 'src/app/models/general';
+import { LaunchNavigator } from '@awesome-cordova-plugins/launch-navigator/ngx';
 
 @Component({
   selector: 'app-my-order-details',
@@ -27,7 +30,7 @@ export class MyOrderDetailsPage implements OnInit {
   userType: string;
   orderMaps: string[] = ['in_way', 'finish', 'cancel'];
   orderStatus: string;
-
+  address: string;
   //   finish: false
   // in_way: false
   // new: true
@@ -42,7 +45,8 @@ export class MyOrderDetailsPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private auth: AuthService,
     private dataService: DataService,
-    private providerService: ProviderService
+    private providerService: ProviderService,
+    private launchNavigator: LaunchNavigator
   ) {
     this.currentlangauge = this.LanguageService.getLanguage();
     console.log('page come from  ' + this.dataService.getPageData()?.title);
@@ -58,7 +62,7 @@ export class MyOrderDetailsPage implements OnInit {
       user_id: this.auth.userID.value,
       order_id: parseInt(this.activatedRoute.snapshot.paramMap.get('id')),
     };
-    this.showOrderByOederID(orderData);
+    this.showOrderByOrderID(orderData);
     this.orderConfig = {
       slidesPerView: 1,
       spaceBetween: 0,
@@ -106,12 +110,60 @@ export class MyOrderDetailsPage implements OnInit {
     });
     return await modal.present();
   }
-  showOrderByOederID(orderData: OrderData) {
+
+  trackLocation(lat,lng) {
+    console.log('location :'+lat + ' '+lng);
+    this.launchNavigator
+      .isAppAvailable(this.launchNavigator.APP.GOOGLE_MAPS)
+      .then((isAvailable: any) => {
+        var app;
+        if (isAvailable) {
+          app = this.launchNavigator.APP.GOOGLE_MAPS;
+        } else {
+          console.warn(
+            'Google Maps not available - falling back to user selection'
+          );
+          app = this.launchNavigator.APP.USER_SELECT;
+        }
+        this.launchNavigator.navigate(
+          [lat, lng],
+          {
+            app: app,
+            start: [this.util.userLocation.lat, this.util.userLocation.lng],
+          }
+        );
+      });
+  }
+
+  showOrderByOrderID(orderData: OrderData) {
     this.util.showLoadingSpinner().then((__) => {
       this.orderService.showOrderByOederID(orderData).subscribe(
         (data: OrderResponse) => {
           if (data.key == 1) {
             this.orderDetails = data.data;
+            this.showAddressByLatLng(data.data.lat, data.data.lng);
+          }
+          this.util.dismissLoading();
+        },
+        (err) => {
+          this.util.dismissLoading();
+        }
+      );
+    });
+  }
+
+  // showAddressByLatLng
+
+  showAddressByLatLng(latitude, longitude) {
+    const userLocation: UserLocation = {
+      lat: latitude,
+      lng: longitude,
+    };
+    this.util.showLoadingSpinner().then((__) => {
+      this.orderService.showAddressByLatLng(userLocation).subscribe(
+        (data: LocationAddessResponse) => {
+          if (data.key == 1) {
+            this.address = data.data;
           }
           this.util.dismissLoading();
         },
@@ -159,7 +211,7 @@ export class MyOrderDetailsPage implements OnInit {
                   this.activatedRoute.snapshot.paramMap.get('id')
                 ),
               };
-              this.showOrderByOederID(orderData);
+              this.showOrderByOrderID(orderData);
             }, 2000);
           }
           this.util.dismissLoading();
@@ -179,8 +231,6 @@ export class MyOrderDetailsPage implements OnInit {
   }
 
   doRefresh($event) {
-    //
-
     const orderData: OrderData = {
       lang: this.languageService.getLanguage(),
       user_id: this.auth.userID.value,
@@ -191,6 +241,7 @@ export class MyOrderDetailsPage implements OnInit {
       (data: OrderResponse) => {
         if (data.key == 1) {
           this.orderDetails = data.data;
+          this.showAddressByLatLng(data.data.lat, data.data.lng);
         }
         $event.target.complete();
       },

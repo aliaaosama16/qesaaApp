@@ -109,13 +109,13 @@ export class DriverLocationPage implements OnInit {
       icon: './../../../../assets/icon/location_pin.svg',
     });
 
-    if (this.auth.userType.value == 'provider') {
-      google.maps.event.addListener(this.home, 'click', (event) => {
-        console.log('marker clicked');
-        this.trackOnMap();
-        // let opt
-      });
-    }
+    // if (this.auth.userType.value == 'provider') {
+    //   google.maps.event.addListener(this.home, 'click', (event) => {
+    //     console.log('marker clicked');
+    //     this.trackOnMap();
+    //     // let opt
+    //   });
+    // }
   }
   trackOnMap() {
     // let options: LaunchNavigatorOptions = {

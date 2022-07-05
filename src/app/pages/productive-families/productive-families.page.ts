@@ -29,7 +29,7 @@ export class ProductiveFamiliesPage implements OnInit {
     private util: UtilitiesService,
     private general: GeneralService,
     private familyService: FamilyService,
-    private auth:AuthService
+    private auth: AuthService
   ) {}
 
   ngOnInit() {
@@ -37,14 +37,13 @@ export class ProductiveFamiliesPage implements OnInit {
     //console.log('charity page title :  '+this.charityInfoType.title);
     const familyData: UserData = {
       lang: this.languageService.getLanguage(),
-     // user_id: this.auth.userID.value,
+      // user_id: this.auth.userID.value,
     };
     this.util.showLoadingSpinner().then((__) => {
       this.familyService.providers(familyData).subscribe(
         (data: FamilyListResponse) => {
           if (data.key == 1) {
             this.families = data.data;
-            
           } else {
             this.util.showMessage(data.msg);
           }
@@ -55,5 +54,24 @@ export class ProductiveFamiliesPage implements OnInit {
         }
       );
     });
+  }
+
+  doRefresh($event) {
+    const familyData: UserData = {
+      lang: this.languageService.getLanguage(),
+    };
+    this.familyService.providers(familyData).subscribe(
+      (data: FamilyListResponse) => {
+        if (data.key == 1) {
+          this.families = data.data;
+        } else {
+          $event.target.complete();
+        }
+        $event.target.complete();
+      },
+      (err) => {
+        $event.target.complete();
+      }
+    );
   }
 }
