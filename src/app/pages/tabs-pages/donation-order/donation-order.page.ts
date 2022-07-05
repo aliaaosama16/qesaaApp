@@ -280,7 +280,7 @@ export class DonationOrderPage implements OnInit {
       this.reverseGeocode(this.lat, this.long);
     });
 
-    this.reverseGeocode(this.lat, this.long);
+    //this.reverseGeocode(this.lat, this.long);
 
     //   google.maps.event.addListener(this.home, 'dragend', (ev){
 
@@ -441,7 +441,11 @@ export class DonationOrderPage implements OnInit {
         type: StoreOrderType.volunteer,
         name: this.donationForm.value.userName,
         phone: this.donationForm.value.phoneNumber,
+<<<<<<< HEAD
         city_id: this.donationForm.value.city,
+=======
+        city_id: this.donationForm.value.city.id,
+>>>>>>> 4db43c8e0b3e6f7df01b3fec08b912078e821222
         lat: this.lat,
         lng: this.long,
         date: moment(this.donationForm.value.requestDate).format('YYYY-MM-DD'),

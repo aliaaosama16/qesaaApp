@@ -9,6 +9,7 @@ import { SupportProductiveFamiliesPageRoutingModule } from './support-productive
 
 import { SupportProductiveFamiliesPage } from './support-productive-families.page';
 import { SharedComponentModule } from 'src/app/components/shared-component.module';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   imports: [
@@ -18,7 +19,8 @@ import { SharedComponentModule } from 'src/app/components/shared-component.modul
     SupportProductiveFamiliesPageRoutingModule,
     SharedComponentModule,
     TranslateModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IonicSelectableModule
   ],
   declarations: [SupportProductiveFamiliesPage]
 })
