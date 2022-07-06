@@ -71,7 +71,7 @@ export class VerificationCodePage implements OnInit {
           if (data.key == 1) {
             console.log('activeAccount  res :' + JSON.stringify(data));
             this.util.showMessage(data.msg);
-            setTimeout(() => {
+          //  setTimeout(() => {
              // this.auth.storeStatusAfterLogin(data);
               // this.auth.setUserID(data.data.id);
               // this.auth.storeUserType(data.data.user_type);
@@ -89,7 +89,7 @@ export class VerificationCodePage implements OnInit {
               }
 
               
-            }, 2000);
+          //  }, 2000);
            
            
           } else {
@@ -151,6 +151,7 @@ export class VerificationCodePage implements OnInit {
         (data: AuthResponse) => {
           if (data.key == 1) {
             this.util.showMessage(data.msg);
+            window.location.reload();
           } else {
             this.util.showMessage(data.msg);
           }

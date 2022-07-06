@@ -208,5 +208,6 @@
   "from camera":"take photo from camera",
   "address":"address",
   "please make sure gps is open": "please make sure gps is open",
-  "track provider":"track provider"
+  "track provider":"track provider",
+  "km":"km"
 }

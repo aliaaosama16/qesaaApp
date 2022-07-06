@@ -208,6 +208,7 @@
   "from camera":"التقط صورة بالكاميرا",
   "address":"العنوان",
   "please make sure gps is open":"تاكد من تفعيل خدمة تشغيل الموقع",
-  "track provider":"تتبع السائق"
+  "track provider":"تتبع السائق",
+  "km":"كم"
   
 }

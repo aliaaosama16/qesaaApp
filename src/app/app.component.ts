@@ -17,7 +17,9 @@ import { CallbackID, Geolocation, Position } from '@capacitor/geolocation';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { AppData } from './models/data';
 import { DataService } from './services/data/data.service';
-import { OneSignal } from '@awesome-cordova-plugins/onesignal/ngx';
+// import { OneSignal } from '@awesome-cordova-plugins/onesignal/ngx';
+import OneSignal from 'onesignal-cordova-plugin';
+import { DeviceState } from 'onesignal-cordova-plugin/types/Subscription';
 
 @Component({
   selector: 'app-root',
@@ -121,8 +123,8 @@ export class AppComponent {
     private sectionsService: SectionsProductsService,
     private providerService: ProviderService,
     private dataService: DataService,
-    private oneSignal: OneSignal,
-    private alertCtrl:AlertController
+    //private oneSignal: OneSignal,
+    private alertCtrl: AlertController
   ) {
     this.initializeApp();
 
@@ -208,7 +210,7 @@ export class AppComponent {
 
   selectMenuItem(index, url) {
     this.selectedIndex = index;
-    if (index ==6) {
+    if (index == 6) {
       console.log('share app');
       this.shareApp();
     } else {
@@ -226,7 +228,7 @@ export class AppComponent {
           this.util.dismissLoading();
           if (data.key == 1) {
             //this.marfoofLink = data.maroof;
-            window.open(data?.maroof)
+            window.open(data?.maroof);
           } else {
             this.util.showMessage(data.msg);
           }
@@ -236,48 +238,50 @@ export class AppComponent {
         }
       );
     });
-    
   }
 
   setupPush() {
+    // // I recommend to put these into your environment.ts
+    // this.oneSignal.startInit('8a9d6d2b-bee7-4edd-b2e1-1b7ab872c521', '778904577393');
 
-    // I recommend to put these into your environment.ts
-    this.oneSignal.startInit('8a9d6d2b-bee7-4edd-b2e1-1b7ab872c521', '778904577393');
- 
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
- 
-    // Notifcation was received in general
-    this.oneSignal.handleNotificationReceived().subscribe(data => {
-      let msg = data.payload.body;
-      let title = data.payload.title;
-      let additionalData = data.payload.additionalData;
-      this.showAlert(title, msg, additionalData.task);
+    // this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
+
+    // // Notifcation was received in general
+    // this.oneSignal.handleNotificationReceived().subscribe(data => {
+    //   let msg = data.payload.body;
+    //   let title = data.payload.title;
+    //   let additionalData = data.payload.additionalData;
+    //   this.showAlert(title, msg, additionalData.task);
+    // });
+
+    // // Notification was really clicked/opened
+    // this.oneSignal.handleNotificationOpened().subscribe(data => {
+    //   // Just a note that the data is a different place here!
+    //   let additionalData = data.notification.payload.additionalData;
+
+    //   this.showAlert('Notification opened', 'You already read this before', additionalData.task);
+    // });
+
+    // this.oneSignal.endInit();
+
+    this.util.getDevice();
+
+    OneSignal.setNotificationOpenedHandler((jsonData) => {
+      console.log('setNotificationOpenedHandler ' + JSON.stringify(jsonData));
     });
- 
-    // Notification was really clicked/opened
-    this.oneSignal.handleNotificationOpened().subscribe(data => {
-      // Just a note that the data is a different place here!
-      let additionalData = data.notification.payload.additionalData;
- 
-      this.showAlert('Notification opened', 'You already read this before', additionalData.task);
+
+    OneSignal.setNotificationWillShowInForegroundHandler((jsonData) => {
+      console.log(
+        'setNotificationWillShowInForegroundHandler ' + JSON.stringify(jsonData)
+      );
     });
- 
-    this.oneSignal.endInit();
+
+    // iOS - Prompts the user for notification permissions.
+    //    * Since this shows a generic native prompt, we recommend instead using an In-App Message to prompt for notification permission (See step 6) to better communicate to your users what notifications they will get.
+    OneSignal.promptForPushNotificationsWithUserResponse((accepted) => {
+      console.log('User accepted notifications: ' + accepted);
+    });
   }
 
-  async showAlert(title, msg, task) {
-    const alert = await this.alertCtrl.create({
-      header: title,
-      subHeader: msg,
-      buttons: [
-        {
-          text: `Action: ${task}`,
-          handler: () => {
-            // E.g: Navigate to a specific screen
-          }
-        }
-      ]
-    })
-    alert.present();
-  }
+  
 }
