@@ -3,18 +3,23 @@ import { ProviderService } from './services/provider/provider.service';
 import { SectionsProductsService } from 'src/app/services/sections-products/sections-products.service';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { Platform } from '@ionic/angular';
+import { Platform, AlertController } from '@ionic/angular';
 import { AuthService } from './services/auth/auth.service';
 import { LanguageService } from './services/language/language.service';
 import { UtilitiesService } from './services/utilities/utilities.service';
 import { Share } from '@capacitor/share';
 import { LogOutData, Status } from './models/auth';
 import { Storage } from '@capacitor/storage';
-import { GeneralResponse } from './models/general';
+import { GeneralResponse, UserData } from './models/general';
 import { interval } from 'rxjs';
 //import { SplashScreen } from '@capacitor/splash-screen';
 import { CallbackID, Geolocation, Position } from '@capacitor/geolocation';
 import { SplashScreen } from '@capacitor/splash-screen';
+import { AppData } from './models/data';
+import { DataService } from './services/data/data.service';
+// import { OneSignal } from '@awesome-cordova-plugins/onesignal/ngx';
+import OneSignal from 'onesignal-cordova-plugin';
+import { DeviceState } from 'onesignal-cordova-plugin/types/Subscription';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +37,8 @@ export class AppComponent {
   logoutData: LogOutData;
   currentPlatform: string;
   splash: boolean = false;
+  marfoofLink: string;
+
   pages = [
     {
       title: 'about',
@@ -69,12 +76,12 @@ export class AppComponent {
       iconActive: './../assets/icon/menu-icons/donate-active.svg',
       iconInActive: './../assets/icon/menu-icons/volunteer.svg',
     },
-    {
-      title: 'Supporting productive families',
-      url: '/tabs/support-productive-families',
-      iconActive: './../assets/icon/menu-icons/families-active.svg',
-      iconInActive: './../assets/icon/menu-icons/families-inactive.svg',
-    },
+    // {
+    //   title: 'Supporting productive families',
+    //   url: '/tabs/support-productive-families',
+    //   iconActive: './../assets/icon/menu-icons/families-active.svg',
+    //   iconInActive: './../assets/icon/menu-icons/families-inactive.svg',
+    // },
     {
       title: 'share app',
       url: 'share',
@@ -114,7 +121,10 @@ export class AppComponent {
     private router: Router,
     private auth: AuthService,
     private sectionsService: SectionsProductsService,
-    private providerService: ProviderService
+    private providerService: ProviderService,
+    private dataService: DataService,
+    //private oneSignal: OneSignal,
+    private alertCtrl: AlertController
   ) {
     this.initializeApp();
 
@@ -129,14 +139,14 @@ export class AppComponent {
     this.platform.ready().then(() => {
       setTimeout(() => {
         SplashScreen.hide();
-      },50);
+      }, 50);
 
       this.languageService.setInitialAppLanguage();
 
       this.util.getPlatformType();
       this.util.getDeviceID();
 
-      // this.fcmService.initFcm();
+      this.setupPush();
 
       this.util.getUserLocation();
       this.getLoginStatus();
@@ -200,11 +210,82 @@ export class AppComponent {
 
   selectMenuItem(index, url) {
     this.selectedIndex = index;
-    if (index == 7) {
+    if (index == 6) {
       console.log('share app');
       this.shareApp();
     } else {
       this.router.navigateByUrl(url);
     }
+  }
+
+  getMaroofLink() {
+    const userData: UserData = {
+      lang: this.languageService.getLanguage(),
+    };
+    this.util.showLoadingSpinner().then((__) => {
+      this.dataService.appData(userData).subscribe(
+        (data: AppData) => {
+          this.util.dismissLoading();
+          if (data.key == 1) {
+            //this.marfoofLink = data.maroof;
+            window.open(data?.maroof);
+          } else {
+            this.util.showMessage(data.msg);
+          }
+        },
+        (err) => {
+          this.util.dismissLoading();
+        }
+      );
+    });
+  }
+
+  setupPush() {
+    // // I recommend to put these into your environment.ts
+    // this.oneSignal.startInit('8a9d6d2b-bee7-4edd-b2e1-1b7ab872c521', '778904577393');
+
+    // this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
+
+    // // Notifcation was received in general
+    // this.oneSignal.handleNotificationReceived().subscribe(data => {
+    //   let msg = data.payload.body;
+    //   let title = data.payload.title;
+    //   let additionalData = data.payload.additionalData;
+    //   this.showAlert(title, msg, additionalData.task);
+    // });
+
+    // // Notification was really clicked/opened
+    // this.oneSignal.handleNotificationOpened().subscribe(data => {
+    //   // Just a note that the data is a different place here!
+    //   let additionalData = data.notification.payload.additionalData;
+
+    //   this.showAlert('Notification opened', 'You already read this before', additionalData.task);
+    // });
+
+    // this.oneSignal.endInit();
+
+    this.util.getDevice();
+
+    OneSignal.setNotificationOpenedHandler((jsonData) => {
+      console.log('setNotificationOpenedHandler ' + JSON.stringify(jsonData));
+
+      // 'volunteers' 'charity-market'
+      // this.dataService.setPageData(page);
+      // this.router.navigateByUrl(
+      //   `/tabs/my-orders/details/${jsonData.notification.rawPayload?.additionalData.order_id}`
+      // );
+    });
+
+    OneSignal.setNotificationWillShowInForegroundHandler((jsonData) => {
+      console.log(
+        'setNotificationWillShowInForegroundHandler ' + JSON.stringify(jsonData)
+      );
+    });
+
+    // iOS - Prompts the user for notification permissions.
+    //    * Since this shows a generic native prompt, we recommend instead using an In-App Message to prompt for notification permission (See step 6) to better communicate to your users what notifications they will get.
+    OneSignal.promptForPushNotificationsWithUserResponse((accepted) => {
+      console.log('User accepted notifications: ' + accepted);
+    });
   }
 }

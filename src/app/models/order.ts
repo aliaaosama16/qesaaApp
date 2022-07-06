@@ -46,6 +46,7 @@ export interface Order {
   image: string;
   provider_full_phone: string;
   user_full_phone: string;
+  user_distance:number;
 }
 
 export interface StatusMap {

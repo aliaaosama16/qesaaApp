@@ -12,6 +12,8 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 import { LocationData } from 'src/app/models/provider';
 import { GeneralResponse } from 'src/app/models/general';
 import { ProviderService } from '../provider/provider.service';
+import OneSignal from 'onesignal-cordova-plugin';
+import { DeviceState } from 'onesignal-cordova-plugin/types/Subscription';
 
 @Injectable({
   providedIn: 'root',
@@ -101,7 +103,21 @@ export class UtilitiesService {
 
   async getDeviceID() {
     const device = await (await Device.getId()).uuid;
-    this.setDeviceID(device);
+    console.log('get device id by device plugin '+device)
+   // this.setDeviceID(device);
+  }
+
+  getDevice() {
+    OneSignal.setAppId('8a9d6d2b-bee7-4edd-b2e1-1b7ab872c521');
+    OneSignal.getDeviceState((response: DeviceState) => {
+      console.log('getDeviceState : ' + JSON.stringify(response));
+      console.log('userId  : ' + response.userId);
+      if (response.subscribed) {
+        this.setDeviceID(response.userId);
+      } else {
+        this.getDevice();
+      }
+    });
   }
 
   getDatesDifference(dateFrom) {
@@ -168,7 +184,7 @@ export class UtilitiesService {
 
   async updateProviderLocation() {
     await Geolocation.watchPosition(
-      { enableHighAccuracy: true },
+      { enableHighAccuracy: true ,timeout:300000},
       (position: Position) => {
         console.log(
           'location :' +

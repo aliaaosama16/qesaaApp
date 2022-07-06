@@ -50,10 +50,22 @@
           (click)="showOrder(order.id,'volunteers')"
         >
           <div>
-            <p class="order-number fn-16 qesaa-Janna-Bold">
-              <span class="primary-color">{{"orderNumber"|translate}}</span>
-              <span class="custom-margin secondary-color">#{{order.id}}</span>
-            </p>
+
+        
+            
+              <p class="order-number fn-16 qesaa-Janna-Bold">
+                <span class="primary-color">{{"orderNumber"|translate}}</span>
+                <span class="custom-margin secondary-color">#{{order.id}}</span>
+              </p>
+           
+              
+              <p class="order-number fn-16 qesaa-Janna-Bold">
+                <span class="primary-color">{{"distance"|translate}}</span>
+                <span class="custom-margin secondary-color">{{order.user_distance}}</span>
+              </p>
+            
+              
+          
             <p class="order-status fn-16 qesaa-Janna-Bold">
               <span class="primary-color">{{"orderStatus"|translate}}</span>
 
@@ -192,10 +204,20 @@
         (click)="showOrder(order.id,'volunteers')"
       >
         <div>
-          <p class="order-number fn-16 qesaa-Janna-Bold">
-            <span class="primary-color">{{"orderNumber"|translate}}</span>
-            <span class="custom-margin secondary-color">#{{order.id}}</span>
-          </p>
+
+
+        
+              <p class="order-number fn-16 qesaa-Janna-Bold">
+                <span class="primary-color">{{"orderNumber"|translate}}</span>
+                <span class="custom-margin secondary-color">#{{order.id}}</span>
+              </p>
+          
+              <p class="order-number fn-16 qesaa-Janna-Bold">
+                <span class="primary-color">{{"distance"|translate}}</span>
+                <span class="custom-margin secondary-color">{{order.user_distance}}</span>
+              </p>
+           
+         
           <p class="order-status fn-16 qesaa-Janna-Bold">
             <span class="primary-color">{{"orderStatus"|translate}}</span>
 

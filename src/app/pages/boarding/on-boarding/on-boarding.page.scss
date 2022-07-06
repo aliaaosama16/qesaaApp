@@ -21,7 +21,7 @@ ion-content {
       justify-content: space-between;
       flex-direction: column;
       height: 100% !important;
-      grid-template-rows: 2fr 7fr 1fr;
+      grid-template-rows: 2fr 7fr 1fr 2fr;
       .slide-mage {
         img {
           width: 100%;
@@ -31,8 +31,8 @@ ion-content {
       .intro-description {
         // overflow-y: scroll;
         // height: 124px;
-        margin: 12px 0 16px 0 ;
-        
+       // margin: 12px 0 16px 0 ;
+        margin-top: 12px ;
       }
 
       .indicators {

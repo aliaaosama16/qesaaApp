@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { Order, OrderData, OrderListResponse, OrderResponse } from './../../models/order';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { UserData } from 'src/app/models/general';
+import { GeneralResponse, LocationAddessResponse, UserData, UserLocation } from 'src/app/models/general';
 import { environment } from 'src/environments/environment.prod';
 
 @Injectable({
@@ -24,4 +24,12 @@ export class OrdersService {
       data
     );
   }
+
+  showAddressByLatLng(data: UserLocation): Observable<LocationAddessResponse> {
+    return this.httpclient.post<LocationAddessResponse>(
+      `${environment.BASE_URL}get-address`,
+      data
+    );
+  }
+
 }

@@ -22,19 +22,19 @@
               {{introData?.data?.first_title}}
             </p>
           
-            <div  class="ion-margin-horizontal intro-description">
-              <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
+            <!-- <div  class="ion-margin-horizontal intro-description"> -->
+              <p class="text ion-margin fn-16 qesaa-Janna-Regular">
                 {{introData?.data?.first_desc}}
               </p>
-            </div>
+            <!-- </div> -->
 
-            <div class="indicators ion-margin-top">
-              <div class="selected"></div>
-              <div class="not-selected"></div>
-              <div class="not-selected"></div>
-            </div>
           </div>
          
+          <div class="indicators">
+            <div class="selected"></div>
+            <div class="not-selected"></div>
+            <div class="not-selected"></div>
+          </div>
           <div class="slide-footer">
             <div
               (click)="nextSlide()"
@@ -64,16 +64,18 @@
             <p class="ion-no-margin fn-24 qesaa-Janna-Bold primary-color">
               {{introData?.data?.second_title}}
             </p>
-            <div  class="ion-margin-horizontal intro-description">
-              <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
+            <!-- <div  class="ion-margin-horizontal intro-description"> -->
+              <p class="text ion-margin fn-16 qesaa-Janna-Regular">
                 {{introData?.data?.second_desc}}
               </p>
-            </div>
-            <div class="indicators ion-margin-top">
-              <div class="not-selected"></div>
-              <div class="selected"></div>
-              <div class="not-selected"></div>
-            </div>
+            <!-- </div> -->
+           
+          </div>
+
+          <div class="indicators">
+            <div class="not-selected"></div>
+            <div class="selected"></div>
+            <div class="not-selected"></div>
           </div>
           
           <div class="slide-footer">
@@ -104,18 +106,18 @@
             <p class="ion-no-margin fn-24 qesaa-Janna-Bold primary-color">
               {{introData?.data?.third_title}}
             </p>
-            <div  class="ion-margin-horizontal intro-description">
-              <p class="text ion-no-margin fn-16 qesaa-Janna-Regular">
+            <!-- <div  class="ion-margin-horizontal intro-description"> -->
+              <p class="text ion-margin fn-16 qesaa-Janna-Regular">
                 {{introData?.data?.third_desc}}
               </p>
-            </div>
-            <div class="indicators ion-margin-top">
-              <div class="not-selected"></div>
-              <div class="not-selected"></div>
-              <div class="selected"></div>
-            </div>
+            <!-- </div> -->
+           
           </div>
-         
+          <div class="indicators">
+            <div class="not-selected"></div>
+            <div class="not-selected"></div>
+            <div class="selected"></div>
+          </div>
           <div class="slide-footer">
             <div
               (click)="start()"

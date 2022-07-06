@@ -38,4 +38,9 @@
   margin-bottom: 6px;
 }
 // ion-content {--background	:none}
-
+.ionic-selectable-value-item{
+  color: red;
+}
+ionic-selectable.ionic-selectable-inner.ionic-selectable-value.ionic-selectable-value-item{
+color: red;
+}
