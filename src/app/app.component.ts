@@ -268,6 +268,12 @@ export class AppComponent {
 
     OneSignal.setNotificationOpenedHandler((jsonData) => {
       console.log('setNotificationOpenedHandler ' + JSON.stringify(jsonData));
+
+      // 'volunteers' 'charity-market'
+      // this.dataService.setPageData(page);
+      // this.router.navigateByUrl(
+      //   `/tabs/my-orders/details/${jsonData.notification.rawPayload?.additionalData.order_id}`
+      // );
     });
 
     OneSignal.setNotificationWillShowInForegroundHandler((jsonData) => {
@@ -282,6 +288,4 @@ export class AppComponent {
       console.log('User accepted notifications: ' + accepted);
     });
   }
-
-  
 }

@@ -209,6 +209,7 @@
   "address":"العنوان",
   "please make sure gps is open":"تاكد من تفعيل خدمة تشغيل الموقع",
   "track provider":"تتبع السائق",
-  "km":"كم"
+  "km":"كم",
+  "distance":"المسافة"
   
 }

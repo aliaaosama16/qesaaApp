@@ -209,5 +209,6 @@
   "address":"address",
   "please make sure gps is open": "please make sure gps is open",
   "track provider":"track provider",
-  "km":"km"
+  "km":"km",
+  "distance": "distance"
 }
