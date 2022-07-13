@@ -27,8 +27,8 @@
     </div>
   </div>
 
-  <div class="wrapper" routerLink="/tabs/account/edit">
-    <div class="container">
+  <div class="wrapper" >
+    <div class="container" routerLink="/tabs/account/edit">
       <div class="icon">
         <img src="./../../../../assets/icon/account/account_circle.svg" />
       </div>
@@ -37,6 +37,17 @@
       </div>
       <div class="tailing-icon">
         <ion-icon src="./../../../../assets/icon/account/edit.svg"></ion-icon>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="container" (click)="deleteAccount()">
+      <div class="icon">
+        <ion-icon name="trash" color="primary"></ion-icon>
+      </div>
+      <div class="title fn-18 qesaa-Janna-Regular">
+        <span>{{"delete-account"|translate}}</span>
       </div>
     </div>
   </div>

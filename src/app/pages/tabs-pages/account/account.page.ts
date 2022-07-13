@@ -150,6 +150,65 @@ export class AccountPage implements OnInit {
     alert.present();
   }
 
+ async deleteAccount(){
+    const logoutData: LogOutData = {
+      lang: this.languageService.getLanguage(),
+      user_id: this.auth.userID.value,
+      device_id: this.util.deviceID,
+    };
+
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      message: this.translate.instant('confirm account removal'),
+      buttons: [
+        {
+          text: this.translate.instant('ok'),
+          handler: () => {
+            this.deleteService(logoutData);
+          },
+        },
+        {
+          text: this.translate.instant('cancel'),
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          },
+        },
+      ],
+    });
+    alert.present();
+  }
+
+  deleteService(logoutData: LogOutData) {
+    this.util.showLoadingSpinner().then((__) => {
+      this.auth.removeAccount(logoutData).subscribe(
+        (data: AuthResponse) => {
+          if (data.key == 1) {
+            this.util.showMessage(data.msg);
+            
+           // setTimeout(()=>{
+              this.auth.removeRegistrationData().then( (_) => {
+                this.router.navigateByUrl('/tabs/home');
+                if (this.auth.userType.value == 'provider') {
+                  this.removeWatchDriverLocation();
+                }
+              });
+           // },2200)
+            
+           
+            console.log('logout data :' + JSON.stringify(this.userData));
+          } else {
+          }
+          this.util.dismissLoading();
+        },
+        (err) => {
+          this.util.dismissLoading();
+        }
+      );
+    });
+  }
+
   logoutService(logoutData: LogOutData) {
     this.util.showLoadingSpinner().then((__) => {
       this.auth.logout(logoutData).subscribe(

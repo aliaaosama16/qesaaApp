@@ -210,5 +210,7 @@
   "please make sure gps is open": "please make sure gps is open",
   "track provider":"track provider",
   "km":"km",
-  "distance": "distance"
+  "distance": "distance",
+  "confirm account removal": "confirm account removal",
+  "delete-account":"delete-account"
 }

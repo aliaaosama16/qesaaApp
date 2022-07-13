@@ -20,6 +20,8 @@ import { DataService } from './services/data/data.service';
 // import { OneSignal } from '@awesome-cordova-plugins/onesignal/ngx';
 import OneSignal from 'onesignal-cordova-plugin';
 import { DeviceState } from 'onesignal-cordova-plugin/types/Subscription';
+import { OpenedEvent } from 'onesignal-cordova-plugin/types/Notification';
+import { InAppMessageAction } from 'onesignal-cordova-plugin/types/InAppMessage';
 
 @Component({
   selector: 'app-root',
@@ -267,21 +269,36 @@ export class AppComponent {
 
     this.util.getDevice();
 
-    OneSignal.setNotificationOpenedHandler((jsonData) => {
+    OneSignal.setNotificationOpenedHandler((jsonData:OpenedEvent) => {
       console.log('setNotificationOpenedHandler ' + JSON.stringify(jsonData));
 
+      const orderData:any=jsonData.notification.additionalData;
+      // console.log('title  : '+?.order_id);
+      // console.log('subtitle  : '+jsonData.notification.subtitle);
       // 'volunteers' 'charity-market'
       // this.dataService.setPageData(page);
-      // this.router.navigateByUrl(
-      //   `/tabs/my-orders/details/${jsonData.notification.rawPayload?.additionalData.order_id}`
-      // );
-    });
-
-    OneSignal.setNotificationWillShowInForegroundHandler((jsonData) => {
-      console.log(
-        'setNotificationWillShowInForegroundHandler ' + JSON.stringify(jsonData)
+      this.router.navigateByUrl(
+        `/tabs/my-orders/details/${orderData?.order_id}`
       );
     });
+
+    // OneSignal.setInAppMessageClickHandler((action: InAppMessageAction) => {
+    //   console.log('setNotificationOpenedHandler ' + JSON.stringify(action)); 
+    // });
+
+    // OneSignal.setNotificationWillShowInForegroundHandler((jsonData) => {
+    //   console.log(
+    //     'setNotificationWillShowInForegroundHandler ' + JSON.stringify(jsonData)
+    //   );
+    //   const orderData:any=jsonData.getNotification().additionalData;
+    //   // console.log('title  : '+?.order_id);
+    //   // console.log('subtitle  : '+jsonData.notification.subtitle);
+    //   // 'volunteers' 'charity-market'
+    //   // this.dataService.setPageData(page);
+    //   this.router.navigateByUrl(
+    //     `/tabs/my-orders/details/${orderData?.order_id}`
+    //   );
+    // });
 
     // iOS - Prompts the user for notification permissions.
     //    * Since this shows a generic native prompt, we recommend instead using an In-App Message to prompt for notification permission (See step 6) to better communicate to your users what notifications they will get.

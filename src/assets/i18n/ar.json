@@ -210,6 +210,8 @@
   "please make sure gps is open":"تاكد من تفعيل خدمة تشغيل الموقع",
   "track provider":"تتبع السائق",
   "km":"كم",
-  "distance":"المسافة"
+  "distance":"المسافة",
+  "confirm account removal":"تاكيد حذف الحساب",
+  "delete-account":"حذف الحساب"
   
 }

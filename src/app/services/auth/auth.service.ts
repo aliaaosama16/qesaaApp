@@ -263,4 +263,11 @@ export class AuthService {
       data
     );
   }
+
+  removeAccount(data: LogOutData): Observable<AuthResponse> {
+    return this.httpclient.post<AuthResponse>(
+      `${environment.BASE_URL}destory-user`,
+      data
+    );
+  }
 }

@@ -1,6 +1,6 @@
 ion-item-sliding {
  
-  box-shadow: var(--custom-box-shadow);
+ 
   ion-item {
     --inner-padding-end: 0 !important;
     &::part(native) {
@@ -15,6 +15,7 @@ ion-item-sliding {
     .notification-container {
       background-color: var(--ion-color-white);
       border-radius: var(--custom-border-10-radius) !important;
+     // box-shadow: var(--custom-box-shadow);
       padding: 23px 20px;
       display: flex;
       width: 100%;
