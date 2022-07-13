@@ -96,7 +96,7 @@ export class GalleryPage implements OnInit {
       cssClass: 'transparent-modal',
       componentProps: {
         images: itemImages,
-        imageID: currentImage,
+        imageID: currentImage+1,
       },
     });
     modal.present();

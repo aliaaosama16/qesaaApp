@@ -266,7 +266,10 @@
           height: 25px;
           img {
             border-radius: 50%;
-            width: 25px;
+            width: 23px;
+            height: 23px;
+            object-fit: cover;
+            object-position: center;
           }
         }
         .feedback-person-name {

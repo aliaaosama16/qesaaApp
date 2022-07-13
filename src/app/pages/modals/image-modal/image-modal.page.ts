@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Artical } from 'src/app/models/articals';
 import { LanguageService } from 'src/app/services/language/language.service';
 import Swiper, {
   Navigation,
@@ -17,7 +18,7 @@ Swiper.use([Navigation, Pagination, EffectCards, Zoom]);
 })
 export class ImageModalPage implements OnInit {
   @Input() orderImage?: string;
-  @Input() images: any;
+  @Input() images: Artical[];
   @Input() imageID: number;
   currentlangauge: string = '';
   @ViewChild('swiper') imageSwiper: SwiperComponent;
@@ -27,6 +28,7 @@ export class ImageModalPage implements OnInit {
     pagination: false,
     effect: 'fade',
     autoplay: false,
+    loop: true,
     zoom: {
       maxRatio: 5,
     },
@@ -41,15 +43,16 @@ export class ImageModalPage implements OnInit {
     // console.log('this.currentImage ' + this.imageID);
     this.currentlangauge = this.language.getLanguage();
     console.log('order image : ' + JSON.stringify(this.orderImage));
-    this.imageSwiper.swiperRef.slideTo(this.imageID, 400);
+   // this.imageSwiper.swiperRef.slideTo(this.imageID,100);
   }
 
   ngAfterViewInit(): void {
     if (this.orderImage ==undefined) {
-      this.imageSwiper.swiperRef.slideTo(this.imageID, 400);
+      console.log('this.imageID  : '+this.imageID)
+      this.imageSwiper.swiperRef.slideTo(this.imageID, 100);
     }
 
-    console.log(this.imageSwiper.swiperRef);
+    console.log(JSON.stringify(this.imageSwiper.swiperRef));
   }
 
   closeModal() {

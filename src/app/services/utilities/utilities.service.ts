@@ -32,7 +32,7 @@ export class UtilitiesService {
     private loadingCtrl: LoadingController,
     private plt: Platform,
     private auth: AuthService,
-    private providerService:ProviderService
+    private providerService: ProviderService
   ) {}
 
   setPlatform(val) {
@@ -103,8 +103,8 @@ export class UtilitiesService {
 
   async getDeviceID() {
     const device = await (await Device.getId()).uuid;
-    console.log('get device id by device plugin '+device)
-   // this.setDeviceID(device);
+    console.log('get device id by device plugin ' + device);
+    // this.setDeviceID(device);
   }
 
   getDevice() {
@@ -112,7 +112,8 @@ export class UtilitiesService {
     OneSignal.getDeviceState((response: DeviceState) => {
       console.log('getDeviceState : ' + JSON.stringify(response));
       console.log('userId  : ' + response.userId);
-      if (response.subscribed) {
+
+      if (response.userId) {
         this.setDeviceID(response.userId);
       } else {
         this.getDevice();
@@ -184,7 +185,7 @@ export class UtilitiesService {
 
   async updateProviderLocation() {
     await Geolocation.watchPosition(
-      { enableHighAccuracy: true ,timeout:300000},
+      { enableHighAccuracy: true, timeout: 300000 },
       (position: Position) => {
         console.log(
           'location :' +
@@ -212,7 +213,6 @@ export class UtilitiesService {
   }
 
   repeatGettingLocation(location) {
-    
     // this.util.showLoadingSpinner().then((__) => {
     this.providerService.updateLocation(location).subscribe(
       (data: GeneralResponse) => {

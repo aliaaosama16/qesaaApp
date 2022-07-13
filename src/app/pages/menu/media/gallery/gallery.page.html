@@ -48,8 +48,8 @@
       <ion-col
         class="ion-text-center"
         size="4"
-        *ngFor="let image of galleryPhotos"
-        (click)="openPreview(galleryPhotos,image.id)"
+        *ngFor="let image of galleryPhotos,let imageIndex=index"
+        (click)="openPreview(galleryPhotos,imageIndex)"
       >
         <img [src]="image.image" />
       </ion-col>

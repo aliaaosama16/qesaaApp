@@ -28,7 +28,7 @@ export class CustomModalPage implements OnInit {
     private util: UtilitiesService,
     private languageService: LanguageService,
     private sectionsProvider: SectionsProductsService,
-    private transalte:TranslateService
+    private transalte: TranslateService
   ) {
     console.log('providerID :' + this.providerID);
     console.log('orderID :' + this.orderID);
@@ -71,18 +71,16 @@ export class CustomModalPage implements OnInit {
   }
 
   rateProvider(rateData: RatingData) {
-    if(this.ratingNumber!=0){
+    if (this.ratingNumber != 0) {
       this.util.showLoadingSpinner().then((__) => {
         this.sectionsProvider.rateProvider(rateData).subscribe(
           (data: GeneralResponse) => {
             if (data.key == 1) {
-              this.util.showMessage(data.msg);
-              
+              this.modal.dismiss();
+
               setTimeout(() => {
-                this.modal.dismiss();
+                this.util.showMessage(data.msg);
               }, 2000);
-               
-             
             } else {
               this.util.showMessage(data.msg);
             }
@@ -93,9 +91,8 @@ export class CustomModalPage implements OnInit {
           }
         );
       });
-    }else{
+    } else {
       this.util.showMessage(this.transalte.instant('rate first '));
     }
-   
   }
 }

@@ -91,12 +91,12 @@
       </div>
     </div>
 
-    <div class="client-data" *ngIf="orderDetails.type=='volunteer'">
+    <div class="client-data" *ngIf="orderDetails.type=='volunteer' && userType=='provider'">
       <div class="text primary-color fn-16 qesaa-Janna-Bold">
         {{'distance'|translate}}
       </div>
 
-      <div class="value fn-16 qesaa-Janna-Regular" style="width: 50%">
+      <div class="value fn-16 qesaa-Janna-Regular" >
         {{orderDetails?.user_distance}} {{"km"|translate}}
       </div>
     </div>
