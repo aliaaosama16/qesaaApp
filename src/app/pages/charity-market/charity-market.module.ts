@@ -19,7 +19,8 @@ import { TranslateModule } from '@ngx-translate/core';
     CharityMarketPageRoutingModule,
     SharedComponentModule,
     SwiperModule,
-    TranslateModule
+    TranslateModule,
+    
   ],
   declarations: [CharityMarketPage]
 })

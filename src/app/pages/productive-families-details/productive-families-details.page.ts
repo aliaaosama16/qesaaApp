@@ -47,7 +47,7 @@ export class ProductiveFamiliesDetailsPage implements OnInit {
 
   showProviderSocail(type: string, url) {
     if (type == 'whats') {
-      window.open(`https://api.whatsapp.com/send?phone=+${url}&text=`);
+      window.open(`https://api.whatsapp.com/send?phone=${url}&text=`);
     } else {
       window.open(url);
     }

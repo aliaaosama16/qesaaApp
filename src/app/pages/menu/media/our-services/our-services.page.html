@@ -24,7 +24,7 @@
     </div>
   </div> -->
 
-  <ion-row>
+  <!-- <ion-row>
     <ion-col   *ngFor="let service of services"  
     size-xs="4"
     size-sm="4"
@@ -47,5 +47,27 @@
       </div>
     </div>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
+
+  <div
+  *ngFor="let service of services"  
+   class="ion-margin-bottom news-container"
+   routerLink="/tabs/our-services/details/{{service.id}}"
+ >
+   <div class="icon" [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'">
+     <ion-avatar slot="start">
+
+     <img [src]="service?.image" />
+     </ion-avatar>
+   </div>
+   <div class="details">
+     <p class="title ion-no-margin secondary-color fn-18 qesaa-Janna-Bold">
+       {{service?.title}}
+     </p>
+     <p class="description ion-no-margin fn-12 qesaa-Janna-Regular" *ngIf="service?.desc">{{service?.desc}}</p>
+     <p class="date ion-no-margin primary-color fn-12 qesaa-Janna-Regular" *ngIf="service?.date">
+       {{service?.date}}
+     </p>
+   </div>
+ </div>
 </ion-content>

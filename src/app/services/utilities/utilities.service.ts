@@ -23,7 +23,6 @@ export class UtilitiesService {
   platform: any;
   deviceID: string;
   userLocation = { lat: 0, lng: 0 };
-
   closedDates: Array<string>;
   inputHaveFocused = new BehaviorSubject(false);
 

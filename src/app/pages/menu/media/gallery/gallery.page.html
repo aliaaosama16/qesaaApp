@@ -66,7 +66,7 @@
         size="6"
         *ngFor="let video of galleryVideos"
       >
-        <video controls>
+        <video controls poster="./../../../../../assets/icon/app-logo.svg">
           <source [src]="video.video" type="video/mp4" />
         </video>
       </ion-col>

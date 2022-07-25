@@ -68,6 +68,7 @@ export class NotificationsPage implements OnInit {
               this.noNotifications = true;
             }
             this.notifications = data.data;
+            console.log('this.notifications  '+JSON.stringify(this.notifications ))
           }
           this.util.dismissLoading();
         },

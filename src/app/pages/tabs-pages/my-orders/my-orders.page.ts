@@ -71,6 +71,7 @@ export class MyOrdersPage implements OnInit {
       );
     });
   }
+  
   showAllOrdersByUserId(type: string) {
     this.util.showLoadingSpinner().then((__) => {
       this.orderService.showAllorders(this.userData).subscribe(

@@ -25,6 +25,7 @@ export class NetworkService {
     Network.getStatus().then((status) => {
       if (!status) {
         this.util.showMessage('connection error');
+        this.util.dismissLoading()
       }
       this.networkStatus.next(status.connected);
     });

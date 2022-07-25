@@ -13,15 +13,12 @@ import {
   ForgetPasswordData,
 } from 'src/app/models/forgetPassword';
 import { GeneralResponse, UserData } from 'src/app/models/general';
-// import { environment } from 'src/environments/environment.prod';
 import { environment } from 'src/environments/environment.prod';
-
 import { Storage } from '@capacitor/storage';
 import { HttpClient } from '@angular/common/http';
 import { LanguageService } from '../language/language.service';
 import { NotificationsService } from '../notifications/notifications.service';
 import { NotificationsResponse } from 'src/app/models/notifications';
-import { UserType } from 'src/app/models/userType';
 
 @Injectable({
   providedIn: 'root',

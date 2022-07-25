@@ -286,19 +286,19 @@ export class AppComponent {
     //   console.log('setNotificationOpenedHandler ' + JSON.stringify(action)); 
     // });
 
-    // OneSignal.setNotificationWillShowInForegroundHandler((jsonData) => {
-    //   console.log(
-    //     'setNotificationWillShowInForegroundHandler ' + JSON.stringify(jsonData)
-    //   );
-    //   const orderData:any=jsonData.getNotification().additionalData;
-    //   // console.log('title  : '+?.order_id);
-    //   // console.log('subtitle  : '+jsonData.notification.subtitle);
-    //   // 'volunteers' 'charity-market'
-    //   // this.dataService.setPageData(page);
-    //   this.router.navigateByUrl(
-    //     `/tabs/my-orders/details/${orderData?.order_id}`
-    //   );
-    // });
+    OneSignal.setNotificationWillShowInForegroundHandler((jsonData) => {
+      console.log(
+        'setNotificationWillShowInForegroundHandler ' + JSON.stringify(jsonData)
+      );
+      const orderData:any=jsonData.getNotification().additionalData;
+      // console.log('title  : '+?.order_id);
+      // console.log('subtitle  : '+jsonData.notification.subtitle);
+      // 'volunteers' 'charity-market'
+      // this.dataService.setPageData(page);
+      this.router.navigateByUrl(
+        `/tabs/my-orders/details/${orderData?.order_id}`
+      );
+    });
 
     // iOS - Prompts the user for notification permissions.
     //    * Since this shows a generic native prompt, we recommend instead using an In-App Message to prompt for notification permission (See step 6) to better communicate to your users what notifications they will get.

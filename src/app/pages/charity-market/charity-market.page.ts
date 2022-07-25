@@ -19,11 +19,13 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./charity-market.page.scss'],
 })
 export class CharityMarketPage implements OnInit {
+  configSlider: SwiperOptions;
   selectedIndex:string ;
   categoriesConfig: SwiperOptions;
   currentlangauge: string;
   sections: GeneralSectionResponse[];
   sectionProducts: GeneralSectionResponse[];
+  Sliders: GeneralSectionResponse[];
   constructor(
     private languageService: LanguageService,
     private util: UtilitiesService,
@@ -41,7 +43,14 @@ export class CharityMarketPage implements OnInit {
       pagination: false,
       effect: 'fade',
     };
-
+    this.configSlider = {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      pagination: true,
+      effect: 'fade',
+      autoplay: true,
+      loop: true,
+    };
     // set cart count 
    // this.sectionsService.setCartCount();
 

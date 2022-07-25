@@ -1,5 +1,3 @@
-
-
 .map-location {
   .map-container {
     background: none !important;
@@ -9,8 +7,28 @@
 
     //background: none !important;
   }
+}
 
- 
+.request-time-date {
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-between;
+  display: grid;
+  /* flex-direction: row; */
+  justify-content: space-between;
+  grid-template-columns: 6fr 1fr 6fr;
+  justify-items: center;
+  align-items: center;
+  div{
+    width: 100%;
+  }
+
+  .request-time {
+    margin-bottom: 6px;
+    .custom-form-icon-time{
+      font-size: 10px;
+    }
+  }
 }
 
 .request-date {
@@ -33,14 +51,10 @@
     }
   }
 }
-
-.request-time {
-  margin-bottom: 6px;
-}
 // ion-content {--background	:none}
-.ionic-selectable-value-item{
+.ionic-selectable-value-item {
   color: red;
 }
-ionic-selectable.ionic-selectable-inner.ionic-selectable-value.ionic-selectable-value-item{
-color: red;
+ionic-selectable.ionic-selectable-inner.ionic-selectable-value.ionic-selectable-value-item {
+  color: red;
 }

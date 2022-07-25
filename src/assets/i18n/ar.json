@@ -35,7 +35,7 @@
   "our-services": "خدماتنا",
   "news": "الأخبار",
   "news-details": "تفاصيل الخبر",
-  "our-projects": "مشاريعنا",
+  "our-projects": "دليل الجمعيات الخيرية"   ,
   "gallery": "المعرض",
   "volunteer with us": "تطوع معنا",
   "Supporting productive families": "دعم الاسر المنتجه",
@@ -147,7 +147,7 @@
   "use policy": "سياسة الاستخدام",
   "about app": "عن التطبيق",
   "app version": "اصدار التطبيق",
-  "app-copyright": "الحقوق محفوظة | منصة كساء |2022 | ",
+  "app-copyright": " الحقوق محفوظة | منصة كساء | 2022 | ",
   "image change": "تغيير الصورة ",
   "map location": "المكان على الخريطة",
   "the request": "الطلب",
@@ -212,6 +212,8 @@
   "km":"كم",
   "distance":"المسافة",
   "confirm account removal":"تاكيد حذف الحساب",
-  "delete-account":"حذف الحساب"
+  "delete-account":"حذف الحساب",
+  "away from you":"يبعد عنك",
+  "family create account":"انشاء حساب"
   
 }

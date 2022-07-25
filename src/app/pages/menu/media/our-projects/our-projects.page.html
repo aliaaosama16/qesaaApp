@@ -6,7 +6,7 @@
 ></app-header>
 
 <ion-content class="ion-padding-horizontal">
-  <ion-row>
+  <!-- <ion-row>
     <ion-col
       routerLink="/tabs/our-projects/details/{{project.id}}"
       size="6"
@@ -17,5 +17,31 @@
         <p class="ion-no-margin fn-20 qesaa-Janna-Bold">{{project.title}}</p>
       </div>
     </ion-col>
-  </ion-row>
+  </ion-row> -->
+
+  <div
+    *ngFor="let project of projects"
+    class="ion-margin-bottom news-container"
+    routerLink="/tabs/our-projects/details/{{project.id}}"
+  >
+    <div class="icon" [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'">
+      <ion-avatar slot="start">
+        <img [src]="project?.image" />
+      </ion-avatar>
+    </div>
+    <div class="details">
+      <p class="title ion-no-margin secondary-color fn-18 qesaa-Janna-Bold">
+        {{project?.title}}
+      </p>
+      <p class="description ion-no-margin fn-12 qesaa-Janna-Regular" *ngIf="project?.desc">
+        {{project?.desc}}
+      </p>
+      <p class="date ion-no-margin primary-color fn-12 qesaa-Janna-Regular" *ngIf="project?.date">
+        {{project?.date}}
+      </p>
+      <p class="title ion-no-margin  fn-12 qesaa-Janna-Bold">
+        {{"away from you"|translate}}   :  5 {{"km"|translate}}
+      </p>
+    </div>
+  </div>
 </ion-content>

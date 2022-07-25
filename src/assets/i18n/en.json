@@ -35,7 +35,7 @@
   "our-services":"our services",
   "news":"news",
   "news-details":"news details",
-  "our-projects":"our projects",
+  "our-projects":"charities guide",
   "gallery":"gallery",
   "volunteer with us": "volunteer with us",
   "Supporting productive families": "supporting productive families",
@@ -147,7 +147,7 @@
   "use policy":"use policy",
   "about app":"about app",
   "app version":"app version",
-  "app-copyright": "all rights reserved | kesaa app |2022 | ",
+  "app-copyright": "all rights reserved | kesaa app | 2022 | ",
   "image change":"update image",
   "map location":"place on map",
   "the request":"the request",
@@ -212,5 +212,7 @@
   "km":"km",
   "distance": "distance",
   "confirm account removal": "confirm account removal",
-  "delete-account":"delete-account"
+  "delete-account":"delete-account",
+  "away from you":"away from you",
+  "family create account":"create account"
 }

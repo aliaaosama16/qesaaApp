@@ -8,6 +8,7 @@ import { OurProjectsPageRoutingModule } from './our-projects-routing.module';
 
 import { OurProjectsPage } from './our-projects.page';
 import { SharedComponentModule } from 'src/app/components/shared-component.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedComponentModule } from 'src/app/components/shared-component.modul
     FormsModule,
     IonicModule,
     OurProjectsPageRoutingModule,
-    SharedComponentModule
+    SharedComponentModule,
+    TranslateModule
   ],
   declarations: [OurProjectsPage]
 })

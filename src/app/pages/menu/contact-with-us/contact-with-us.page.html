@@ -26,7 +26,6 @@
         formControlName="userName"
         (ionFocus)="inputHaveFocused(true)"
         (ionBlur)="inputHaveFocused(false)"
-
       ></ion-input>
     </ion-item>
 
@@ -45,7 +44,6 @@
         formControlName="phoneNumber"
         (ionFocus)="inputHaveFocused(true)"
         (ionBlur)="inputHaveFocused(false)"
-
       ></ion-input>
     </ion-item>
 
@@ -64,7 +62,6 @@
         formControlName="email"
         (ionFocus)="inputHaveFocused(true)"
         (ionBlur)="inputHaveFocused(false)"
-
       ></ion-input>
     </ion-item>
 
@@ -77,12 +74,22 @@
         formControlName="message"
         (ionFocus)="inputHaveFocused(true)"
         (ionBlur)="inputHaveFocused(false)"
-
       ></ion-textarea>
     </ion-item>
 
-    <ion-button class="margin-8-top" expand="block" type="submit" color="primary">
+    <ion-button
+      class="margin-8-top"
+      expand="block"
+      type="submit"
+      color="primary"
+    >
       <span class="fn-20 qesaa-Janna-Bold"> {{ "send"|translate}} </span>
     </ion-button>
   </form>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed" >
+    <ion-fab-button>
+      <ion-icon name="chatbox-outline" color="white"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

@@ -13,6 +13,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
   styleUrls: ['./our-services.page.scss'],
 })
 export class OurServicesPage implements OnInit {
+  currentLanguage: string = '';
   services:Artical[];
   articalData: ArticalsData;
   articalDataResponse:ArticalsDataResponse;
@@ -28,6 +29,7 @@ export class OurServicesPage implements OnInit {
       console.log('Handler was called!');
       this.location.back();
     });
+    this.currentLanguage = this.languageService.getLanguage();
   }
 
   ngOnInit() {
