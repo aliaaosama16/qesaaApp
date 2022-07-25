@@ -439,7 +439,7 @@ export class DonationOrderPage implements OnInit {
           );
         });
       } else {
-        console.log('there is  no neighborhood');
+        console.log('there is  no neighborhood donation form : ' + JSON.stringify(this.donationForm.value));
         const storeOrderData: StoreOrderData = {
           lang: this.languageService.getLanguage(),
           user_id: this.auth.userID.value,

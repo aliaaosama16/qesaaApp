@@ -16,18 +16,22 @@
   display: grid;
   /* flex-direction: row; */
   justify-content: space-between;
-  grid-template-columns: 6fr 1fr 6fr;
+  grid-template-columns: 10fr 1fr 10fr;
   justify-items: center;
   align-items: center;
-  div{
+  div {
     width: 100%;
   }
 
   .request-time {
     margin-bottom: 6px;
-    .custom-form-icon-time{
+    .custom-form-icon-time {
       font-size: 10px;
     }
+  }
+
+  ion-text[slot="end"] {
+    margin-inline-start: 0px !important;
   }
 }
 

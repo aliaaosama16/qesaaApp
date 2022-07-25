@@ -89,7 +89,6 @@ export class LoginPage implements OnInit {
           if (data.key == 1) {
             console.log('login res :' + JSON.stringify(data));
 
-           
             if (data.data.is_active && data.data.is_login) {
               this.auth.storeStatusAfterLogin(data);
               this.auth.setUserID(data.data.id);
@@ -104,9 +103,9 @@ export class LoginPage implements OnInit {
               (data.data.is_active && !data.data.is_login)
             ) {
               this.util.showMessage(data.msg);
-             // setTimeout(() => {
-                this.router.navigateByUrl(`/verification-code/${data.data.id}`);
-             // }, 2010);
+              // setTimeout(() => {
+              this.router.navigateByUrl(`/verification-code/${data.data.id}`);
+              // }, 2010);
             }
           } else {
             this.util.showMessage(data.msg);

@@ -59,23 +59,6 @@
         src="./../../../../assets/icon/donate/location-inactive.svg"
       ></ion-icon>
 
-      <!-- <ion-select
-        formControlName="city"
-        (ionChange)="chooseCity($event)"
-        placeholder="{{'city'|translate}}"
-        okText='{{"ok"|translate}}'
-        cancelText='{{"cancel"|translate}}'
-        interface="popover"
-        mode="ios"
-      >
-        <ion-select-option
-          class="fn-16 qesaa-Janna-Regular"
-          [value]="city.id"
-          *ngFor="let city of cities"
-        >
-          {{city.title|translate}}
-        </ion-select-option>
-      </ion-select> -->
       <ionic-selectable
         formControlName="city"
         [items]="cities"
@@ -98,24 +81,6 @@
         src="./../../../../assets/icon/donate/location-inactive.svg"
       ></ion-icon>
 
-      <!-- <ion-select
-        formControlName="neighborhood"
-        (ionChange)="chooseNeighborhood($event)"
-        placeholder="{{'the area or neighborhood'|translate}}"
-        okText='{{"ok"|translate}}'
-        cancelText='{{"cancel"|translate}}'
-        interface="popover"
-        mode="ios"
-      >
-        <ion-select-option
-          class="fn-16 qesaa-Janna-Regular"
-          [value]="neighborhood.id"
-          *ngFor="let neighborhood of neighborhoods"
-        >
-          {{neighborhood.title}}
-        </ion-select-option>
-      </ion-select>-->
-
       <ionic-selectable
         formControlName="neighborhood"
         [items]="neighborhoods"
@@ -125,7 +90,7 @@
         (onChange)="chooseNeighborhood($event)"
         placeholder="{{'the area or neighborhood'|translate}}"
         [isEnabled]="noNeighborhoods"
-       closeButtonText="{{'cancel'|translate}}"
+        closeButtonText="{{'cancel'|translate}}"
       >
       </ionic-selectable>
     </ion-item>
@@ -145,14 +110,13 @@
     </div> -->
 
     <div class="request-time-date">
-      
       <div>
         <div class="request-time">
           <p class="ion-no-margin fn-16 qesaa-Janna-Regular">
             {{"request-date"|translate}}
           </p>
         </div>
-    
+
         <ion-item
           lines="none"
           class="ion-margin-bottom"
@@ -166,7 +130,7 @@
             color="primary"
             src="./../../../../assets/icon/donate/request-inactive.svg"
           ></ion-icon>
-          <ion-text slot="end">{{requestDate }}</ion-text>
+          <ion-text class="fn-12" slot="end">{{requestDate }}</ion-text>
           <ion-popover trigger="open-date-input" show-backdrop="false">
             <ng-template>
               <ion-datetime
@@ -181,46 +145,44 @@
         </ion-item>
       </div>
       <div></div>
-  
-     <div>
-      <div class="request-time">
-        <p class="ion-no-margin fn-16 qesaa-Janna-Regular">
-          {{"request-time"|translate}}
-        </p>
-      </div>
-  
-      <ion-item lines="none" class="ion-margin-bottom">
-        <ion-icon
-          class="custom-form-icon"
-          [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
-          item-start
-          color="primary"
-          src="./../../../../assets/icon/donate/request-inactive.svg"
-        ></ion-icon>
-  
-        <ion-select
-          formControlName="requestTime"
-          (ionChange)="chooseTime($event)"
-          placeholder='{{"request-time"|translate}}'
-          okText='{{"ok"|translate}}'
-          cancelText='{{"cancel"|translate}}'
-          interface="popover"
-          mode="ios"
-        >
-          <ion-select-option
-            class="fn-16 qesaa-Janna-Regular"
-            [value]="time.title"
-            *ngFor="let time of requestTimes"
+
+      <div>
+        <div class="request-time">
+          <p class="ion-no-margin fn-16 qesaa-Janna-Regular">
+            {{"request-time"|translate}}
+          </p>
+        </div>
+
+        <ion-item lines="none" class="ion-margin-bottom">
+          <ion-icon
+            class="custom-form-icon"
+            [ngClass]="currentLanguage=='ar'?'icon-ar':'icon-en'"
+            item-start
+            color="primary"
+            src="./../../../../assets/icon/donate/request-inactive.svg"
+          ></ion-icon>
+
+          <ion-select
+            formControlName="requestTime"
+            (ionChange)="chooseTime($event)"
+            placeholder='{{"request-time"|translate}}'
+            okText='{{"ok"|translate}}'
+            cancelText='{{"cancel"|translate}}'
+            interface="popover"
+            mode="ios"
           >
-            {{time.title}}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-  
-     </div>
+            <ion-select-option
+              class="fn-16 qesaa-Janna-Regular"
+              [value]="time.title"
+              *ngFor="let time of requestTimes"
+            >
+              {{time.title}}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </div>
     </div>
 
-  
     <div class="request-date ion-margin-bottom">
       <p class="ion-no-margin fn-16 qesaa-Janna-Bold">
         {{ "request image"|translate}}
