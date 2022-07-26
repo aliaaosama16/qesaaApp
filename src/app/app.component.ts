@@ -207,7 +207,7 @@ export class AppComponent {
   async shareApp() {
     await Share.share({
       title: 'kesa app',
-      url: 'https://play.google.com/store/apps/details?id=com.efada.qesaa.app',
+      url: this.currentPlatform == 'ios' ?'https://apps.apple.com/eg/app/%D9%85%D9%86%D8%B5%D8%A9-%D9%83%D8%B3%D8%A7%D8%A1/id1628540171':'https://play.google.com/store/apps/details?id=com.efada.qesaa.app',
     });
   }
 

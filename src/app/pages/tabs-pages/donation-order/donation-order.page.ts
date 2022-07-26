@@ -446,7 +446,7 @@ export class DonationOrderPage implements OnInit {
           type: StoreOrderType.volunteer,
           name: this.donationForm.value.userName,
           phone: this.donationForm.value.phoneNumber,
-          city_id: this.donationForm.value.city.id,
+          city_id: this.donationForm.value.city,
           lat: this.lat,
           lng: this.long,
           date: moment(this.donationForm.value.requestDate).format(
