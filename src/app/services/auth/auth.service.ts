@@ -103,6 +103,7 @@ export class AuthService {
     await Storage.remove({ key: 'qesaa-activation-status' });
     await Storage.remove({ key: 'qesaa-confirmation-status' });
     await Storage.remove({ key: 'qesaa-status' });
+    await Storage.remove({ key: 'qesaa-userDevice' });
     //await Storage.clear();
   }
 

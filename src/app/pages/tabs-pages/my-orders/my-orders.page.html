@@ -47,7 +47,7 @@
         <div
           class="orders-container ion-margin-top"
           *ngFor="let order of volunteerOrders"
-          (click)="showOrder(order.id,'volunteers')"
+          (click)="showOrder(order.id,'volunteer')"
         >
           <div>
             <p class="order-number fn-16 qesaa-Janna-Bold">
@@ -109,12 +109,12 @@
       </div> -->
     </div>
 
-    <div class="service-orders-section" *ngIf="orderType=='charity-market'">
+    <div class="service-orders-section" *ngIf="orderType=='service'">
       <div class="ion-padding-horizontal" *ngIf="serviceOrders.length!=0  ">
         <div
           class="request-container ion-margin-top"
           *ngFor="let order of serviceOrders"
-          (click)="showOrder(order.id,'charity-market')"
+          (click)="showOrder(order.id,'service')"
         >
           <div class="request-status-date">
             <div class="title primary-color fn-16 qesaa-Janna-Bold">
@@ -197,7 +197,7 @@
       <div
         class="orders-container ion-margin-top"
         *ngFor="let order of providerOrders"
-        (click)="showOrder(order.id,'volunteers')"
+        (click)="showOrder(order.id,'volunteer')"
       >
         <div>
           <p class="order-number fn-16 qesaa-Janna-Bold">

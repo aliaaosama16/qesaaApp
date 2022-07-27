@@ -16,4 +16,5 @@ export enum StaticPageTitle {
   message = 'message',
   policy = 'policy',
   support = 'support',
+  volunteer='volunteer'
 }

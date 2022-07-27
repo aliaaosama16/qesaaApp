@@ -39,11 +39,6 @@ export class UtilitiesService {
     this.platform = val;
   }
 
-  setDeviceID(val) {
-    console.log('deviceID is ' + val);
-    this.deviceID = val;
-  }
-
   async showMessage(message: string) {
     await Toast.show({
       text: this.translate.instant(message),
@@ -100,24 +95,31 @@ export class UtilitiesService {
     });
   }
 
-  async getDeviceID() {
-    const device = await (await Device.getId()).uuid;
-    console.log('get device id by device plugin ' + device);
-    // this.setDeviceID(device);
+  setDeviceID(val) {
+    console.log('deviceID is ' + val);
+    this.deviceID = val;
   }
 
-  getDevice() {
-    OneSignal.setAppId('8a9d6d2b-bee7-4edd-b2e1-1b7ab872c521');
-    OneSignal.getDeviceState((response: DeviceState) => {
-      console.log('getDeviceState : ' + JSON.stringify(response));
-      console.log('userId  : ' + response.userId);
+  async getDevice() {
+    const userDevice = await Storage.get({ key: 'qesaa-userDevice' });
 
-      if (response.userId) {
-        this.setDeviceID(response.userId);
-      } else {
-        this.getDevice();
-      }
-    });
+    if (userDevice.value != null) {
+      this.setDeviceID(userDevice.value);
+    } else {
+      OneSignal.setAppId('8a9d6d2b-bee7-4edd-b2e1-1b7ab872c521');
+      OneSignal.getDeviceState((response: DeviceState) => {
+        console.log('getDeviceState : ' + JSON.stringify(response));
+        console.log('userId  : ' + response.userId);
+
+        // if not have id before in storage
+        if (response.userId) {
+          this.storeData('qesaa-userDevice', response.userId);
+          this.setDeviceID(response.userId);
+        } else {
+          this.getDevice();
+        }
+      });
+    }
   }
 
   getDatesDifference(dateFrom) {
@@ -226,6 +228,7 @@ export class UtilitiesService {
     );
     // });
   }
+  
   setUserLocation(lat, long) {
     this.userLocation.lat = lat;
     this.userLocation.lng = long;
@@ -237,5 +240,12 @@ export class UtilitiesService {
 
   getinputStatus(): Observable<boolean> {
     return this.inputHaveFocused.asObservable();
+  }
+
+  async getDeviceID() {
+    const device = await (await Device.getId()).uuid;
+    console.log('get device id by device plugin ' + device);
+    // alert(device);
+    // this.setDeviceID(device);
   }
 }

@@ -53,7 +53,6 @@ export class DonationOrderPage implements OnInit {
   currentLanguage: string;
   donationForm: FormGroup;
   requestImage: any = '';
-
   requestTimes: GeneralSectionResponse[];
   cities: GeneralSectionResponse[];
   neighborhoods: GeneralSectionResponse[];
@@ -267,7 +266,7 @@ export class DonationOrderPage implements OnInit {
       draggable: true,
       icon: './../../../../assets/icon/location-pin-small.svg',
     });
-    this.reverseGeocode(this.lat, this.long);
+    // this.reverseGeocode(this.lat, this.long);
     google.maps.event.addListener(this.home, 'dragend', (event) => {
       //alert(JSON.stringify(event))
       //
@@ -277,7 +276,7 @@ export class DonationOrderPage implements OnInit {
       console.log('new location :' + this.lat + '  ' + this.long);
       //    alert(res.coords.latitude+'   '+res.coords.longitude)
       //  })
-      this.reverseGeocode(this.lat, this.long);
+      // this.reverseGeocode(this.lat, this.long);
     });
 
     //this.reverseGeocode(this.lat, this.long);
@@ -288,30 +287,30 @@ export class DonationOrderPage implements OnInit {
     // });
   }
 
-  reverseGeocode(lat, lng) {
-    let options: NativeGeocoderOptions = {
-      useLocale: true,
-      maxResults: 5,
-    };
+  // reverseGeocode(lat, lng) {
+  //   let options: NativeGeocoderOptions = {
+  //     useLocale: true,
+  //     maxResults: 5,
+  //   };
 
-    this.nativeGeocoder
-      .reverseGeocode(lat, lng, options)
-      .then((result: NativeGeocoderResult[]) => {
-        //console.log(JSON.stringify(result[0]));
-        this.address =
-          result[0].countryName +
-          ' ' +
-          result[0].administrativeArea +
-          ' ' +
-          result[0].subAdministrativeArea +
-          ' ' +
-          result[0].locality +
-          ' ' +
-          result[0].postalCode;
-          console.log('address : ' + this.address);
-      })
-      .catch((error: any) => console.log(error));
-  }
+  //   this.nativeGeocoder
+  //     .reverseGeocode(lat, lng, options)
+  //     .then((result: NativeGeocoderResult[]) => {
+  //       //console.log(JSON.stringify(result[0]));
+  //       this.address =
+  //         result[0].countryName +
+  //         ' ' +
+  //         result[0].administrativeArea +
+  //         ' ' +
+  //         result[0].subAdministrativeArea +
+  //         ' ' +
+  //         result[0].locality +
+  //         ' ' +
+  //         result[0].postalCode;
+  //         console.log('address : ' + this.address);
+  //     })
+  //     .catch((error: any) => console.log(error));
+  // }
 
   getAllCities() {
     const userData: UserData = {
@@ -439,7 +438,10 @@ export class DonationOrderPage implements OnInit {
           );
         });
       } else {
-        console.log('there is  no neighborhood donation form : ' + JSON.stringify(this.donationForm.value));
+        console.log(
+          'there is  no neighborhood donation form : ' +
+            JSON.stringify(this.donationForm.value)
+        );
         const storeOrderData: StoreOrderData = {
           lang: this.languageService.getLanguage(),
           user_id: this.auth.userID.value,
@@ -481,8 +483,8 @@ export class DonationOrderPage implements OnInit {
           );
         });
       }
-    }else{
-      this.util.showMessage("please make sure gps is open")
+    } else {
+      this.util.showMessage('please make sure gps is open');
     }
   }
 

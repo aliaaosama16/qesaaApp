@@ -26,7 +26,7 @@
       </div>
     </div>
 
-    <div class="request-data" *ngIf="orderType=='volunteers'">
+    <div class="request-data" *ngIf="orderType=='volunteer'">
       <div class="text primary-color fn-16 qesaa-Janna-Bold">
         {{'orderDate'|translate}}
       </div>
@@ -91,12 +91,15 @@
       </div>
     </div>
 
-    <div class="client-data" *ngIf="orderDetails.type=='volunteer' && userType=='provider'">
+    <div
+      class="client-data"
+      *ngIf="orderDetails.type=='volunteer' && userType=='provider'"
+    >
       <div class="text primary-color fn-16 qesaa-Janna-Bold">
         {{'distance'|translate}}
       </div>
 
-      <div class="value fn-16 qesaa-Janna-Regular" >
+      <div class="value fn-16 qesaa-Janna-Regular">
         {{orderDetails?.user_distance}} {{"km"|translate}}
       </div>
     </div>
@@ -150,7 +153,7 @@
         class="custom-swiper"
         [dir]="currentlangauge == 'ar' ? 'rtl' : 'ltr'"
       >
-        <ng-template swiperSlide *ngIf="orderType=='charity-market'">
+        <ng-template swiperSlide *ngIf="orderType=='service'">
           <img
             [src]="orderDetails?.order_services[0].service_image"
             (click)="openPreview(orderDetails?.image,1)"

@@ -47,6 +47,7 @@ export class VerificationCodePage implements OnInit {
   ) {
     this.menuCtrl.enable(false, 'main');
     this.currentLanguage = this.languaService.getLanguage();
+    this.util.getDevice();
   }
 
   ngOnInit() {

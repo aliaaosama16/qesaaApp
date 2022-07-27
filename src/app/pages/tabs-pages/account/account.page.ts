@@ -41,6 +41,7 @@ export class AccountPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.util.getDevice();
     this.languageService.getUpdatedLanguage().subscribe((lang) => {
       console.log('current language :' + lang);
       this.otherLanguage = lang == 'ar' ? 'English' : 'عربي';

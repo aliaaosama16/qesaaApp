@@ -22,6 +22,7 @@ import OneSignal from 'onesignal-cordova-plugin';
 import { DeviceState } from 'onesignal-cordova-plugin/types/Subscription';
 import { OpenedEvent } from 'onesignal-cordova-plugin/types/Notification';
 import { InAppMessageAction } from 'onesignal-cordova-plugin/types/InAppMessage';
+import { StaticPageTitle } from './models/staticPage';
 
 @Component({
   selector: 'app-root',
@@ -143,7 +144,6 @@ export class AppComponent {
         SplashScreen.hide();
       }, 50);
 
-      
       this.languageService.setInitialAppLanguage();
 
       this.util.getPlatformType();
@@ -207,7 +207,10 @@ export class AppComponent {
   async shareApp() {
     await Share.share({
       title: 'kesa app',
-      url: this.currentPlatform == 'ios' ?'https://apps.apple.com/eg/app/%D9%85%D9%86%D8%B5%D8%A9-%D9%83%D8%B3%D8%A7%D8%A1/id1628540171':'https://play.google.com/store/apps/details?id=com.efada.qesaa.app',
+      url:
+        this.currentPlatform == 'ios'
+          ? 'https://apps.apple.com/eg/app/%D9%85%D9%86%D8%B5%D8%A9-%D9%83%D8%B3%D8%A7%D8%A1/id1628540171'
+          : 'https://play.google.com/store/apps/details?id=com.efada.qesaa.app',
     });
   }
 
@@ -267,34 +270,34 @@ export class AppComponent {
 
     // this.oneSignal.endInit();
 
-    this.util.getDevice();
-
-    OneSignal.setNotificationOpenedHandler((jsonData:OpenedEvent) => {
+    // this.util.getDevice();
+    OneSignal.setAppId('8a9d6d2b-bee7-4edd-b2e1-1b7ab872c521');
+    OneSignal.setNotificationOpenedHandler((jsonData: OpenedEvent) => {
       console.log('setNotificationOpenedHandler ' + JSON.stringify(jsonData));
 
-      const orderData:any=jsonData.notification.additionalData;
+      const orderData: any = jsonData.notification.additionalData;
       // console.log('title  : '+?.order_id);
       // console.log('subtitle  : '+jsonData.notification.subtitle);
       // 'volunteers' 'charity-market'
-      // this.dataService.setPageData(page);
+      this.dataService.setPageData(orderData?.status);
       this.router.navigateByUrl(
         `/tabs/my-orders/details/${orderData?.order_id}`
       );
     });
 
     // OneSignal.setInAppMessageClickHandler((action: InAppMessageAction) => {
-    //   console.log('setNotificationOpenedHandler ' + JSON.stringify(action)); 
+    //   console.log('setNotificationOpenedHandler ' + JSON.stringify(action));
     // });
 
     OneSignal.setNotificationWillShowInForegroundHandler((jsonData) => {
       console.log(
         'setNotificationWillShowInForegroundHandler ' + JSON.stringify(jsonData)
       );
-      const orderData:any=jsonData.getNotification().additionalData;
+      const orderData: any = jsonData.getNotification().additionalData;
       // console.log('title  : '+?.order_id);
       // console.log('subtitle  : '+jsonData.notification.subtitle);
       // 'volunteers' 'charity-market'
-      // this.dataService.setPageData(page);
+      this.dataService.setPageData(orderData?.status);
       this.router.navigateByUrl(
         `/tabs/my-orders/details/${orderData?.order_id}`
       );

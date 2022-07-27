@@ -61,6 +61,7 @@ export class LoginPage implements OnInit {
       this.otherLanguage = lang == 'ar' ? 'English' : 'عربي';
       this.currentLanguage = lang;
     });
+    this.util.getDevice();
   }
 
   ngOnInit() {
