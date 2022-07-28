@@ -151,7 +151,7 @@ export class AccountPage implements OnInit {
     alert.present();
   }
 
- async deleteAccount(){
+  async deleteAccount() {
     const logoutData: LogOutData = {
       lang: this.languageService.getLanguage(),
       user_id: this.auth.userID.value,
@@ -187,17 +187,16 @@ export class AccountPage implements OnInit {
         (data: AuthResponse) => {
           if (data.key == 1) {
             this.util.showMessage(data.msg);
-            
-           // setTimeout(()=>{
-              this.auth.removeRegistrationData().then( (_) => {
-                this.router.navigateByUrl('/tabs/home');
-                if (this.auth.userType.value == 'provider') {
-                  this.removeWatchDriverLocation();
-                }
-              });
-           // },2200)
-            
-           
+
+            // setTimeout(()=>{
+            this.auth.removeRegistrationData().then((_) => {
+              this.router.navigateByUrl('/tabs/home');
+              if (this.auth.userType.value == 'provider') {
+                this.removeWatchDriverLocation();
+              }
+            });
+            // },2200)
+
             console.log('logout data :' + JSON.stringify(this.userData));
           } else {
           }
@@ -216,17 +215,16 @@ export class AccountPage implements OnInit {
         (data: AuthResponse) => {
           if (data.key == 1) {
             this.util.showMessage(data.msg);
-            
-           // setTimeout(()=>{
-              this.auth.removeRegistrationData().then( (_) => {
-                this.router.navigateByUrl('/tabs/home');
-                if (this.auth.userType.value == 'provider') {
-                  this.removeWatchDriverLocation();
-                }
-              });
-           // },2200)
-            
-           
+
+            // setTimeout(()=>{
+            this.auth.removeRegistrationData().then((_) => {
+              this.router.navigateByUrl('/tabs/home');
+              if (this.auth.userType.value == 'provider') {
+                this.removeWatchDriverLocation();
+              }
+            });
+            // },2200)
+
             console.log('logout data :' + JSON.stringify(this.userData));
           } else {
           }

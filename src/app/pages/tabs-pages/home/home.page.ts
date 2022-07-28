@@ -9,11 +9,12 @@ import { DataService } from 'src/app/services/data/data.service';
 import SwiperCore, { Pagination, Autoplay } from 'swiper';
 import { HomeService } from 'src/app/services/home/home.service';
 import { HomeResponse } from 'src/app/models/home';
-import { StaticPageResponse, StaticPageTitle } from 'src/app/models/staticPage';
-import { GeneralService } from 'src/app/services/general/general.service';
+//import { StaticPageResponse, StaticPageTitle } from 'src/app/models/staticPage';
+//import { GeneralService } from 'src/app/services/general/general.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { interval, Observable } from 'rxjs';
-import { Storage } from '@capacitor/storage';
+import { StaticPageTitle } from 'src/app/models/staticPage';
+//import { Storage } from '@capacitor/storage';
 
 
 SwiperCore.use([Pagination, Autoplay]);
@@ -25,8 +26,6 @@ SwiperCore.use([Pagination, Autoplay]);
 })
 export class HomePage implements OnInit {
   public intervallTimer = interval(1000);
-  private subscription;
-
   configSlider: SwiperOptions;
   partenrsConfig: SwiperOptions;
   feedbackConfig: SwiperOptions;
@@ -47,14 +46,14 @@ export class HomePage implements OnInit {
   constructor(
     private menuCtrl: MenuController,
     private util: UtilitiesService,
-    private general: GeneralService,
+    //private general: GeneralService,
     private router: Router,
     private data: DataService,
     private home: HomeService,
     private languageService: LanguageService,
     private auth: AuthService,
-    private plt: Platform,
-    private routerOutlet: IonRouterOutlet,
+    // private plt: Platform,
+    // private routerOutlet: IonRouterOutlet,
    
   ) {
     this.platform = this.util.platform;
@@ -67,8 +66,6 @@ export class HomePage implements OnInit {
     //   }
     // });
   }
-
-
 
   ngOnInit() {
     this.menuCtrl.enable(true, 'main');

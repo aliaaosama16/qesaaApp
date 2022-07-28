@@ -10,6 +10,7 @@ import { DonationOrderPageRoutingModule } from './donation-order-routing.module'
 import { DonationOrderPage } from './donation-order.page';
 import { SharedComponentModule } from 'src/app/components/shared-component.module';
 import { IonicSelectableModule } from 'ionic-selectable';
+import { SwiperModule } from 'swiper/angular';
 // import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
@@ -21,7 +22,8 @@ import { IonicSelectableModule } from 'ionic-selectable';
     SharedComponentModule,
     ReactiveFormsModule,
     TranslateModule,
-    IonicSelectableModule
+    IonicSelectableModule,
+    SwiperModule
   ],
   declarations: [DonationOrderPage],
   // schemas: [CUSTOM_ELEMENTS_SCHEMA]

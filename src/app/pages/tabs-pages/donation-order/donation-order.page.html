@@ -6,6 +6,23 @@
 ></app-header>
 
 <ion-content class="ion-padding-horizontal">
+
+
+  <div class="slider-section ion-padding-horizontal">
+    <swiper
+      #swiper
+      [config]="configSlider"
+      class="custom-swiper"
+      [dir]="currentLanguage == 'ar' ? 'rtl' : 'ltr'"
+    >
+      <ng-template swiperSlide *ngFor="let slide of slides">
+        <div class="slide-item-container">
+          <img [src]="slide.image" />
+        </div>
+      </ng-template>
+    </swiper>
+  </div>
+
   <form
     (ngSubmit)="donate()"
     [formGroup]="donationForm"

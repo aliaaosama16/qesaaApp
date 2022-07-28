@@ -228,7 +228,7 @@ export class UtilitiesService {
     );
     // });
   }
-  
+
   setUserLocation(lat, long) {
     this.userLocation.lat = lat;
     this.userLocation.lng = long;

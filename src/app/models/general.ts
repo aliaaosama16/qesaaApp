@@ -1,3 +1,5 @@
+import { StaticPageTitle } from "./staticPage";
+
 export interface GeneralResponse {
   key: number;
   msg: string;
@@ -43,10 +45,11 @@ export interface GeneralSectionResponse {
   service_id?: number;
   service_title?: string;
   count?: number;
+ 
+  type?: StaticPageTitle;
 }
 
 export interface AuthDataResponse {
-  
   first_name: string;
   full_phone: string;
   instagram: string;
@@ -67,8 +70,8 @@ export interface AuthDataResponse {
   is_confirmed?: boolean;
   lang?: string;
   avatar: string;
-  see_family?:boolean;
-  is_login:boolean
+  see_family?: boolean;
+  is_login: boolean;
 }
 
 export interface ImageInfo extends Language {

@@ -15,7 +15,12 @@ import { LanguageService } from '../language/language.service';
 import { Filesystem, Directory, Encoding } from '@capacitor/filesystem';
 import { UtilitiesService } from '../utilities/utilities.service';
 import { Intro } from 'src/app/models/intro';
-import { StaticPageData, StaticPageResponse } from 'src/app/models/staticPage';
+import {
+  SlideData,
+  SlideResponse,
+  StaticPageData,
+  StaticPageResponse,
+} from 'src/app/models/staticPage';
 import { ContactUsData } from 'src/app/models/contactUs';
 
 @Injectable({
@@ -71,6 +76,13 @@ export class GeneralService {
   contactUs(data: ContactUsData): Observable<GeneralResponse> {
     return this.httpclient.post<GeneralResponse>(
       `${environment.BASE_URL}contact-us`,
+      data
+    );
+  }
+
+  getSliders(data: SlideData): Observable<SlideResponse> {
+    return this.httpclient.post<SlideResponse>(
+      `${environment.BASE_URL}sliders`,
       data
     );
   }

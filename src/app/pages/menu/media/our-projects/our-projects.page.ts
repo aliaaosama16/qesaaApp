@@ -1,13 +1,15 @@
-
 import { Platform } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { UtilitiesService } from 'src/app/services/utilities/utilities.service';
 import { MediaService } from 'src/app/services/media/media.service';
-import { Artical, ArticalsData, ArticalsDataResponse, ArticalType } from 'src/app/models/articals';
-import { AuthService } from 'src/app/services/auth/auth.service';
-
+import {
+  Artical,
+  ArticalsData,
+  ArticalsDataResponse,
+  ArticalType,
+} from 'src/app/models/articals';
 
 @Component({
   selector: 'app-our-projects',
@@ -24,8 +26,7 @@ export class OurProjectsPage implements OnInit {
     private location: Location,
     private languageService: LanguageService,
     private util: UtilitiesService,
-    private mediaService: MediaService,
-    private auth:AuthService
+    private mediaService: MediaService
   ) {
     this.platform.backButton.subscribeWithPriority(10, () => {
       console.log('Handler was called!');
@@ -37,8 +38,10 @@ export class OurProjectsPage implements OnInit {
   ngOnInit() {
     this.articalData = {
       lang: this.languageService.getLanguage(),
-     // user_id: this.auth.userID.value,
+      // user_id: this.auth.userID.value,
       type: ArticalType.projects,
+      lat:this.util.userLocation.lat,
+      long:this.util.userLocation.lng,
     };
     this.util.showLoadingSpinner().then((__) => {
       this.mediaService.articals(this.articalData).subscribe(
@@ -49,9 +52,9 @@ export class OurProjectsPage implements OnInit {
             //   'articalDataResponse  :  ' +
             //     JSON.stringify(this.articalDataResponse)
             // );
-           // this.util.showMessage(data.msg);
+            // this.util.showMessage(data.msg);
           } else {
-           // this.util.showMessage(data.msg);
+            // this.util.showMessage(data.msg);
           }
           this.util.dismissLoading();
         },

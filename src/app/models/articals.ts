@@ -2,7 +2,9 @@ import { UserData, GeneralResponse } from './general';
 
 // ALL articles  [services , news , projects , photos , videos]
 export interface ArticalsData extends UserData {
-  type:string;
+  type: string;
+  lat?: number;
+  long?: number;
 }
 
 export interface ArticalsDataResponse extends GeneralResponse {
@@ -26,7 +28,11 @@ export interface Artical {
   date: string;
   image: string;
   video: string;
+  distance: number;
+  lat: number;
+  lng: number;
 }
+
 export enum ArticalType {
   services = 'services',
   news = 'news ',

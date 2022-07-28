@@ -1,7 +1,6 @@
 import { UtilitiesService } from './../../services/utilities/utilities.service';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { Component, OnInit } from '@angular/core';
-import { SwiperOptions } from 'swiper';
 import { GeneralSectionResponse, UserData } from 'src/app/models/general';
 import { SectionsProductsService } from 'src/app/services/sections-products/sections-products.service';
 
@@ -12,6 +11,16 @@ import {
   SectionResponse,
 } from 'src/app/models/sections';
 import { AuthService } from 'src/app/services/auth/auth.service';
+import {
+  SlideData,
+  SlideResponse,
+  StaticPageTitle,
+} from 'src/app/models/staticPage';
+import { GeneralService } from 'src/app/services/general/general.service';
+import { SwiperOptions } from 'swiper';
+import SwiperCore, { Pagination, Autoplay } from 'swiper';
+import { GeneralResponse } from '../../models/general';
+SwiperCore.use([Pagination, Autoplay]);
 
 @Component({
   selector: 'app-charity-market',
@@ -20,7 +29,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 })
 export class CharityMarketPage implements OnInit {
   configSlider: SwiperOptions;
-  selectedIndex:string ;
+  selectedIndex: string;
   categoriesConfig: SwiperOptions;
   currentlangauge: string;
   sections: GeneralSectionResponse[];
@@ -31,7 +40,8 @@ export class CharityMarketPage implements OnInit {
     private util: UtilitiesService,
     private sectionsService: SectionsProductsService,
     private router: Router,
-    private auth:AuthService
+    private auth: AuthService,
+    private general: GeneralService
   ) {
     this.currentlangauge = this.languageService.getLanguage();
   }
@@ -51,26 +61,26 @@ export class CharityMarketPage implements OnInit {
       autoplay: true,
       loop: true,
     };
-    // set cart count 
-   // this.sectionsService.setCartCount();
 
-    // get all sections
+    this.getSections();
+    this.getSliders();
+  }
 
-
-
+ getSections() {
     const sectionData: UserData = {
       lang: this.languageService.getLanguage(),
-      user_id:this.auth.userID.value,
+      user_id: this.auth.userID.value,
     };
-    this.util.showLoadingSpinner().then((__) => {
-      this.sectionsService.getAllSections(sectionData).subscribe(
+    this.util.showLoadingSpinner().then( (__) => {
+     this.sectionsService.getAllSections(sectionData).subscribe(
         (data: SectionResponse) => {
           if (data.key == 1) {
             this.sections = data.data;
             console.log('all sections :' + this.sections);
-           this.getProductsBySection(  this.sections[0].id);
+            this.getProductsBySection(this.sections[0].id);
+
           } else {
-           // this.util.showMessage(data.msg);
+          this.util.showMessage(data.msg);
           }
           this.util.dismissLoading();
         },
@@ -80,12 +90,33 @@ export class CharityMarketPage implements OnInit {
       );
     });
   }
-  catSelect(catIndex){
-    console.log(catIndex)
-    this.selectedIndex=catIndex;
+
+  getSliders() {
+    const slideData: SlideData = {
+      lang: this.languageService.getLanguage(),
+      type: StaticPageTitle.volunteer,
+    };
+    //this.util.showLoadingSpinner().then((__) => {
+      this.general.getSliders(slideData).subscribe(
+        (data: SlideResponse) => {
+          this.util.dismissLoading();
+          if (data.key == 1) {
+            this.Sliders = data.data;
+          } else {
+        //    this.util.showMessage(data.msg);
+          }
+        },
+        (err) => {
+        //  this.util.dismissLoading();
+        }
+      );
+    //});
+  }
+  catSelect(catIndex) {
+    console.log(catIndex);
+    this.selectedIndex = catIndex;
   }
   segmentChanged($event) {
-  
     console.log('selected :' + $event.target.value);
 
     this.getProductsBySection($event.target.value);

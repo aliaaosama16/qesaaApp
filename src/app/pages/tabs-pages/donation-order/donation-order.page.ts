@@ -13,7 +13,13 @@ import {
   Platform,
 } from '@ionic/angular';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { LanguageService } from 'src/app/services/language/language.service';
 import { StoreOrderData, StoreOrderType } from 'src/app/models/sections';
 import { SectionsProductsService } from 'src/app/services/sections-products/sections-products.service';
@@ -35,11 +41,19 @@ import {
   NativeGeocoderResult,
   NativeGeocoderOptions,
 } from '@awesome-cordova-plugins/native-geocoder/ngx';
-
+import SwiperCore, { Pagination, Autoplay } from 'swiper';
+import {
+  SlideData,
+  SlideResponse,
+  StaticPageTitle,
+} from 'src/app/models/staticPage';
+import { SwiperOptions } from 'swiper';
+SwiperCore.use([Pagination, Autoplay]);
 @Component({
   selector: 'app-donation-order',
   templateUrl: './donation-order.page.html',
   styleUrls: ['./donation-order.page.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DonationOrderPage implements OnInit {
   @ViewChild('map', { static: false }) mapElement: ElementRef;
@@ -64,6 +78,8 @@ export class DonationOrderPage implements OnInit {
   neighborhood: GeneralSectionResponse;
   noNeighborhoods: boolean = true;
   selectNeighborhood: boolean = false;
+  slides: GeneralSectionResponse[];
+  configSlider: SwiperOptions;
   constructor(
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
@@ -94,6 +110,15 @@ export class DonationOrderPage implements OnInit {
   }
 
   ngOnInit() {
+    this.configSlider = {
+      slidesPerView: 1,
+      spaceBetween: 0,
+      pagination: true,
+      effect: 'fade',
+      autoplay: true,
+      loop: true,
+    };
+
     this.lat = this.util.userLocation.lat;
     this.long = this.util.userLocation.lng;
 
@@ -105,6 +130,29 @@ export class DonationOrderPage implements OnInit {
     this.buildForm();
     this.getOrderTimes(userData);
     this.getUserData(userData);
+    this.getSliders();
+  }
+
+  getSliders() {
+    const slideData: SlideData = {
+      lang: this.languageService.getLanguage(),
+      type: StaticPageTitle.volunteer,
+    };
+    this.util.showLoadingSpinner().then((__) => {
+      this.general.getSliders(slideData).subscribe(
+        (data: SlideResponse) => {
+          this.util.dismissLoading();
+          if (data.key == 1) {
+            this.slides = data.data;
+          } else {
+            this.util.showMessage(data.msg);
+          }
+        },
+        (err) => {
+          this.util.dismissLoading();
+        }
+      );
+    });
   }
 
   ngAfterViewInit() {
@@ -286,31 +334,6 @@ export class DonationOrderPage implements OnInit {
     //      alert(this.home.getPosition()); // new LatLng-Object after dragend-event...
     // });
   }
-
-  // reverseGeocode(lat, lng) {
-  //   let options: NativeGeocoderOptions = {
-  //     useLocale: true,
-  //     maxResults: 5,
-  //   };
-
-  //   this.nativeGeocoder
-  //     .reverseGeocode(lat, lng, options)
-  //     .then((result: NativeGeocoderResult[]) => {
-  //       //console.log(JSON.stringify(result[0]));
-  //       this.address =
-  //         result[0].countryName +
-  //         ' ' +
-  //         result[0].administrativeArea +
-  //         ' ' +
-  //         result[0].subAdministrativeArea +
-  //         ' ' +
-  //         result[0].locality +
-  //         ' ' +
-  //         result[0].postalCode;
-  //         console.log('address : ' + this.address);
-  //     })
-  //     .catch((error: any) => console.log(error));
-  // }
 
   getAllCities() {
     const userData: UserData = {
@@ -502,3 +525,27 @@ export class DonationOrderPage implements OnInit {
     return await modal.present();
   }
 }
+// reverseGeocode(lat, lng) {
+//   let options: NativeGeocoderOptions = {
+//     useLocale: true,
+//     maxResults: 5,
+//   };
+
+//   this.nativeGeocoder
+//     .reverseGeocode(lat, lng, options)
+//     .then((result: NativeGeocoderResult[]) => {
+//       //console.log(JSON.stringify(result[0]));
+//       this.address =
+//         result[0].countryName +
+//         ' ' +
+//         result[0].administrativeArea +
+//         ' ' +
+//         result[0].subAdministrativeArea +
+//         ' ' +
+//         result[0].locality +
+//         ' ' +
+//         result[0].postalCode;
+//         console.log('address : ' + this.address);
+//     })
+//     .catch((error: any) => console.log(error));
+// }

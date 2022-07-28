@@ -8,6 +8,7 @@ import { OurServicesPageRoutingModule } from './our-services-routing.module';
 
 import { OurServicesPage } from './our-services.page';
 import { SharedComponentModule } from 'src/app/components/shared-component.module';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedComponentModule } from 'src/app/components/shared-component.modul
     FormsModule,
     IonicModule,
     OurServicesPageRoutingModule,
-    SharedComponentModule
+    SharedComponentModule,
+    SwiperModule
   ],
   declarations: [OurServicesPage]
 })

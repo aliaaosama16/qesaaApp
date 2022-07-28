@@ -6,8 +6,7 @@
 ></app-header>
 
 <ion-content class="ion-padding-horizontal">
-
-  <div class="slider-section ion-padding-horizontal ion-margin-bottom">
+  <div class="slider-section ion-margin-bottom">
     <swiper
       #swiper
       [config]="configSlider"
@@ -25,8 +24,8 @@
   <div class="category-section">
     <ion-segment scrollable="true" (ionChange)="segmentChanged($event)">
       <ion-segment-button
-      (click)="catSelect(section.id)"
-      [class.cat-selected]="selectedIndex == section.id"
+        (click)="catSelect(section.id)"
+        [class.cat-selected]="selectedIndex == section.id"
         [value]="section.id"
         *ngFor="let section of sections;let i=index"
       >

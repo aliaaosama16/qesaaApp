@@ -16,5 +16,16 @@ export enum StaticPageTitle {
   message = 'message',
   policy = 'policy',
   support = 'support',
-  volunteer='volunteer'
+  volunteer = 'volunteer',
+  home = 'home',
+  market = 'market',
+  services = 'services',
+}
+
+export interface SlideData extends UserData {
+ type:StaticPageTitle;
+}
+
+export interface SlideResponse extends GeneralResponse {
+  data: GeneralSectionResponse[];
 }
