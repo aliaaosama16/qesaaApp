@@ -5,6 +5,9 @@ import { LanguageService } from 'src/app/services/language/language.service';
 import { FamilyService } from '../../services/family/family.service';
 import { FamilyData } from '../../models/family';
 import { UtilitiesService } from '../../services/utilities/utilities.service';
+import { SwiperOptions } from 'swiper';
+import { ImageModalPage } from '../modals/image-modal/image-modal.page';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-productive-families-details',
@@ -12,15 +15,24 @@ import { UtilitiesService } from '../../services/utilities/utilities.service';
   styleUrls: ['./productive-families-details.page.scss'],
 })
 export class ProductiveFamiliesDetailsPage implements OnInit {
-  langauge: string;
   familyDetails: Family;
+  showDetails: boolean = false;
+  currentlangauge:string='';
+  familyPrpdcuts:SwiperOptions;
   constructor(
     private languageService: LanguageService,
     private familyService: FamilyService,
     private activatedRoute: ActivatedRoute,
-    private util: UtilitiesService
+    private util: UtilitiesService,
+    private modalCtrl:ModalController
   ) {
-    this.langauge = this.languageService.getLanguage();
+    this.currentlangauge = this.languageService.getLanguage();
+    this.familyPrpdcuts = {
+      slidesPerView: 3.1,
+      spaceBetween: 24,
+      pagination: false,
+      effect: 'fade',
+    };
   }
 
   ngOnInit() {
@@ -53,5 +65,22 @@ export class ProductiveFamiliesDetailsPage implements OnInit {
     }
 
     // https://api.whatsapp.com/send?phone=+201013288575&text=test
+  }
+
+  showHideDetails() {
+    this.showDetails = !this.showDetails;
+  }
+
+  async openPreview(itemImages, currentImage) {
+    console.log('open iamges modal');
+    const modal = await this.modalCtrl.create({
+      component: ImageModalPage,
+      cssClass: 'transparent-modal',
+      componentProps: {
+        images: itemImages,
+        imageID: currentImage+1,
+      },
+    });
+    modal.present();
   }
 }

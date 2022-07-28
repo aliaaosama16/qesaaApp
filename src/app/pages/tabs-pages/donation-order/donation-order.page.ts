@@ -138,21 +138,21 @@ export class DonationOrderPage implements OnInit {
       lang: this.languageService.getLanguage(),
       type: StaticPageTitle.volunteer,
     };
-    this.util.showLoadingSpinner().then((__) => {
+   // this.util.showLoadingSpinner().then((__) => {
       this.general.getSliders(slideData).subscribe(
         (data: SlideResponse) => {
           this.util.dismissLoading();
           if (data.key == 1) {
             this.slides = data.data;
           } else {
-            this.util.showMessage(data.msg);
+           // this.util.showMessage(data.msg);
           }
         },
         (err) => {
-          this.util.dismissLoading();
+      //    this.util.dismissLoading();
         }
       );
-    });
+   // });
   }
 
   ngAfterViewInit() {

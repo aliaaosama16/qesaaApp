@@ -164,7 +164,7 @@
   "add":"add",
   "District": "district",
   "basic image": "basic image",
-  "product image":"product image",
+  "product images":"product images",
   "instgram link": "instgram link",
   "enter instgram link": "enter instgram link",
   "twitter link": "twitter link",
@@ -172,7 +172,7 @@
   "attach image":"attach image",
   "contact with admn":"contact with admn",
   "contact-notice":"leave message and we will contact with you",
-  "no prodiders":"no prodiders",
+  "no providers":"no providers",
   "no products":"no products",
   "please login":"please login first",
   "accept to":"accept to",
@@ -214,5 +214,8 @@
   "confirm account removal": "confirm account removal",
   "delete-account":"delete-account",
   "away from you":"away from you",
-  "family create account":"create account"
+  "family create account":"create account",
+  "show more data":"show more data",
+  "show less data": "show less data",
+  "family products":"family products"
 }

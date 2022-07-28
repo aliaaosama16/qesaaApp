@@ -9,6 +9,7 @@ import { ProductiveFamiliesDetailsPageRoutingModule } from './productive-familie
 import { ProductiveFamiliesDetailsPage } from './productive-families-details.page';
 import { SharedComponentModule } from 'src/app/components/shared-component.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { TranslateModule } from '@ngx-translate/core';
     IonicModule,
     ProductiveFamiliesDetailsPageRoutingModule,
     SharedComponentModule,
-    TranslateModule
+    TranslateModule,
+    SwiperModule
   ],
   declarations: [ProductiveFamiliesDetailsPage]
 })

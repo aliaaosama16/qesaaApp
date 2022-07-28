@@ -43,6 +43,8 @@ export class SupportProductiveFamiliesPage implements OnInit {
   neighborhood: GeneralSectionResponse;
   noNeighborhoods: boolean = true;
   selectNeighborhood: boolean = false;
+  productImageSelected: boolean = false;
+  productImages: any[] = [];
   constructor(
     private languageService: LanguageService,
     private formBuilder: FormBuilder,
@@ -59,6 +61,7 @@ export class SupportProductiveFamiliesPage implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.productImageSelected = this.general.getFamiliesProductImage() != '';
     this.currentLanguage = this.languageService.getLanguage();
     this.buildForm();
     this.getAllCities();
@@ -77,7 +80,7 @@ export class SupportProductiveFamiliesPage implements OnInit {
         ],
       ],
       city: ['', [Validators.required, Validators.minLength(2)]],
-      neighborhood: ['', [ Validators.minLength(2)]],
+      neighborhood: ['', [Validators.minLength(2)]],
       twitterLink: ['', [Validators.required, Validators.minLength(2)]],
       instgramLink: ['', [Validators.required, Validators.minLength(2)]],
       basicImage: [
@@ -145,15 +148,37 @@ export class SupportProductiveFamiliesPage implements OnInit {
   }
 
   async attachProductImage(source: CameraSource) {
-    const image = await Camera.getPhoto({
+    const images = await Camera.pickImages({
       quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Uri,
-      source: source,
+      // allowEditing: false,
+      // resultType: CameraResultType.Uri,
+      // source: source,
     });
-    this.productImage = this.sanitizer.bypassSecurityTrustUrl(image.webPath);
-    console.log('taken image by camera  :' + this.basicImage);
-    await this.uploadImage.getImageConverted(image, 'product');
+    //this.productImages=images.photos
+    console.log('taken image from gallery  :' + JSON.stringify(images.photos));
+    this.productImage = 'hshhh';
+    for (let i = 0; i < images.photos.length; i++) {
+      this.productImages.push(
+        this.sanitizer.bypassSecurityTrustUrl(images.photos[i].webPath)
+      );
+      //  await this.uploadImage.getImageConverted(
+      //   images.photos[1].webPath,
+      //    'product'
+      //  );
+    }
+    console.log('productImage  : ' + JSON.stringify(this.productImages));
+    // this.productImages=[];
+    // for (let i = 0; i < this.productImages.length; i++) {
+    //   this.productImages.push(
+    //     this.sanitizer.bypassSecurityTrustUrl(this.productImages[i])
+    //   );
+    //  await this.uploadImage.getImageConverted(
+    //   images.photos[1].webPath,
+    //    'product'
+    //  );
+    //}
+
+    // await this.uploadImage.getImageConverted(image, 'product');
   }
 
   getAllCities() {
@@ -179,7 +204,7 @@ export class SupportProductiveFamiliesPage implements OnInit {
   }
 
   chooseCity($event) {
-    this.selectNeighborhood=false;
+    this.selectNeighborhood = false;
     const cityData: CitysData = {
       lang: this.languageService.getLanguage(),
       user_id: this.auth.userID.value,
@@ -192,7 +217,7 @@ export class SupportProductiveFamiliesPage implements OnInit {
           if (data.key == 1) {
             if (data.data.length == 0) {
               this.noNeighborhoods = false;
-              this.productAdditionForm.value.neighborhood='';
+              this.productAdditionForm.value.neighborhood = '';
             } else {
               this.noNeighborhoods = true;
               this.neighborhoods = data.data;
@@ -209,9 +234,9 @@ export class SupportProductiveFamiliesPage implements OnInit {
   }
 
   chooseNeighborhood($event) {
-    this.selectNeighborhood=true;
+    this.selectNeighborhood = true;
     console.log('Neighborhood : ' + $event.target.value);
-    this.productAdditionForm.value.neighborhood =  $event?.value?.id;
+    this.productAdditionForm.value.neighborhood = $event?.value?.id;
   }
 
   // support productive families
@@ -237,6 +262,7 @@ export class SupportProductiveFamiliesPage implements OnInit {
       neighborhood_id: this.productAdditionForm.value.neighborhood.id,
       avatar: this.general.getFamiliesBasicImage(),
       license_image: this.general.getFamiliesProductImage(),
+      photots: this.general.getFamiliesProductImage(),
     };
     this.util.showLoadingSpinner().then((__) => {
       this.auth.register(registerData).subscribe(

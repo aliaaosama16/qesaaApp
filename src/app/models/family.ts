@@ -28,4 +28,9 @@ export interface Family {
   neighborhood_title: string;
   avatar: string;
   license_image: string;
+  images:Image[]
+}
+
+export interface Image{
+  image:string
 }

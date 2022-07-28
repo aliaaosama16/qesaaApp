@@ -8,95 +8,164 @@
 <ion-content class="ion-padding-horizontal">
   <div class="ion-padding-horizontal" *ngIf="familyDetails">
     <div class="family-image">
-      <img [src]="familyDetails?.avatar" />
+      <!-- <img [src]="familyDetails?.avatar" /> -->
+
+      <ion-avatar *ngIf="familyDetails?.avatar">
+        <ion-img [src]="familyDetails?.avatar"></ion-img>
+      </ion-avatar>
     </div>
+    <div class="partners ion-padding-horizontal">
+      <p class="fn-18 qesaa-Janna-Bold ion-margin-bottom">
+        {{"family products"|translate}}
+      </p>
 
-    <div class="family-details">
-      <div class="nameandphone">
-        <div class="title">
-          <div [ngClass]=" langauge=='ar' ?'icon-ar':'icon-en'">
-            <ion-icon src="./../../../assets/icon/family/person.svg"></ion-icon>
-          </div>
-          <div class="fn-16 qesaa-Janna-Bold primary-color">
-            :{{"person name"|translate}}
-          </div>
-        </div>
-        <div class="fn-16 qesaa-Janna-Regular secondary-color">
-          {{familyDetails?.first_name}}
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="nameandphone">
-        <div class="title">
-          <div [ngClass]=" langauge=='ar' ?'icon-ar':'icon-en'">
-            <ion-icon src="./../../../assets/icon/family/phone.svg"></ion-icon>
-          </div>
-          <div class="fn-16 qesaa-Janna-Bold primary-color">
-            :{{"phone number"|translate}}
-          </div>
-        </div>
-        <div class="fn-16 qesaa-Janna-Regular secondary-color">
-          {{familyDetails?.phone}}
-        </div>
-      </div>
-    </div>
-
-    <div class="family-details">
-      <div class="nameandphone">
-        <div class="title">
-          <div [ngClass]=" langauge=='ar' ?'icon-ar':'icon-en'">
-            <ion-icon
-              src="./../../../assets/icon/family/instagram.svg"
-            ></ion-icon>
-          </div>
-          <div class="fn-16 qesaa-Janna-Bold primary-color">
-            :{{"instgram"|translate}}
-          </div>
-        </div>
-        <div class="fn-16 qesaa-Janna-Regular secondary-color" (click)="showProviderSocail('twitter',familyDetails?.instagram)">
-          {{familyDetails?.instagram}}
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="nameandphone">
-        <div class="title">
-          <div [ngClass]=" langauge=='ar' ?'icon-ar':'icon-en'">
-            <ion-icon
-              src="./../../../assets/icon/family/twitter.svg"
-            ></ion-icon>
-          </div>
-          <div class="fn-16 qesaa-Janna-Bold primary-color">
-            :{{"twitter"|translate}}
-          </div>
-        </div>
-        <div class="fn-16 qesaa-Janna-Regular secondary-color" (click)="showProviderSocail('twitter',familyDetails?.twitter)">
-          {{familyDetails?.twitter}}
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="nameandphone">
-        <div class="title">
-          <div [ngClass]=" langauge=='ar' ?'icon-ar':'icon-en'">
-            <!-- <ion-icon
-              src="./../../../assets/icon/family/twitter.svg"
-            ></ion-icon> -->
-            <ion-icon style="font-size:21px ;" color="primary" name="logo-whatsapp"></ion-icon>
-          </div>
-          <div class="fn-16 qesaa-Janna-Bold primary-color">
-            :{{"whatsapp"|translate}}
-          </div>
-        </div>
-        <div
-          class="fn-16 qesaa-Janna-Regular secondary-color"
-          (click)="showProviderSocail('whats',familyDetails?.full_phone)"
+      <div class="partenrs-section ion-margin-top">
+        <swiper
+          #swiper
+          [config]="familyPrpdcuts"
+          class="custom-swiper"
+          [dir]="currentlangauge == 'ar' ? 'rtl' : 'ltr'"
         >
-          {{familyDetails?.full_phone}}
+          <ng-template
+            swiperSlide
+            *ngFor="let product of familyDetails?.images,let imageIndex=index"
+          >
+            <div class="slide-item-container ">
+              <img
+                [src]="product.image"
+                (click)="openPreview(familyDetails?.images,imageIndex)"
+              />
+            </div>
+          </ng-template>
+        </swiper>
+      </div>
+    </div>
+
+    <div class="ion-margin-vertical">
+      <ion-button
+        class="form-btn margin-8-top"
+        expand="block"
+        (click)="showHideDetails()"
+        color="primary"
+      >
+        <span
+          class="fn-20 qesaa-Janna-Bold"
+          style="margin: 0 6px"
+          *ngIf="!showDetails"
+        >
+          {{ "show more data"|translate}}
+        </span>
+        <span
+          class="fn-20 qesaa-Janna-Bold"
+          style="margin: 0 6px"
+          *ngIf="showDetails"
+        >
+          {{ "show less data"|translate}}
+        </span>
+      </ion-button>
+    </div>
+    <div *ngIf="showDetails">
+      <div class="family-details">
+        <div class="nameandphone">
+          <div class="title">
+            <div [ngClass]=" currentlangauge=='ar' ?'icon-ar':'icon-en'">
+              <ion-icon
+                src="./../../../assets/icon/family/person.svg"
+              ></ion-icon>
+            </div>
+            <div class="fn-16 qesaa-Janna-Bold primary-color">
+              :{{"person name"|translate}}
+            </div>
+          </div>
+          <div class="fn-16 qesaa-Janna-Regular secondary-color">
+            {{familyDetails?.first_name}}
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="nameandphone">
+          <div class="title">
+            <div [ngClass]=" currentlangauge=='ar' ?'icon-ar':'icon-en'">
+              <ion-icon
+                src="./../../../assets/icon/family/phone.svg"
+              ></ion-icon>
+            </div>
+            <div class="fn-16 qesaa-Janna-Bold primary-color">
+              :{{"phone number"|translate}}
+            </div>
+          </div>
+          <div class="fn-16 qesaa-Janna-Regular secondary-color">
+            {{familyDetails?.phone}}
+          </div>
+        </div>
+      </div>
+
+      <div class="family-details">
+        <div class="nameandphone">
+          <div class="title">
+            <div [ngClass]=" currentlangauge=='ar' ?'icon-ar':'icon-en'">
+              <ion-icon
+                src="./../../../assets/icon/family/instagram.svg"
+              ></ion-icon>
+            </div>
+            <div class="fn-16 qesaa-Janna-Bold primary-color">
+              :{{"instgram"|translate}}
+            </div>
+          </div>
+          <div
+            class="fn-16 qesaa-Janna-Regular secondary-color"
+            (click)="showProviderSocail('twitter',familyDetails?.instagram)"
+          >
+            {{familyDetails?.instagram}}
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="nameandphone">
+          <div class="title">
+            <div [ngClass]=" currentlangauge=='ar' ?'icon-ar':'icon-en'">
+              <ion-icon
+                src="./../../../assets/icon/family/twitter.svg"
+              ></ion-icon>
+            </div>
+            <div class="fn-16 qesaa-Janna-Bold primary-color">
+              :{{"twitter"|translate}}
+            </div>
+          </div>
+          <div
+            class="fn-16 qesaa-Janna-Regular secondary-color"
+            (click)="showProviderSocail('twitter',familyDetails?.twitter)"
+          >
+            {{familyDetails?.twitter}}
+          </div>
+        </div>
+
+        <div class="divider"></div>
+
+        <div class="nameandphone">
+          <div class="title">
+            <div [ngClass]=" currentlangauge=='ar' ?'icon-ar':'icon-en'">
+              <!-- <ion-icon
+                src="./../../../assets/icon/family/twitter.svg"
+              ></ion-icon> -->
+              <ion-icon
+                style="font-size: 21px"
+                color="primary"
+                name="logo-whatsapp"
+              ></ion-icon>
+            </div>
+            <div class="fn-16 qesaa-Janna-Bold primary-color">
+              :{{"whatsapp"|translate}}
+            </div>
+          </div>
+          <div
+            class="fn-16 qesaa-Janna-Regular secondary-color"
+            (click)="showProviderSocail('whats',familyDetails?.full_phone)"
+          >
+            {{familyDetails?.full_phone}}
+          </div>
         </div>
       </div>
     </div>

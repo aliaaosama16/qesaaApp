@@ -164,7 +164,7 @@
   "add": "اضف",
   "District": "الحي",
   "basic image": "الصورة البارزة",
-  "product image": "صورة المنتج",
+  "product images": "صور المنتج",
   "instgram link": "رابط الانستجرام",
   "enter instgram link": "ادخل رابط الانستجرام",
   "twitter link": "رابط تويتر",
@@ -172,7 +172,7 @@
   "attach image": "ارفق الصورة",
   "contact with admn": "تواصل مع الادارة",
   "contact-notice": "اترك رسالتك وسيتم التواصل معك",
-  "no prodiders": "لا يوجد اسر منتجه",
+  "no providers": "لا يوجد اسر منتجه",
   "no products": "السله فارغة",
   "please login": "يرجي تسجيل دخول أولا",
   "accept to": "أوافق على",
@@ -214,6 +214,9 @@
   "confirm account removal":"تاكيد حذف الحساب",
   "delete-account":"حذف الحساب",
   "away from you":"يبعد عنك",
-  "family create account":"انشاء حساب"
+  "family create account":"انشاء حساب",
+  "show more data":"عرض بيانات اكثر",
+  "show less data":"عرض بيانات اقل ",
+  "family products":"منتجات الاسرة"
   
 }

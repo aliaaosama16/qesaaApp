@@ -17,14 +17,16 @@
       type="submit"
       color="primary"
     >
-    <ion-icon src="./../assets/icon/menu-icons/families-active.svg"></ion-icon>
-      <span class="fn-20 qesaa-Janna-Bold" style="margin: 0 6px;">
+      <ion-icon
+        src="./../assets/icon/menu-icons/families-active.svg"
+      ></ion-icon>
+      <span class="fn-20 qesaa-Janna-Bold" style="margin: 0 6px">
         {{ "family create account"|translate}}
       </span>
     </ion-button>
   </div>
   <div
-    class="families-container ion-padding-horizontal"
+    class="families-container ion-padding-horizontal ion-margin-top"
     *ngIf="families?.length!=0"
   >
     <!-- <div
@@ -63,7 +65,7 @@
   </div>
 
   <div *ngIf="families?.length==0" class="no-data">
-    <p>{{"no prodiders"|translate}}</p>
+    <p>{{"no providers"|translate}}</p>
   </div>
 
   <!-- <ion-fab vertical="bottom" horizontal="start" slot="fixed">

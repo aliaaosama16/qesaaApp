@@ -71,26 +71,7 @@
         color="primary"
         src="./../../../../assets/icon/donate/city-inactive.svg"
       ></ion-icon>
-      <!-- <ion-input class="fn-16 qesaa-Janna-Regular" placeholder="{{'city'|translate}}" type="text"
-        formControlName="city"></ion-input> -->
 
-      <!-- <ion-select
-        formControlName="city"
-        (ionChange)="chooseCity($event)"
-        placeholder="{{'city'|translate}}"
-        okText='{{"ok"|translate}}'
-        cancelText='{{"cancel"|translate}}'
-        interface="popover"
-        mode="ios"
-      >
-        <ion-select-option
-          class="fn-16 qesaa-Janna-Regular"
-          [value]="city.id"
-          *ngFor="let city of cities"
-        >
-          {{city.title|translate}}
-        </ion-select-option>
-      </ion-select> -->
       <ionic-selectable
         formControlName="city"
         [items]="cities"
@@ -118,38 +99,19 @@
         color="primary"
         src="./../../../../assets/icon/donate/city-inactive.svg"
       ></ion-icon>
-      <!-- <ion-input class="fn-16 qesaa-Janna-Regular" placeholder="{{'the area or neighborhood'|translate}}" type="text"
-        formControlName="neighborhood"></ion-input> -->
 
-      <!-- <ion-select
-        formControlName="neighborhood"
-        (ionChange)="chooseNeighborhood($event)"
-        placeholder="{{'the area or neighborhood'|translate}}"
-        okText='{{"ok"|translate}}'
-        cancelText='{{"cancel"|translate}}'
-        interface="popover"
-        mode="ios"
-      >
-        <ion-select-option
-          class="fn-16 qesaa-Janna-Regular"
-          [value]="neighborhood.id"
-          *ngFor="let neighborhood of neighborhoods"
-        >
-          {{neighborhood.title}}
-        </ion-select-option>
-      </ion-select> -->
       <ionic-selectable
-      formControlName="neighborhood"
-      [items]="neighborhoods"
-      itemValueField="id"
-      itemTextField="title"
-      [canSearch]="true"
-      (onChange)="chooseNeighborhood($event)"
-      placeholder="{{'the area or neighborhood'|translate}}"
-      [isEnabled]="noNeighborhoods"
-      closeButtonText="{{'cancel'|translate}}"
-    >
-    </ionic-selectable>
+        formControlName="neighborhood"
+        [items]="neighborhoods"
+        itemValueField="id"
+        itemTextField="title"
+        [canSearch]="true"
+        (onChange)="chooseNeighborhood($event)"
+        placeholder="{{'the area or neighborhood'|translate}}"
+        [isEnabled]="noNeighborhoods"
+        closeButtonText="{{'cancel'|translate}}"
+      >
+      </ionic-selectable>
     </ion-item>
 
     <div class="custom-6-margin-bottom">
@@ -201,7 +163,7 @@
     </ion-item>
 
     <div class="request-date ion-margin-bottom">
-      <div >
+      <div>
         <p class="ion-no-margin fn-16 qesaa-Janna-Bold">
           {{ "basic image"|translate}}
         </p>
@@ -224,11 +186,15 @@
     </div>
 
     <div class="request-date ion-margin-bottom">
-      <div >
+      <div>
         <p class="ion-no-margin fn-16 qesaa-Janna-Bold">
-          {{ "product image"|translate}}
+          {{ "product images"|translate}}
         </p>
       </div>
+      <!-- 
+      <p class="ion-no-margin fn-16 qesaa-Janna-Bold">
+        select product image {{productImageSelected}}
+      </p> -->
 
       <div class="image-container">
         <div
@@ -242,10 +208,16 @@
             {{"attach image"|translate}}
           </p>
         </div>
-        <img *ngIf="productImage!=''" [src]="productImage" />
+      </div>
+
+      <div class="image-container" *ngFor="let image of productImages">
+        <div *ngIf="productImage!=''">
+          <img [src]="image" />
+        </div>
       </div>
     </div>
 
+    <img [src]="image" *ngFor="let image of productImages" />
     <ion-button
       class="form-btn ion-margin-top"
       expand="block"

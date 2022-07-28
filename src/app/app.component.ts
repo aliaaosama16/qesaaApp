@@ -279,10 +279,13 @@ export class AppComponent {
       // console.log('title  : '+?.order_id);
       // console.log('subtitle  : '+jsonData.notification.subtitle);
       // 'volunteers' 'charity-market'
+
+      if(orderData?.type=='order'){
       this.dataService.setPageData(orderData?.status);
       this.router.navigateByUrl(
         `/tabs/my-orders/details/${orderData?.order_id}`
       );
+      }
     });
 
     // OneSignal.setInAppMessageClickHandler((action: InAppMessageAction) => {
@@ -294,6 +297,8 @@ export class AppComponent {
         'setNotificationWillShowInForegroundHandler ' + JSON.stringify(jsonData)
       );
       const orderData: any = jsonData.getNotification().additionalData;
+     if(orderData?.type=='order'){
+      
       // console.log('title  : '+?.order_id);
       // console.log('subtitle  : '+jsonData.notification.subtitle);
       // 'volunteers' 'charity-market'
@@ -301,6 +306,7 @@ export class AppComponent {
       this.router.navigateByUrl(
         `/tabs/my-orders/details/${orderData?.order_id}`
       );
+     }
     });
 
     // iOS - Prompts the user for notification permissions.

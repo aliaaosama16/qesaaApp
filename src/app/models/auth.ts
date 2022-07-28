@@ -26,6 +26,7 @@ export interface RegisterData extends UserData {
   avatar?: string;
   license_image?: string;
   phone_code?:string;
+  photots?:string;
 }
 
 export interface ForgetPasswordData extends Language {

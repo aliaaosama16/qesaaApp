@@ -1,13 +1,25 @@
+ion-button{
+  &::part(native){
+    height: 50px;
+  }
+}
+
 .family-image {
   border-radius: 10px;
   margin-bottom: 20px;
-  img {
-    width: 100%;
-    height: 160px;
-    object-fit: cover;
-    border-radius: 10px;
-    object-position: top;
+  ion-avatar {
+    margin: 0 auto;
+    height: 120px;
+    width: 120px;
+    // img {
+    //   width: 100%;
+    //   height: 160px;
+    //   object-fit: cover;
+    //   border-radius: 10px;
+    //   object-position: top;
+    // }
   }
+ 
 }
 
 .family-details {

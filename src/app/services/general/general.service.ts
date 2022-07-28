@@ -42,7 +42,7 @@ export class GeneralService {
   }
 
   setFamiliesProductImage(image) {
-    this.familiesProductImage = image;
+    this.familiesProductImage += image;
   }
   getFamiliesProductImage() {
     return this.familiesProductImage;
