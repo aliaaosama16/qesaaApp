@@ -196,10 +196,10 @@
         select product image {{productImageSelected}}
       </p> -->
 
-      <div class="image-container">
+      <div class="image-container"  *ngIf="productImage==''">
         <div
           (click)="attachImageActionSheet('product')"
-          *ngIf="productImage==''"
+         
           class="ion-text-center"
         >
           <ion-icon src="./../../../../assets/icon/camera.svg"></ion-icon>
@@ -211,7 +211,7 @@
       </div>
 
       <div class="image-container" *ngFor="let image of productImages">
-        <div *ngIf="productImage!=''">
+        <div *ngIf="productImage!=''" style="width: 100%;">
           <img [src]="image" />
         </div>
       </div>

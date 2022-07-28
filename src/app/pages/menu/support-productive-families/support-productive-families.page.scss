@@ -18,6 +18,11 @@
         font-size: 20px;
       }
     }
+    .images-container{
+      display: grid;
+      flex-direction: row;
+
+    }
   }
   
   .request-time {
